@@ -13,6 +13,10 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
     <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-7 5-13 14-14 1 9-5 15-14 14Z"/><path d="M5 19c3-4 6-6.5 10-8"/></symbol>
+    <symbol id="i-sprout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-8"/><path d="M12 13c0-3 2-5 5-5 0 3-2 5-5 5Z"/><path d="M12 15c0-2.6-1.8-4.4-4.4-4.4C7.6 13.2 9.4 15 12 15Z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-ruler" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M12 6H9M12 10H8.5M12 14H9M12 18H8.5"/></symbol>
+    <symbol id="i-talk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H9l-4 4V6a1 1 0 0 1 1-1Z"/><path d="M10.5 11c0-1.8 1.3-3 3.2-3-.2 1.8-1.4 3-3.2 3Z"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 6l6 6-6 6"/></symbol>
     <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
   </defs>
@@ -63,6 +67,35 @@
     </div>
   </section>
 
+  <section class="bg-paper2">
+    <div class="wrap reveal">
+      <p class="eyebrow">Format</p>
+      <h2>Was dich in einem Porträt erwartet</h2>
+      <div class="mini-grid">
+        <div class="mini">
+          <svg class="ic" aria-hidden="true"><use href="#i-sprout"/></svg>
+          <h3>Standort &amp; Licht</h3>
+          <p>Wo die Pflanze sich wohlfühlt — Sonne, Halbschatten, Boden.</p>
+        </div>
+        <div class="mini">
+          <svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>
+          <h3>Blütezeit</h3>
+          <p>Wann sie blüht und wie lange sie Nahrung bietet.</p>
+        </div>
+        <div class="mini">
+          <svg class="ic" aria-hidden="true"><use href="#i-ruler"/></svg>
+          <h3>Wuchs &amp; Pflege</h3>
+          <p>Höhe, Winterhärte, Eignung für den Topf — und was zu tun ist.</p>
+        </div>
+        <div class="mini">
+          <svg class="ic" aria-hidden="true"><use href="#i-talk"/></svg>
+          <h3>Tierische Gäste</h3>
+          <p>Welche Falter, Bienen und Käfer genau diese Pflanze brauchen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="bg-sage">
     <div class="wrap reveal">
       <p class="eyebrow">Beobachtungen aus dem Garten</p>
@@ -81,15 +114,29 @@
           <img src="assets/img/grashuepfer-auf-stein.jpg" alt="Grashüpfer auf einem sonnenwarmen Stein" loading="lazy" />
           <figcaption><b>Grashüpfer</b>auf einem sonnenwarmen Stein</figcaption>
         </figure>
+        <figure class="shot">
+          <img src="assets/img/akelei-aquilegia-vulgaris.jpg" alt="Akelei mit kleiner Blattlaus" loading="lazy" />
+          <figcaption><b>Akelei</b><i>Aquilegia vulgaris</i>, mit kleinem Gast auf der Blüte</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/img/kuckuckslichtnelke-lychnis-flos-cuculi.jpg" alt="Kuckuckslichtnelke in der Wiese" loading="lazy" />
+          <figcaption><b>Kuckuckslichtnelke</b><i>Lychnis flos-cuculi</i>, auf feuchter Wiese</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/img/kirschen-rotes-wunder.jpg" alt="Reife Kirschen am Baum" loading="lazy" />
+          <figcaption><b>Süßkirsche</b>reife Früchte — Nahrung für Mensch und Tier</figcaption>
+        </figure>
       </div>
     </div>
   </section>
 
-  <section class="section-sm">
-    <div class="wrap-narrow reveal" style="text-align:center;">
-      <p class="eyebrow">Bald mehr</p>
-      <h2>Weitere Porträts folgen</h2>
-      <p class="lede" style="margin-inline:auto;">Nach und nach wächst hier eine kleine Bibliothek von Pflanzen und den Tieren, die sie brauchen — genau wie ein Garten selbst.</p>
+  <section class="band-photo">
+    <img src="assets/img/grosse-sternmiere-stellaria-holostea.jpg" alt="Große Sternmiere blüht flächig" loading="lazy" />
+    <div class="wrap reveal">
+      <p class="eyebrow on-dark">Bald mehr</p>
+      <h2>Weitere Porträts folgen.</h2>
+      <p>Nach und nach wächst hier eine kleine Bibliothek von Pflanzen und den Tieren, die sie brauchen. Du hast eine Wunschpflanze oder eine Frage? Schreib mir gern.</p>
+      <p style="margin-top:1.6rem;"><a class="btn btn-primary" href="kontakt.html">Pflanze vorschlagen <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
     </div>
   </section>
 
