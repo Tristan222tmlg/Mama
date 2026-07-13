@@ -22,7 +22,16 @@ und dann `http://localhost:8000` aufrufen.
 - `kontakt.html` — Kontakt
 - `impressum.html`, `datenschutz.html` — rechtliche Pflichtseiten (Platzhalter)
 - `assets/css/style.css` — gesamtes Design (Farbpalette: Grüntöne + Blau + Weiß, nach Sabines eigener Beschreibung)
+- `assets/js/main.js` — Menü, Header-Verhalten, sanfte Einblend-Animationen
 - `assets/img/` — Bildmaterial
+- `assets/fonts/` — selbst gehostete Schriften (Fraunces + Inter, Latin-Subset).
+  Werden **lokal** ausgeliefert, keine Verbindung zu Google Fonts — DSGVO-freundlich.
+
+## Design
+
+Editorial-Look: großformatige Fotos, Serifen-Display-Schrift (Fraunces) mit
+klarer Grotesk (Inter), eigene Linien-Icons (SVG, keine Emojis), Farbwelt aus
+mehreren Grüntönen plus warmem Papierton, Blau und Weiß. Reines HTML/CSS/JS.
 
 ## Offene Punkte, bevor die Seite live gehen kann
 

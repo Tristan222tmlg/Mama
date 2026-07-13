@@ -4,71 +4,99 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Impressum — Bessere Welt ergärtnern</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css" />
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-7 5-13 14-14 1 9-5 15-14 14Z"/><path d="M5 19c3-4 6-6.5 10-8"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 6l6 6-6 6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  </defs>
+</svg>
+
 <header class="site-header">
-  <nav class="nav container">
-    <a class="brand" href="index.html"><strong>Bessere Welt</strong>&nbsp;ergärtnern</a>
-    <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
-    <ul class="nav-links">
-      <li><a href="index.html">Startseite</a></li>
-      <li><a href="ueber-mich.html">Über mich</a></li>
-      <li><a href="angebot.html">Angebot</a></li>
-      <li><a href="pflanzenwelt.html">Pflanzenwelt</a></li>
-      <li><a href="kontakt.html">Kontakt</a></li>
-    </ul>
-  </nav>
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="mark" aria-hidden="true"><use href="#i-leaf"/></svg>
+      <span><b>bessere&nbsp;welt</b> <span class="light">ergärtnern</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menü" aria-expanded="false"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+    <nav class="nav">
+      <a href="index.html">Start</a>
+      <a href="ueber-mich.html">Über mich</a>
+      <a href="angebot.html">Angebot</a>
+      <a href="pflanzenwelt.html">Pflanzenwelt</a>
+      <a class="btn btn-primary" href="kontakt.html">Kontakt <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </nav>
+  </div>
 </header>
 
 <main>
   <section class="page-hero">
-    <div class="container">
+    <div class="wrap">
       <p class="eyebrow">Rechtliches</p>
-      <h1>Impressum</h1>
+      <h1 class="display" style="font-size:clamp(2rem,4vw,3rem);">Impressum</h1>
     </div>
   </section>
 
-  <section>
-    <div class="container" style="max-width: 700px;">
-      <div class="note-box" style="margin-bottom: 2rem;">
-        Platzhalter: Diese Seite muss vor Veröffentlichung mit den
-        vollständigen Pflichtangaben nach § 5 TMG ausgefüllt werden
-        (Name, ladungsfähige Anschrift, Kontakt, ggf. USt-IdNr. und
-        Berufsbezeichnung als Tierärztin).
+  <section class="section-sm">
+    <div class="wrap-narrow">
+      <div class="note" style="margin-bottom:2.5rem;">
+        Platzhalter: Diese Seite muss vor Veröffentlichung mit den vollständigen Pflichtangaben nach § 5 TMG ausgefüllt werden (Name, ladungsfähige Anschrift, Kontakt, ggf. USt-IdNr. und Berufsbezeichnung als Tierärztin).
       </div>
-      <h2>Angaben gemäß § 5 TMG</h2>
-      <p>
-        [Vollständiger Name]<br />
-        [Straße und Hausnummer]<br />
-        [PLZ und Ort]
-      </p>
-      <h2>Kontakt</h2>
-      <p>
-        Telefon: [Telefonnummer]<br />
-        E-Mail: [E-Mail-Adresse]
-      </p>
-      <h2>Berufsbezeichnung</h2>
+      <h3>Angaben gemäß § 5 TMG</h3>
+      <p>[Vollständiger Name]<br />[Straße und Hausnummer]<br />[PLZ und Ort]</p>
+      <h3>Kontakt</h3>
+      <p>Telefon: [Telefonnummer]<br />E-Mail: [E-Mail-Adresse]</p>
+      <h3>Berufsbezeichnung</h3>
       <p>Tierärztin, verliehen in [Land / zuständige Kammer]</p>
-      <h2>Umsatzsteuer-ID</h2>
-      <p>[Falls vorhanden: USt-IdNr. gemäß §27a UStG]</p>
-      <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+      <h3>Umsatzsteuer-ID</h3>
+      <p>[Falls vorhanden: USt-IdNr. gemäß § 27a UStG]</p>
+      <h3>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h3>
       <p>[Name, Anschrift wie oben]</p>
     </div>
   </section>
 </main>
 
 <footer class="site-footer">
-  <div class="container">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <svg class="mark" aria-hidden="true"><use href="#i-leaf"/></svg>
+          <span><b>bessere&nbsp;welt</b> <span class="light">ergärtnern</span></span>
+        </a>
+        <p>Biodiversität für Garten, Balkon und Gelände — Schritt für Schritt, mit Freude.</p>
+      </div>
+      <nav class="footer-nav">
+        <div>
+          <h4>Seiten</h4>
+          <ul>
+            <li><a href="ueber-mich.html">Über mich</a></li>
+            <li><a href="angebot.html">Angebot</a></li>
+            <li><a href="pflanzenwelt.html">Pflanzenwelt</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Rechtliches</h4>
+          <ul>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
     <div class="footer-bottom">
-      <span>© <span id="year"></span> Sabine Schröder-Gravendyck — Bessere Welt ergärtnern</span>
-      <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
+      <span>© <span id="year"></span> Sabine Schröder-Gravendyck</span>
+      <span>Bessere Welt ergärtnern</span>
     </div>
   </div>
 </footer>
 
 <script src="assets/js/main.js"></script>
-<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>

@@ -5,182 +5,186 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Bessere Welt ergärtnern — Sabine Schröder-Gravendyck</title>
 <meta name="description" content="Sabine Schröder-Gravendyck begleitet Menschen dabei, Garten, Balkon oder Firmengelände in lebendige Lebensräume für Pflanzen und Tiere zu verwandeln." />
+<link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="assets/fonts/fonts.css" />
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<body>
+<body class="home">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-7 5-13 14-14 1 9-5 15-14 14Z"/><path d="M5 19c3-4 6-6.5 10-8"/></symbol>
+    <symbol id="i-sprout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-8"/><path d="M12 13c0-3 2-5 5-5 0 3-2 5-5 5Z"/><path d="M12 15c0-2.6-1.8-4.4-4.4-4.4C7.6 13.2 9.4 15 12 15Z"/></symbol>
+    <symbol id="i-trees" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21v-3"/><path d="M8 18 4.5 13H7L4.5 8.5H12L9 13h2.5L8 18Z"/><path d="M16 21v-5"/><circle cx="16" cy="12" r="4"/></symbol>
+    <symbol id="i-yarn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M5 9c4 1.5 8 5 10 10"/><path d="M9 4c3.5 3 7 7 9.5 12"/><path d="M4.5 13c3 1.4 6 4 7.5 6.5"/></symbol>
+    <symbol id="i-talk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H9l-4 4V6a1 1 0 0 1 1-1Z"/><path d="M10.5 11c0-1.8 1.3-3 3.2-3-.2 1.8-1.4 3-3.2 3Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.6 7 12 12.8 20.4 7"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H8l2 5-2 1.5a11 11 0 0 0 5.5 5.5L15 14l5 2v2.5c0 .8-.7 1.5-1.5 1.5A15.5 15.5 0 0 1 4 5.5Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 6l6 6-6 6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  </defs>
+</svg>
 
 <header class="site-header">
-  <nav class="nav container">
-    <a class="brand" href="index.html"><strong>Bessere Welt</strong>&nbsp;ergärtnern</a>
-    <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
-    <ul class="nav-links">
-      <li><a href="index.html" aria-current="page">Startseite</a></li>
-      <li><a href="ueber-mich.html">Über mich</a></li>
-      <li><a href="angebot.html">Angebot</a></li>
-      <li><a href="pflanzenwelt.html">Pflanzenwelt</a></li>
-      <li><a href="kontakt.html">Kontakt</a></li>
-    </ul>
-  </nav>
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="mark" aria-hidden="true"><use href="#i-leaf"/></svg>
+      <span><b>bessere&nbsp;welt</b> <span class="light">ergärtnern</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menü" aria-expanded="false"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+    <nav class="nav">
+      <a href="index.html" aria-current="page">Start</a>
+      <a href="ueber-mich.html">Über mich</a>
+      <a href="angebot.html">Angebot</a>
+      <a href="pflanzenwelt.html">Pflanzenwelt</a>
+      <a class="btn btn-primary" href="kontakt.html">Kontakt <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </nav>
+  </div>
 </header>
 
 <main>
 
   <section class="hero">
-    <div class="container hero-grid">
-      <div>
-        <p class="eyebrow">Biodiversität für Garten, Balkon &amp; Firmengelände</p>
-        <h1>Die Fülle ist überall — <em>wenn wir sie zulassen.</em></h1>
-        <p class="lede">
-          Ich begleite Menschen dabei, ihr Stückchen Erde lebendig zu machen:
-          Schritt für Schritt, mit Freude statt Aktionismus. Aus jedem Garten,
-          Balkon oder Firmengelände kann ein Zuhause für Pflanzen und Tiere werden.
-        </p>
+    <div class="hero-media">
+      <img src="assets/img/kuckuckslichtnelke-lychnis-flos-cuculi.jpg" alt="Kuckuckslichtnelke blüht in einer sommerlichen Wiese" />
+    </div>
+    <div class="wrap">
+      <div class="hero-inner">
+        <p class="eyebrow on-dark">Biodiversität für Garten, Balkon &amp; Gelände</p>
+        <h1 class="display">Die Fülle ist überall — <em>wenn wir sie zulassen.</em></h1>
+        <p>Ich begleite Menschen dabei, ihr Stückchen Erde lebendig zu machen. Schritt für Schritt, mit Freude statt Aktionismus — bis aus Garten, Balkon oder Firmengelände ein Zuhause für Pflanzen und Tiere wird.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="kontakt.html">Melde dich bei mir</a>
-          <a class="btn btn-ghost" href="ueber-mich.html">Wer ich bin</a>
+          <a class="btn btn-primary" href="kontakt.html">Gespräch beginnen <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-outline" href="angebot.html">Wie ich arbeite</a>
         </div>
       </div>
-      <div class="leaf-art">
-        <img src="assets/img/kuckuckslichtnelke-lychnis-flos-cuculi.jpg" alt="Kuckuckslichtnelke (Lychnis flos-cuculi) blüht in einer Wiese" loading="eager" />
-      </div>
     </div>
+    <div class="scroll-hint" aria-hidden="true">Mehr<span></span></div>
   </section>
 
   <section>
-    <div class="container">
-      <p class="eyebrow">Mein Warum</p>
-      <div class="feature">
-        <div>
-          <h2>Pflanzen und Tiere gehören zusammen wie Schloss und Schlüssel.</h2>
-          <p>
-            Jede Pflanze bietet ganz bestimmten Faltern, Bienen, Käfern und
-            anderen Mitgeschöpfen Wohnung und Nahrung. Wenn wir Pflanzen wählen,
-            die zu Standort, Boden und Licht passen, entstehen Vitalität,
-            Schönheit und Vielfalt fast von selbst.
-          </p>
-          <p>
-            Ich war Tierärztin geworden, weil ich Menschen und Tieren helfen
-            wollte. Mit der Zeit wurde mir klar, wie oft Tiere krank werden,
-            weil sie unnatürlich leben — und wie sehr Natur um uns herum jeden
-            Tag weniger wird. Also habe ich meinen Fokus verschoben: von der
-            Praxis in den Garten.
-          </p>
-          <a class="btn btn-ghost" href="ueber-mich.html">Meine Geschichte lesen →</a>
-        </div>
-        <div class="feature-media">
-          <img src="assets/img/akelei-aquilegia-vulgaris.jpg" alt="Akelei (Aquilegia vulgaris) im Garten, mit einer kleinen grünen Blattlaus auf der Blüte" loading="lazy" />
-        </div>
+    <div class="wrap feature reverse reveal">
+      <div class="feature-text">
+        <p class="eyebrow">Mein Warum</p>
+        <h2>Pflanzen und Tiere gehören zusammen wie Schloss und Schlüssel.</h2>
+        <p>Jede Pflanze bietet ganz bestimmten Faltern, Bienen, Käfern und anderen Mitgeschöpfen Wohnung und Nahrung. Wählen wir Pflanzen, die zu Standort, Boden und Licht passen, entstehen Vitalität, Schönheit und Vielfalt fast von selbst.</p>
+        <p>Ich war Tierärztin geworden, weil ich Menschen und Tieren helfen wollte. Mit der Zeit wurde mir klar, wie oft Tiere krank werden, weil sie unnatürlich leben — und wie sehr Natur um uns herum jeden Tag weniger wird. Also habe ich meinen Fokus verschoben: von der Praxis in den Garten.</p>
+        <a class="link-arrow" href="ueber-mich.html">Meine Geschichte <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="feature-media">
+        <img src="assets/img/akelei-aquilegia-vulgaris.jpg" alt="Akelei im Garten, mit einer kleinen Blattlaus auf der Blüte" loading="lazy" />
       </div>
     </div>
   </section>
 
-  <section class="alt-bg">
-    <div class="container">
+  <section class="bg-sage">
+    <div class="wrap reveal">
       <p class="eyebrow">Wie ich helfe</p>
       <h2>Drei Wege zu mehr Lebendigkeit</h2>
-      <div class="grid-3">
-        <div class="card">
-          <div class="icon">🌿</div>
-          <h3>Biodiversität für Garten &amp; Balkon</h3>
-          <p>
-            Ich zeige passende Pflanzen und den biologischen Zusammenhang für
-            deinen Standort. Gemeinsam entwickeln wir ein Konzept — und ich
-            begleite dich bei Beschaffung und Umsetzung.
-          </p>
+      <div class="index-list">
+        <div class="index-item">
+          <div class="index-num">01</div>
+          <div class="index-body">
+            <h3>Biodiversität für Garten &amp; Balkon</h3>
+            <p>Ich zeige passende Pflanzen und den biologischen Zusammenhang für deinen Standort. Gemeinsam entwickeln wir ein Konzept — und ich begleite dich bei Beschaffung und Umsetzung.</p>
+          </div>
+          <div class="index-icon"><svg aria-hidden="true"><use href="#i-sprout"/></svg></div>
         </div>
-        <div class="card">
-          <div class="icon">🏫</div>
-          <h3>Naturnahe Schul- &amp; Firmengelände</h3>
-          <p>
-            Von der Kita bis zum Betriebsgelände: verwahrloste Flächen werden
-            zu Lebensräumen, an denen Menschen und Tiere sich begegnen können.
-          </p>
+        <div class="index-item">
+          <div class="index-num">02</div>
+          <div class="index-body">
+            <h3>Naturnahe Schul- &amp; Firmengelände</h3>
+            <p>Von der Kita bis zum Betriebsgelände: aus ungeliebten Flächen werden Lebensräume, an denen Menschen und Tiere sich begegnen können.</p>
+          </div>
+          <div class="index-icon"><svg aria-hidden="true"><use href="#i-trees"/></svg></div>
         </div>
-        <div class="card">
-          <div class="icon">🧶</div>
-          <h3>Workshops &amp; Naturfasern</h3>
-          <p>
-            Vorträge, Beratungen und praktische Workshops — unter anderem zur
-            Verarbeitung von Wolle und Pflanzenfasern: Spinnen, Weben, Färben.
-          </p>
+        <div class="index-item">
+          <div class="index-num">03</div>
+          <div class="index-body">
+            <h3>Workshops &amp; Naturfasern</h3>
+            <p>Vorträge, Beratungen und praktische Workshops — unter anderem zur Verarbeitung von Wolle und Pflanzenfasern: Spinnen, Weben, Färben.</p>
+          </div>
+          <div class="index-icon"><svg aria-hidden="true"><use href="#i-yarn"/></svg></div>
         </div>
       </div>
-      <p style="margin-top:2.2rem;"><a class="btn btn-primary" href="angebot.html">Alle Angebote ansehen</a></p>
+      <p style="margin-top:2.5rem;"><a class="link-arrow" href="angebot.html">Das ganze Angebot <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
     </div>
   </section>
 
-  <section class="quote-band">
-    <div class="container">
-      <blockquote>
-        „Grün ist nicht gleich grün. Im Frühling frisch und lichtdurchlässig,
-        im Sommer fest, im Herbst raschelnd trocken — meine Arbeit ist ein
-        Fließen, im Rhythmus der Tage und Jahreszeiten.“
-      </blockquote>
+  <section class="bg-forest quote">
+    <div class="wrap-narrow reveal">
+      <blockquote>Grün ist nicht gleich grün — meine Arbeit ist ein <span>Fließen,</span> im Rhythmus der Tage und Jahreszeiten.</blockquote>
       <cite>Sabine Schröder-Gravendyck</cite>
     </div>
   </section>
 
   <section>
-    <div class="container">
-      <div class="portrait-wrap">
-        <img src="assets/img/moschusmalve-malva-moschata.jpg" alt="Pflanzenporträt der Moschusmalve (Malva moschata) mit Fotos von Blüten, einer Steinhummel und einer Mauerbiene" loading="lazy" />
-        <div>
-          <p class="eyebrow">Aus der Pflanzenwelt</p>
-          <h2>Jede Pflanze hat ihre Geschichte</h2>
-          <p>
-            In meinen Pflanzenporträts zeige ich, welche Tiere eine bestimmte
-            Pflanze brauchen — als Nahrung, Nistplatz oder Kinderstube. Die
-            Raupen des Zitronenfalters etwa fressen ausschließlich Blätter
-            von Faulbaum oder Kreuzdorn. Ohne diese Pflanzen gibt es keine
-            Zitronenfalter.
-          </p>
-          <p>
-            <span class="tag">Standort</span>
-            <span class="tag">Blütezeit</span>
-            <span class="tag">Tierische Gäste</span>
-          </p>
-          <a class="btn btn-ghost" href="pflanzenwelt.html">Mehr Pflanzenporträts →</a>
+    <div class="wrap portrait reveal">
+      <img src="assets/img/moschusmalve-malva-moschata.jpg" alt="Pflanzenporträt der Moschusmalve mit Fotos von Blüten, Steinhummel und Mauerbiene" loading="lazy" />
+      <div>
+        <p class="eyebrow">Aus der Pflanzenwelt</p>
+        <h2>Jede Pflanze hat ihre Geschichte</h2>
+        <p>In meinen Pflanzenporträts zeige ich, welche Tiere eine bestimmte Pflanze brauchen — als Nahrung, Nistplatz oder Kinderstube. Die Raupen des Zitronenfalters etwa fressen ausschließlich Blätter von Faulbaum oder Kreuzdorn. Ohne diese Pflanzen gibt es keine Zitronenfalter.</p>
+        <div class="spec-row">
+          <span class="spec">Standort</span>
+          <span class="spec">Blütezeit</span>
+          <span class="spec">Tierische Gäste</span>
         </div>
+        <a class="link-arrow" href="pflanzenwelt.html">Zur Pflanzenwelt <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
 
-  <section class="alt-bg">
-    <div class="container" style="max-width:760px; text-align:center;">
+  <section class="bg-paper2 section-sm">
+    <div class="wrap-narrow reveal" style="text-align:center;">
       <p class="eyebrow">Werde Teil des Netzwerks</p>
       <h2>Melde dich, wenn du ein Stück bessere Welt ergärtnern willst.</h2>
-      <p class="lede">
-        Mit meinem Programm ermögliche ich es dir, dein Stückchen Erde lebendig
-        zu machen — und dabei Ruhe, Freude und Verbundenheit zu erleben.
-      </p>
-      <a class="btn btn-primary" href="kontakt.html">Jetzt Kontakt aufnehmen</a>
+      <p class="lede" style="margin-inline:auto;">Mit meinem Programm ermögliche ich es dir, dein Stückchen Erde lebendig zu machen — und dabei Ruhe, Freude und Verbundenheit zu erleben.</p>
+      <p style="margin-top:2rem;"><a class="btn btn-primary" href="kontakt.html">Kontakt aufnehmen <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
     </div>
   </section>
 
 </main>
 
+<!--#footer-->
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="brand" style="color: var(--green-100); margin-bottom: 0.6rem;"><strong>Bessere Welt</strong>&nbsp;ergärtnern</div>
-        <p style="max-width: 320px;">Biodiversität für Garten, Balkon und Firmengelände — Schritt für Schritt, mit Freude.</p>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <svg class="mark" aria-hidden="true"><use href="#i-leaf"/></svg>
+          <span><b>bessere&nbsp;welt</b> <span class="light">ergärtnern</span></span>
+        </a>
+        <p>Biodiversität für Garten, Balkon und Gelände — Schritt für Schritt, mit Freude.</p>
       </div>
-      <ul class="footer-links">
-        <li><a href="ueber-mich.html">Über mich</a></li>
-        <li><a href="angebot.html">Angebot</a></li>
-        <li><a href="pflanzenwelt.html">Pflanzenwelt</a></li>
-        <li><a href="kontakt.html">Kontakt</a></li>
-      </ul>
+      <nav class="footer-nav">
+        <div>
+          <h4>Seiten</h4>
+          <ul>
+            <li><a href="ueber-mich.html">Über mich</a></li>
+            <li><a href="angebot.html">Angebot</a></li>
+            <li><a href="pflanzenwelt.html">Pflanzenwelt</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Rechtliches</h4>
+          <ul>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+          </ul>
+        </div>
+      </nav>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="year"></span> Sabine Schröder-Gravendyck — Bessere Welt ergärtnern</span>
-      <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
+      <span>© <span id="year"></span> Sabine Schröder-Gravendyck</span>
+      <span>Bessere Welt ergärtnern</span>
     </div>
   </div>
 </footer>
 
 <script src="assets/js/main.js"></script>
-<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>

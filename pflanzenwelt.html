@@ -5,129 +5,132 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Pflanzenwelt — Bessere Welt ergärtnern</title>
 <meta name="description" content="Pflanzenporträts: welche Tiere welche Pflanzen brauchen — als Nahrung, Nistplatz oder Kinderstube." />
+<link rel="stylesheet" href="assets/fonts/fonts.css" />
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-7 5-13 14-14 1 9-5 15-14 14Z"/><path d="M5 19c3-4 6-6.5 10-8"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 6l6 6-6 6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  </defs>
+</svg>
+
 <header class="site-header">
-  <nav class="nav container">
-    <a class="brand" href="index.html"><strong>Bessere Welt</strong>&nbsp;ergärtnern</a>
-    <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
-    <ul class="nav-links">
-      <li><a href="index.html">Startseite</a></li>
-      <li><a href="ueber-mich.html">Über mich</a></li>
-      <li><a href="angebot.html">Angebot</a></li>
-      <li><a href="pflanzenwelt.html" aria-current="page">Pflanzenwelt</a></li>
-      <li><a href="kontakt.html">Kontakt</a></li>
-    </ul>
-  </nav>
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="mark" aria-hidden="true"><use href="#i-leaf"/></svg>
+      <span><b>bessere&nbsp;welt</b> <span class="light">ergärtnern</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menü" aria-expanded="false"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+    <nav class="nav">
+      <a href="index.html">Start</a>
+      <a href="ueber-mich.html">Über mich</a>
+      <a href="angebot.html">Angebot</a>
+      <a href="pflanzenwelt.html" aria-current="page">Pflanzenwelt</a>
+      <a class="btn btn-primary" href="kontakt.html">Kontakt <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </nav>
+  </div>
 </header>
 
 <main>
 
   <section class="page-hero">
-    <div class="container">
+    <div class="wrap">
       <p class="eyebrow">Pflanzenwelt</p>
-      <h1>Pflanzenporträts</h1>
-      <p class="lede">
-        Pflanzen und Tiere gehören zusammen wie Schloss und Schlüssel. Jede
-        Pflanze bietet Wohnung und Nahrung für bestimmte Schmetterlinge,
-        Bienen, Käfer und andere Mitgeschöpfe. Hier stelle ich sie einzeln vor.
-      </p>
+      <h1 class="display" style="font-size:clamp(2.2rem,4.5vw,3.6rem);">Pflanzenporträts</h1>
+      <p class="lede">Pflanzen und Tiere gehören zusammen wie Schloss und Schlüssel. Jede Pflanze bietet Wohnung und Nahrung für bestimmte Schmetterlinge, Bienen, Käfer und andere Mitgeschöpfe. Hier stelle ich sie einzeln vor.</p>
     </div>
   </section>
 
-  <section>
-    <div class="container">
-      <article class="portrait-wrap">
-        <img src="assets/img/moschusmalve-malva-moschata.jpg" alt="Pflanzenporträt der Moschusmalve (Malva moschata): Blüten, Wuchshöhe 30–50 cm, Blütezeit Juni bis Oktober, mehrjährig und winterhart, geeignet für Topfkultur. Dazu Fotos einer Steinhummel und einer Mauerbiene auf den Blüten sowie des Malven-Dickkopffalters." loading="lazy" />
-        <div>
-          <h2>Moschusmalve <span style="font-weight:400; color:var(--ink-soft);">(Malva moschata)</span></h2>
-          <p>
-            <span class="tag">30–50 cm</span>
-            <span class="tag">Juni–Oktober</span>
-            <span class="tag">mehrjährig, winterhart</span>
-            <span class="tag">topfgeeignet</span>
-          </p>
-          <p>
-            Eine Pollen- und Nektarpflanze für zahlreiche Insekten — darunter
-            die Steinhummel (<em>Bombus lapidarius</em>), die hier mit
-            Pollenkörnchen im Pelz zu sehen ist. Für die Raupen des
-            Malven-Dickkopffalters ist sie Futterpflanze. Wildbienen nutzen
-            die Blüten als Schlaf- und Ruheplatz — die Stahlblaue Mauerbiene
-            (<em>Osmia caerulescens</em>) verwendet sie zudem als Baumaterial
-            für ihr Nest.
-          </p>
-          <p style="font-size:0.9rem; color:var(--ink-soft);">
-            Tipp: Wer möchte, entfernt im Spätsommer verblühte Blüten, um
-            noch mehr Wachstum neuer Blüten anzuregen.
-          </p>
+  <section class="section-sm">
+    <div class="wrap portrait reveal">
+      <img src="assets/img/moschusmalve-malva-moschata.jpg" alt="Pflanzenporträt der Moschusmalve (Malva moschata): Wuchshöhe 30–50 cm, Blütezeit Juni bis Oktober, mehrjährig und winterhart, topfgeeignet; dazu Fotos einer Steinhummel und einer Mauerbiene auf den Blüten sowie des Malven-Dickkopffalters" loading="lazy" />
+      <div>
+        <p class="eyebrow">Porträt 01</p>
+        <h2>Moschusmalve <span class="accent-serif" style="color:var(--ink-soft);">(Malva moschata)</span></h2>
+        <div class="spec-row">
+          <span class="spec">30–50 cm</span>
+          <span class="spec">Juni–Oktober</span>
+          <span class="spec">mehrjährig, winterhart</span>
+          <span class="spec">topfgeeignet</span>
         </div>
-      </article>
+        <p>Eine Pollen- und Nektarpflanze für zahlreiche Insekten — darunter die Steinhummel (<em>Bombus lapidarius</em>), die hier mit Pollenkörnchen im Pelz zu sehen ist. Für die Raupen des Malven-Dickkopffalters ist sie Futterpflanze. Wildbienen nutzen die Blüten als Schlaf- und Ruheplatz — die Stahlblaue Mauerbiene (<em>Osmia caerulescens</em>) verwendet sie zudem als Baumaterial für ihr Nest.</p>
+        <p style="font-size:0.95rem; color:var(--ink-soft);">Tipp: Wer möchte, entfernt im Spätsommer verblühte Blüten, um noch mehr Wachstum neuer Blüten anzuregen.</p>
+      </div>
     </div>
   </section>
 
-  <section class="alt-bg">
-    <div class="container">
+  <section class="bg-sage">
+    <div class="wrap reveal">
       <p class="eyebrow">Beobachtungen aus dem Garten</p>
       <h2>Wer sich sonst noch zeigt</h2>
-      <p class="lede" style="max-width:640px;">
-        Zwischen den Pflanzenporträts sammeln sich Momentaufnahmen aus Garten
-        und Wiese — kleine Begegnungen, die zeigen, wie viel Leben in einer
-        naturnahen Fläche steckt.
-      </p>
-      <div class="gallery-grid" style="margin-top:2.2rem;">
-        <figure class="gallery-card">
-          <img src="assets/img/hauhechel-blaeuling-polyommatus-icarus.jpg" alt="Hauhechel-Bläuling (Polyommatus icarus) auf Oreganoblüten" loading="lazy" />
-          <figcaption><strong>Hauhechel-Bläuling</strong><em>Polyommatus icarus</em>, auf Oreganoblüten</figcaption>
+      <p class="lede" style="max-width:60ch;">Zwischen den Porträts sammeln sich Momentaufnahmen aus Garten und Wiese — kleine Begegnungen, die zeigen, wie viel Leben in einer naturnahen Fläche steckt.</p>
+      <div class="gallery">
+        <figure class="shot">
+          <img src="assets/img/hauhechel-blaeuling-polyommatus-icarus.jpg" alt="Hauhechel-Bläuling auf Oreganoblüten" loading="lazy" />
+          <figcaption><b>Hauhechel-Bläuling</b><i>Polyommatus icarus</i>, auf Oreganoblüten</figcaption>
         </figure>
-        <figure class="gallery-card">
-          <img src="assets/img/rotschopfige-sandbiene-andrena-haemorrhoa.jpg" alt="Rotschopfige Sandbiene (Andrena haemorrhoa)" loading="lazy" />
-          <figcaption><strong>Rotschopfige Sandbiene</strong><em>Andrena haemorrhoa</em>, eine früh im Jahr fliegende Wildbiene</figcaption>
+        <figure class="shot">
+          <img src="assets/img/rotschopfige-sandbiene-andrena-haemorrhoa.jpg" alt="Rotschopfige Sandbiene" loading="lazy" />
+          <figcaption><b>Rotschopfige Sandbiene</b><i>Andrena haemorrhoa</i>, eine früh im Jahr fliegende Wildbiene</figcaption>
         </figure>
-        <figure class="gallery-card">
-          <img src="assets/img/grashuepfer-auf-stein.jpg" alt="Grashüpfer sitzt auf einem sonnenwarmen Stein" loading="lazy" />
-          <figcaption><strong>Grashüpfer</strong>auf einem sonnenwarmen Stein</figcaption>
+        <figure class="shot">
+          <img src="assets/img/grashuepfer-auf-stein.jpg" alt="Grashüpfer auf einem sonnenwarmen Stein" loading="lazy" />
+          <figcaption><b>Grashüpfer</b>auf einem sonnenwarmen Stein</figcaption>
         </figure>
       </div>
     </div>
   </section>
 
-  <section>
-    <div class="container" style="max-width: 760px; text-align:center;">
-      <p class="eyebrow">Bald verfügbar</p>
+  <section class="section-sm">
+    <div class="wrap-narrow reveal" style="text-align:center;">
+      <p class="eyebrow">Bald mehr</p>
       <h2>Weitere Porträts folgen</h2>
-      <p class="lede">
-        Nach und nach wächst hier eine kleine Bibliothek von Pflanzen und den
-        Tieren, die sie brauchen — genau wie ein Garten selbst.
-      </p>
+      <p class="lede" style="margin-inline:auto;">Nach und nach wächst hier eine kleine Bibliothek von Pflanzen und den Tieren, die sie brauchen — genau wie ein Garten selbst.</p>
     </div>
   </section>
 
 </main>
 
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="brand" style="color: var(--green-100); margin-bottom: 0.6rem;"><strong>Bessere Welt</strong>&nbsp;ergärtnern</div>
-        <p style="max-width: 320px;">Biodiversität für Garten, Balkon und Firmengelände — Schritt für Schritt, mit Freude.</p>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <svg class="mark" aria-hidden="true"><use href="#i-leaf"/></svg>
+          <span><b>bessere&nbsp;welt</b> <span class="light">ergärtnern</span></span>
+        </a>
+        <p>Biodiversität für Garten, Balkon und Gelände — Schritt für Schritt, mit Freude.</p>
       </div>
-      <ul class="footer-links">
-        <li><a href="ueber-mich.html">Über mich</a></li>
-        <li><a href="angebot.html">Angebot</a></li>
-        <li><a href="pflanzenwelt.html">Pflanzenwelt</a></li>
-        <li><a href="kontakt.html">Kontakt</a></li>
-      </ul>
+      <nav class="footer-nav">
+        <div>
+          <h4>Seiten</h4>
+          <ul>
+            <li><a href="ueber-mich.html">Über mich</a></li>
+            <li><a href="angebot.html">Angebot</a></li>
+            <li><a href="pflanzenwelt.html">Pflanzenwelt</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Rechtliches</h4>
+          <ul>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+          </ul>
+        </div>
+      </nav>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="year"></span> Sabine Schröder-Gravendyck — Bessere Welt ergärtnern</span>
-      <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
+      <span>© <span id="year"></span> Sabine Schröder-Gravendyck</span>
+      <span>Bessere Welt ergärtnern</span>
     </div>
   </div>
 </footer>
 
 <script src="assets/js/main.js"></script>
-<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>

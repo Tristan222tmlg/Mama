@@ -5,56 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Kontakt — Bessere Welt ergärtnern</title>
 <meta name="description" content="Melde dich, wenn du ein Stück bessere Welt ergärtnern willst." />
+<link rel="stylesheet" href="assets/fonts/fonts.css" />
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-7 5-13 14-14 1 9-5 15-14 14Z"/><path d="M5 19c3-4 6-6.5 10-8"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.6 7 12 12.8 20.4 7"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H8l2 5-2 1.5a11 11 0 0 0 5.5 5.5L15 14l5 2v2.5c0 .8-.7 1.5-1.5 1.5A15.5 15.5 0 0 1 4 5.5Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 6l6 6-6 6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  </defs>
+</svg>
+
 <header class="site-header">
-  <nav class="nav container">
-    <a class="brand" href="index.html"><strong>Bessere Welt</strong>&nbsp;ergärtnern</a>
-    <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
-    <ul class="nav-links">
-      <li><a href="index.html">Startseite</a></li>
-      <li><a href="ueber-mich.html">Über mich</a></li>
-      <li><a href="angebot.html">Angebot</a></li>
-      <li><a href="pflanzenwelt.html">Pflanzenwelt</a></li>
-      <li><a href="kontakt.html" aria-current="page">Kontakt</a></li>
-    </ul>
-  </nav>
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="mark" aria-hidden="true"><use href="#i-leaf"/></svg>
+      <span><b>bessere&nbsp;welt</b> <span class="light">ergärtnern</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menü" aria-expanded="false"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+    <nav class="nav">
+      <a href="index.html">Start</a>
+      <a href="ueber-mich.html">Über mich</a>
+      <a href="angebot.html">Angebot</a>
+      <a href="pflanzenwelt.html">Pflanzenwelt</a>
+      <a class="btn btn-primary" href="kontakt.html" aria-current="page">Kontakt <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </nav>
+  </div>
 </header>
 
 <main>
 
   <section class="page-hero">
-    <div class="container">
+    <div class="wrap">
       <p class="eyebrow">Kontakt</p>
-      <h1>Melde dich bei mir</h1>
+      <h1 class="display" style="font-size:clamp(2.2rem,4.5vw,3.6rem);">Melde dich bei mir</h1>
       <p class="lede">Wenn du ein Stück bessere Welt ergärtnern willst — ich freue mich, von dir zu hören.</p>
     </div>
   </section>
 
-  <section>
-    <div class="container contact-grid">
+  <section class="section-sm">
+    <div class="wrap contact-grid reveal">
       <div>
-        <h2>So erreichst du mich</h2>
+        <h2 style="font-size:clamp(1.5rem,2.5vw,2rem);">So erreichst du mich</h2>
         <div class="info-line">
-          <span class="icon-sm">✉</span>
-          <span><a href="mailto:kontakt@bessere-welt-ergaertnern.de">kontakt@bessere-welt-ergaertnern.de</a><br /><small style="color:var(--ink-soft);">Platzhalter — bitte durch echte Adresse ersetzen</small></span>
+          <svg aria-hidden="true"><use href="#i-mail"/></svg>
+          <span><a href="mailto:kontakt@bessere-welt-ergaertnern.de">kontakt@bessere-welt-ergaertnern.de</a><br /><small>Platzhalter — bitte durch echte Adresse ersetzen</small></span>
         </div>
         <div class="info-line">
-          <span class="icon-sm">☎</span>
+          <svg aria-hidden="true"><use href="#i-phone"/></svg>
           <span>[Telefonnummer eintragen]</span>
         </div>
         <div class="info-line">
-          <span class="icon-sm">📍</span>
+          <svg aria-hidden="true"><use href="#i-pin"/></svg>
           <span>[Ort / Einzugsgebiet eintragen]</span>
         </div>
-
-        <div class="note-box" style="margin-top:2rem;">
-          Hinweis: Dieses Formular versendet noch keine E-Mails — dafür braucht
-          es entweder ein kleines Backend oder einen Formular-Dienst (z. B.
-          Formspree). Bis dahin funktioniert der Button „Jetzt schreiben“
-          unten als direkter <em>mailto</em>-Link.
+        <div class="note" style="margin-top:2rem;">
+          Hinweis: Dieses Formular versendet noch keine E-Mails — dafür braucht es einen Formular-Dienst (z.&nbsp;B. Formspree) oder ein kleines Backend. Bis dahin funktioniert der Button „Direkt schreiben“ als <em>mailto</em>-Link.
         </div>
       </div>
 
@@ -69,44 +80,52 @@
         </div>
         <div class="field">
           <label for="message">Deine Nachricht</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
+          <textarea id="message" name="message" rows="6" required></textarea>
         </div>
-        <button class="btn btn-primary" type="submit">Nachricht senden</button>
+        <button class="btn btn-primary" type="submit">Nachricht senden <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <a class="btn btn-outline" href="mailto:kontakt@bessere-welt-ergaertnern.de" style="margin-left:0.6rem;">Direkt schreiben</a>
       </form>
-    </div>
-  </section>
-
-  <section class="alt-bg">
-    <div class="container" style="max-width:760px; text-align:center;">
-      <h2>Oder schreib mir direkt per Mail</h2>
-      <a class="btn btn-primary" href="mailto:kontakt@bessere-welt-ergaertnern.de">Jetzt schreiben</a>
     </div>
   </section>
 
 </main>
 
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="brand" style="color: var(--green-100); margin-bottom: 0.6rem;"><strong>Bessere Welt</strong>&nbsp;ergärtnern</div>
-        <p style="max-width: 320px;">Biodiversität für Garten, Balkon und Firmengelände — Schritt für Schritt, mit Freude.</p>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <svg class="mark" aria-hidden="true"><use href="#i-leaf"/></svg>
+          <span><b>bessere&nbsp;welt</b> <span class="light">ergärtnern</span></span>
+        </a>
+        <p>Biodiversität für Garten, Balkon und Gelände — Schritt für Schritt, mit Freude.</p>
       </div>
-      <ul class="footer-links">
-        <li><a href="ueber-mich.html">Über mich</a></li>
-        <li><a href="angebot.html">Angebot</a></li>
-        <li><a href="pflanzenwelt.html">Pflanzenwelt</a></li>
-        <li><a href="kontakt.html">Kontakt</a></li>
-      </ul>
+      <nav class="footer-nav">
+        <div>
+          <h4>Seiten</h4>
+          <ul>
+            <li><a href="ueber-mich.html">Über mich</a></li>
+            <li><a href="angebot.html">Angebot</a></li>
+            <li><a href="pflanzenwelt.html">Pflanzenwelt</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Rechtliches</h4>
+          <ul>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+          </ul>
+        </div>
+      </nav>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="year"></span> Sabine Schröder-Gravendyck — Bessere Welt ergärtnern</span>
-      <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
+      <span>© <span id="year"></span> Sabine Schröder-Gravendyck</span>
+      <span>Bessere Welt ergärtnern</span>
     </div>
   </div>
 </footer>
 
 <script src="assets/js/main.js"></script>
-<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>

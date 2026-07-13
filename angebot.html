@@ -5,149 +5,150 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Angebot — Bessere Welt ergärtnern</title>
 <meta name="description" content="Biodiversitätsberatung für Garten, Balkon, Schulen und Firmen sowie Workshops zu Naturfasern und Ökologie." />
+<link rel="stylesheet" href="assets/fonts/fonts.css" />
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-7 5-13 14-14 1 9-5 15-14 14Z"/><path d="M5 19c3-4 6-6.5 10-8"/></symbol>
+    <symbol id="i-sprout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-8"/><path d="M12 13c0-3 2-5 5-5 0 3-2 5-5 5Z"/><path d="M12 15c0-2.6-1.8-4.4-4.4-4.4C7.6 13.2 9.4 15 12 15Z"/></symbol>
+    <symbol id="i-trees" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21v-3"/><path d="M8 18 4.5 13H7L4.5 8.5H12L9 13h2.5L8 18Z"/><path d="M16 21v-5"/><circle cx="16" cy="12" r="4"/></symbol>
+    <symbol id="i-yarn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M5 9c4 1.5 8 5 10 10"/><path d="M9 4c3.5 3 7 7 9.5 12"/><path d="M4.5 13c3 1.4 6 4 7.5 6.5"/></symbol>
+    <symbol id="i-talk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H9l-4 4V6a1 1 0 0 1 1-1Z"/><path d="M10.5 11c0-1.8 1.3-3 3.2-3-.2 1.8-1.4 3-3.2 3Z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 6l6 6-6 6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  </defs>
+</svg>
+
 <header class="site-header">
-  <nav class="nav container">
-    <a class="brand" href="index.html"><strong>Bessere Welt</strong>&nbsp;ergärtnern</a>
-    <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
-    <ul class="nav-links">
-      <li><a href="index.html">Startseite</a></li>
-      <li><a href="ueber-mich.html">Über mich</a></li>
-      <li><a href="angebot.html" aria-current="page">Angebot</a></li>
-      <li><a href="pflanzenwelt.html">Pflanzenwelt</a></li>
-      <li><a href="kontakt.html">Kontakt</a></li>
-    </ul>
-  </nav>
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg class="mark" aria-hidden="true"><use href="#i-leaf"/></svg>
+      <span><b>bessere&nbsp;welt</b> <span class="light">ergärtnern</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Menü" aria-expanded="false"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+    <nav class="nav">
+      <a href="index.html">Start</a>
+      <a href="ueber-mich.html">Über mich</a>
+      <a href="angebot.html" aria-current="page">Angebot</a>
+      <a href="pflanzenwelt.html">Pflanzenwelt</a>
+      <a class="btn btn-primary" href="kontakt.html">Kontakt <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </nav>
+  </div>
 </header>
 
 <main>
 
   <section class="page-hero">
-    <div class="container">
+    <div class="wrap">
       <p class="eyebrow">Angebot</p>
-      <h1>Wie wir zusammenarbeiten können</h1>
+      <h1 class="display" style="font-size:clamp(2.2rem,4.5vw,3.6rem);">Wie wir zusammenarbeiten können</h1>
       <p class="lede">Von der ersten Beratung bis zur fertig blühenden Fläche — praxisnah und auf deinen Ort zugeschnitten.</p>
     </div>
   </section>
 
-  <section>
-    <div class="container">
-      <div class="feature">
-        <div>
-          <h2>🌿 Biodiversität für Garten, Hof &amp; Balkon</h2>
-          <ul class="check-list">
-            <li>Ich stelle Pflanzenoptionen und den biologischen Zusammenhang vor, die zu dir und deinem Standort passen.</li>
-            <li>Gemeinsam entwickeln wir ein Konzept, das deinen Ort in einen Lebensraum verwandelt.</li>
-            <li>Ich unterstütze dich bei der Beschaffung der Pflanzen und bei der Umsetzung.</li>
-            <li>Die Beziehung zwischen dir, den Pflanzen, den Tieren und dem Boden verstehe ich als fortlaufenden Prozess — ich begleite dich über Zeit, nicht nur einmalig. Das ist ein anderes Erlebnis als klassische Dekorationsgärtnerei.</li>
-          </ul>
+  <section class="section-sm">
+    <div class="wrap reveal">
+      <div class="index-list">
+        <div class="index-item">
+          <div class="index-num">01</div>
+          <div class="index-body">
+            <h3>Biodiversität für Garten, Hof &amp; Balkon</h3>
+            <p>Ich stelle Pflanzenoptionen und den biologischen Zusammenhang vor, die zu dir und deinem Standort passen. Gemeinsam entwickeln wir ein Konzept, das deinen Ort in einen Lebensraum verwandelt — und ich unterstütze dich bei Beschaffung und Umsetzung. Die Beziehung zwischen dir, den Pflanzen, den Tieren und dem Boden verstehe ich als fortlaufenden Prozess; ich begleite dich über Zeit. Ein anderes Erlebnis als klassische Dekorationsgärtnerei.</p>
+          </div>
+          <div class="index-icon"><svg aria-hidden="true"><use href="#i-sprout"/></svg></div>
         </div>
-        <div class="feature-media">
-          <img src="assets/img/kirschen-rotes-wunder.jpg" alt="Reife Kirschen der Sorte 'Rotes Wunder' am Baum" loading="lazy" />
+        <div class="index-item">
+          <div class="index-num">02</div>
+          <div class="index-body">
+            <h3>Naturnahe Schul-, Kita- &amp; Firmengelände</h3>
+            <p>Aus einem ungeliebten Gelände kann ein lebendiges Stück Paradies werden, das Kinder, Lehrkräfte, Mitarbeitende und Eltern gleichermaßen genießen — und das neuen Lebensraum für Vögel, Bienen, Schmetterlinge und kleine Säugetiere schafft. Workshops und Unterrichtseinheiten zeigen dabei die Verbindungen zwischen Tieren, Pflanzen, Geografie, Geschichte, Wirtschaft, Sprache und Handwerk auf.</p>
+          </div>
+          <div class="index-icon"><svg aria-hidden="true"><use href="#i-trees"/></svg></div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="alt-bg">
-    <div class="container">
-      <div class="feature reverse">
-        <div>
-          <h2>🏫 Naturnahe Schul-, Kita- &amp; Firmengelände</h2>
-          <p>
-            Aus einem ungeliebten Schulgelände kann ein lebendiges Stück
-            Paradies werden, das Schüler*innen, Lehrkräfte und Eltern
-            gleichermaßen genießen — und das neuen Lebensraum für Vögel,
-            Bienen, Schmetterlinge und kleine Säugetiere schafft. Workshops
-            und Unterrichtseinheiten zeigen dabei die Verbindungen zwischen
-            Tieren, Pflanzen, Geografie, Geschichte, Wirtschaft, Sprache und
-            Handwerk auf.
-          </p>
+        <div class="index-item">
+          <div class="index-num">03</div>
+          <div class="index-body">
+            <h3>Naturfasern &amp; ganzheitliche Projekte</h3>
+            <p>In einem mehrjährigen Schulprojekt rund um Schafe und Wolle habe ich Kindern und Mitarbeitenden ermöglicht, Rohwolle und Rohbaumwolle selbst zu verarbeiten: Spinnen, Weben, Stricken und natürliches Färben. So wird Nachhaltigkeit nicht nur erklärt, sondern mit den Händen erfahren.</p>
+          </div>
+          <div class="index-icon"><svg aria-hidden="true"><use href="#i-yarn"/></svg></div>
         </div>
-        <div class="feature-media">
-          <img src="assets/img/grosse-sternmiere-stellaria-holostea.jpg" alt="Große Sternmiere (Stellaria holostea) blüht flächig unter Bäumen" loading="lazy" />
+        <div class="index-item">
+          <div class="index-num">04</div>
+          <div class="index-body">
+            <h3>Vorträge, Workshops &amp; Beratung</h3>
+            <p>Zu Ökologie, Nachhaltigkeit und dem Zusammenspiel von Tier, Pflanze und Boden biete ich Vorträge, Kurse und individuelle Beratungen an — für Privatpersonen ebenso wie für Gruppen, Schulen und Unternehmen.</p>
+          </div>
+          <div class="index-icon"><svg aria-hidden="true"><use href="#i-talk"/></svg></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section>
-    <div class="container">
-      <div class="feature">
-        <div>
-          <h2>🧶 Naturfasern &amp; ganzheitliche Projekte</h2>
-          <p>
-            In einem mehrjährigen Schulprojekt rund um Schafe und Wolle habe
-            ich Kindern und Mitarbeitenden ermöglicht, Rohwolle und
-            Rohbaumwolle selbst zu verarbeiten: Spinnen, Weben, Stricken und
-            natürliches Färben. So wird Nachhaltigkeit nicht nur erklärt,
-            sondern mit den Händen erfahren.
-          </p>
-        </div>
-        <div class="feature-media">
-          <div class="placeholder-photo">Foto: Naturfaser-Workshop<br />(folgt)</div>
-        </div>
+  <section class="bg-sage">
+    <div class="wrap feature reveal">
+      <div class="feature-media landscape">
+        <img src="assets/img/kirschen-rotes-wunder.jpg" alt="Reife Kirschen am Baum" loading="lazy" />
+      </div>
+      <div class="feature-text">
+        <p class="eyebrow">Kein Strauß, sondern ein Kreislauf</p>
+        <h2>Begleitung, die bleibt.</h2>
+        <p>Ein lebendiger Garten ist nicht in einem Wochenende fertig. Er wächst, verändert sich, reift — wie ein Obstbaum, der Jahr für Jahr trägt. Deshalb geht es mir nicht um schnelle Dekoration, sondern um eine Beziehung zu deinem Ort, die über die Jahreszeiten trägt.</p>
+        <a class="link-arrow" href="kontakt.html">Vorhaben besprechen <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
 
-  <section class="alt-bg">
-    <div class="container">
-      <div class="feature reverse">
-        <div>
-          <h2>🎤 Vorträge, Workshops &amp; Beratung</h2>
-          <p>
-            Zu Ökologie, Nachhaltigkeit und dem Zusammenspiel von Tier,
-            Pflanze und Boden biete ich Vorträge, Kurse und individuelle
-            Beratungen an — für Privatpersonen ebenso wie für Gruppen,
-            Schulen und Unternehmen.
-          </p>
-        </div>
-        <div class="feature-media">
-          <div class="placeholder-photo">Foto: Vortrag / Workshop-Situation<br />(folgt)</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container" style="max-width: 760px; text-align:center;">
+  <section class="section-sm">
+    <div class="wrap-narrow reveal" style="text-align:center;">
       <p class="eyebrow">Der nächste Schritt</p>
       <h2>Lass uns herausfinden, was zu deinem Ort passt.</h2>
-      <p class="lede">
-        Jedes Vorhaben beginnt mit einem Gespräch — ohne Verpflichtung.
-      </p>
-      <a class="btn btn-primary" href="kontakt.html">Termin anfragen</a>
+      <p class="lede" style="margin-inline:auto;">Jedes Vorhaben beginnt mit einem Gespräch — ohne Verpflichtung.</p>
+      <p style="margin-top:2rem;"><a class="btn btn-primary" href="kontakt.html">Termin anfragen <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
     </div>
   </section>
 
 </main>
 
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="brand" style="color: var(--green-100); margin-bottom: 0.6rem;"><strong>Bessere Welt</strong>&nbsp;ergärtnern</div>
-        <p style="max-width: 320px;">Biodiversität für Garten, Balkon und Firmengelände — Schritt für Schritt, mit Freude.</p>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <svg class="mark" aria-hidden="true"><use href="#i-leaf"/></svg>
+          <span><b>bessere&nbsp;welt</b> <span class="light">ergärtnern</span></span>
+        </a>
+        <p>Biodiversität für Garten, Balkon und Gelände — Schritt für Schritt, mit Freude.</p>
       </div>
-      <ul class="footer-links">
-        <li><a href="ueber-mich.html">Über mich</a></li>
-        <li><a href="angebot.html">Angebot</a></li>
-        <li><a href="pflanzenwelt.html">Pflanzenwelt</a></li>
-        <li><a href="kontakt.html">Kontakt</a></li>
-      </ul>
+      <nav class="footer-nav">
+        <div>
+          <h4>Seiten</h4>
+          <ul>
+            <li><a href="ueber-mich.html">Über mich</a></li>
+            <li><a href="angebot.html">Angebot</a></li>
+            <li><a href="pflanzenwelt.html">Pflanzenwelt</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Rechtliches</h4>
+          <ul>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+          </ul>
+        </div>
+      </nav>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="year"></span> Sabine Schröder-Gravendyck — Bessere Welt ergärtnern</span>
-      <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
+      <span>© <span id="year"></span> Sabine Schröder-Gravendyck</span>
+      <span>Bessere Welt ergärtnern</span>
     </div>
   </div>
 </footer>
 
 <script src="assets/js/main.js"></script>
-<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>
