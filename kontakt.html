@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kontakt — Bessere Welt ergärtnern</title>
+<meta name="description" content="Melde dich, wenn du ein Stück bessere Welt ergärtnern willst." />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav container">
+    <a class="brand" href="index.html"><strong>Bessere Welt</strong>&nbsp;ergärtnern</a>
+    <button class="nav-toggle" aria-label="Menü öffnen" aria-expanded="false"><span></span></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Startseite</a></li>
+      <li><a href="ueber-mich.html">Über mich</a></li>
+      <li><a href="angebot.html">Angebot</a></li>
+      <li><a href="pflanzenwelt.html">Pflanzenwelt</a></li>
+      <li><a href="kontakt.html" aria-current="page">Kontakt</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Kontakt</p>
+      <h1>Melde dich bei mir</h1>
+      <p class="lede">Wenn du ein Stück bessere Welt ergärtnern willst — ich freue mich, von dir zu hören.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container contact-grid">
+      <div>
+        <h2>So erreichst du mich</h2>
+        <div class="info-line">
+          <span class="icon-sm">✉</span>
+          <span><a href="mailto:kontakt@bessere-welt-ergaertnern.de">kontakt@bessere-welt-ergaertnern.de</a><br /><small style="color:var(--ink-soft);">Platzhalter — bitte durch echte Adresse ersetzen</small></span>
+        </div>
+        <div class="info-line">
+          <span class="icon-sm">☎</span>
+          <span>[Telefonnummer eintragen]</span>
+        </div>
+        <div class="info-line">
+          <span class="icon-sm">📍</span>
+          <span>[Ort / Einzugsgebiet eintragen]</span>
+        </div>
+
+        <div class="note-box" style="margin-top:2rem;">
+          Hinweis: Dieses Formular versendet noch keine E-Mails — dafür braucht
+          es entweder ein kleines Backend oder einen Formular-Dienst (z. B.
+          Formspree). Bis dahin funktioniert der Button „Jetzt schreiben“
+          unten als direkter <em>mailto</em>-Link.
+        </div>
+      </div>
+
+      <form>
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="field">
+          <label for="email">E-Mail</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="field">
+          <label for="message">Deine Nachricht</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Nachricht senden</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="alt-bg">
+    <div class="container" style="max-width:760px; text-align:center;">
+      <h2>Oder schreib mir direkt per Mail</h2>
+      <a class="btn btn-primary" href="mailto:kontakt@bessere-welt-ergaertnern.de">Jetzt schreiben</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="color: var(--green-100); margin-bottom: 0.6rem;"><strong>Bessere Welt</strong>&nbsp;ergärtnern</div>
+        <p style="max-width: 320px;">Biodiversität für Garten, Balkon und Firmengelände — Schritt für Schritt, mit Freude.</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="ueber-mich.html">Über mich</a></li>
+        <li><a href="angebot.html">Angebot</a></li>
+        <li><a href="pflanzenwelt.html">Pflanzenwelt</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Sabine Schröder-Gravendyck — Bessere Welt ergärtnern</span>
+      <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
