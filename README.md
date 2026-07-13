@@ -26,9 +26,11 @@ und dann `http://localhost:8000` aufrufen.
 
 ## Offene Punkte, bevor die Seite live gehen kann
 
-1. **Porträtfotos von Sabine fehlen noch.** Auf `ueber-mich.html` sind zwei
-   Platzhalter ("Foto: Sabine im Garten / bei der Arbeit") — dafür braucht es
-   echte Fotos von ihr, die noch nicht vorliegen. Alle anderen bisher
+1. **Weitere Porträtfotos von Sabine wären gut.** Ein rundes Profilbild ist
+   auf `ueber-mich.html` bereits eingebunden (`assets/img/sabine-portrait.jpg`),
+   aber nur 200×200px — zu klein für die beiden großen Rechteck-Plätze
+   ("Foto: Sabine im Garten / bei der Arbeit") auf derselben Seite. Für die
+   braucht es noch höher aufgelöste Fotos von ihr. Alle anderen bisher
    erhaltenen Naturfotos (Akelei, Kuckuckslichtnelke, Große Sternmiere,
    Hauhechel-Bläuling, Rotschopfige Sandbiene, Grashüpfer, Kirschen sowie
    das Moschusmalve-Pflanzenporträt) sind bereits eingebunden — verteilt auf

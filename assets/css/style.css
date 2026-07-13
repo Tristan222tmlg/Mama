@@ -591,3 +591,20 @@ section {
   background: var(--green-100);
 }
 .page-hero .eyebrow { margin-bottom: 0.4em; }
+
+.page-hero-inner {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.avatar {
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--white);
+  box-shadow: var(--shadow);
+  flex-shrink: 0;
+}
