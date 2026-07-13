@@ -26,12 +26,13 @@ und dann `http://localhost:8000` aufrufen.
 
 ## Offene Punkte, bevor die Seite live gehen kann
 
-1. **Echte Fotos.** Die im Chat eingefügten Bilder (Heckenskizze, Wiesenblumen,
-   Akelei, Wildbiene) waren nur eingebettet, nicht als Datei-Uploads — sie
-   liegen dem Projekt bisher nicht als Dateien vor. Bitte als Anhang
-   (Upload) schicken, dann können sie die grau-gestreiften
-   Platzhalter-Kästen ersetzen. Bisher ist nur ein echtes Bild eingebunden:
-   das Moschusmalve-Pflanzenporträt aus der docx-Datei.
+1. **Porträtfotos von Sabine fehlen noch.** Auf `ueber-mich.html` sind zwei
+   Platzhalter ("Foto: Sabine im Garten / bei der Arbeit") — dafür braucht es
+   echte Fotos von ihr, die noch nicht vorliegen. Alle anderen bisher
+   erhaltenen Naturfotos (Akelei, Kuckuckslichtnelke, Große Sternmiere,
+   Hauhechel-Bläuling, Rotschopfige Sandbiene, Grashüpfer, Kirschen sowie
+   das Moschusmalve-Pflanzenporträt) sind bereits eingebunden — verteilt auf
+   Startseite, Angebot und die Foto-Galerie auf `pflanzenwelt.html`.
 2. **Kontaktdaten.** E-Mail-Adresse, Telefonnummer und Einzugsgebiet in
    `kontakt.html` sind Platzhalter.
 3. **Impressum/Datenschutz.** Rechtlich in Deutschland Pflicht — beide
