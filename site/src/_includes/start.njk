@@ -1,76 +1,90 @@
 ---
 layout: basis.njk
+kopf_dunkel: true
+grafik_js: true
 ---
-<section class="held" aria-labelledby="held-titel">
-<div class="wrap held-raster">
-<div class="held-text">
-<p class="kicker">{{ kicker }}</p>
-<h1 class="held-titel" id="held-titel">{{ ueberschrift | betont | safe }}</h1>
+<section class="held dunkel" aria-labelledby="held-titel">
+<div class="wrap held-innen">
+{%- set orbit = { haupt: bilder[0].datei, trabanten: [bilder[1].datei, bilder[2].datei, bilder[3].datei, bilder[4].datei] } %}
+{% include "teile/orbit.njk" %}
+<h1 id="held-titel">{{ ueberschrift | betont | safe }}</h1>
 <p class="lead">{{ lead }}</p>
-<p class="knoepfe">
-{%- for k in knoepfe %}
-<a class="knopf{% if not loop.first %} knopf-zwei{% endif %}" href="{{ base }}{{ k.ziel }}">{{ k.text }}</a>
-{%- endfor %}
+<p class="aktionen">
+<a class="knopf" href="{{ base }}{{ knoepfe[0].ziel }}">{{ knoepfe[0].text }}</a>
+<a class="weiter" href="{{ base }}{{ knoepfe[1].ziel }}">{{ knoepfe[1].text }}</a>
 </p>
 </div>
-<figure class="komposition">
-{% include "teile/ring.njk" %}
-<div class="kreis kreis-gross">{% foto bilder[0].datei, bilder[0].alt, "(min-width: 56rem) 26rem, 72vw", true %}</div>
-<div class="kreis kreis-a">{% foto bilder[1].datei, bilder[1].alt, "(min-width: 56rem) 10rem, 28vw" %}</div>
-<div class="kreis kreis-b">{% foto bilder[2].datei, bilder[2].alt, "(min-width: 56rem) 8rem, 22vw" %}</div>
-<figcaption class="notiz">{% include "teile/pfeil.njk" %}<span>{{ bilder[0].notiz }}</span></figcaption>
-</figure>
-</div>
 </section>
 
-<section class="abschnitt" aria-labelledby="worum-titel">
-<div class="wrap zwei-spalten">
-<div class="spalte-text">
+<div class="aussage">
+<div class="wrap">
+<p class="aussage-text">Die Tiere <span class="chip">{% foto chips[0], "", "8rem" %}</span> sucht man nicht aus. Man sucht die Pflanzen <span class="chip">{% foto chips[1], "", "8rem" %}</span> aus, die mit besonders vielen Tieren in Beziehung stehen.</p>
+</div>
+</div>
+
+<section class="abschnitt abschnitt-oben-eng" aria-labelledby="worum-titel">
+<div class="wrap zwei">
+<div class="links">
 <h2 id="worum-titel">{{ worum.titel }}</h2>
 {{ worum.text | renderContent("md") | safe }}
+<p><a class="weiter" href="{{ base }}pflanzen-und-tiere.html">Alle Pflanzen und Tiere, mit Quellen</a></p>
 </div>
-{% include "teile/stern.njk" %}
+<div class="rechts">
+{%- set po = pflanzen.pflanzen[0] %}
+{% include "teile/pflanzenorbit.njk" %}
+</div>
 </div>
 </section>
 
-<section class="abschnitt band-salbei" aria-labelledby="nutzen-titel">
-<div class="wrap zwei-spalten umgekehrt">
-<div class="spalte-text">
+<section class="abschnitt licht" aria-labelledby="nutzen-titel">
+<div class="wrap zwei breit-links">
+<div class="links">{% include "teile/trittsteine.njk" %}</div>
+<div class="rechts">
 <h2 id="nutzen-titel">{{ nutzen.titel }}</h2>
 {{ nutzen.text | renderContent("md") | safe }}
 </div>
-{% include "teile/trittsteine.njk" %}
 </div>
 </section>
 
-<section class="abschnitt band-wald programm" aria-labelledby="programm-titel">
+<section class="abschnitt blau programm" aria-labelledby="programm-titel">
 <div class="wrap">
-<p class="kicker">{{ programm.kicker }}</p>
 <h2 id="programm-titel">{{ programm.titel }}</h2>
 {% include "teile/wochen.njk" %}
-<div class="programm-text">
-{{ programm.text | renderContent("md") | safe }}
-</div>
-<p><a class="knopf knopf-hell" href="{{ base }}online-programm.html">So läuft das Programm ab</a></p>
+<ul class="bausteine">
+{%- for b in programm.bausteine %}
+<li>{{ b }}</li>
+{%- endfor %}
+</ul>
+<p class="aktionen"><a class="knopf" href="{{ base }}online-programm.html">So läuft das Programm ab</a><span>{{ programm.erstgespraech }}</span></p>
 </div>
 </section>
 
-<section class="abschnitt" aria-label="Rückmeldung einer Kundin">
+<section class="abschnitt dunkel" aria-labelledby="rad-titel">
+<div class="wrap">
+{%- set rad_titel = "Was wann blüht" %}
+{% include "teile/rad.njk" %}
+</div>
+</section>
+
+<section class="zitat-band" aria-label="Rückmeldung einer Kundin">
 <div class="wrap">
 <figure class="zitat-gross">
-<blockquote><p>{{ zitat.text }}“</p></blockquote>
+<blockquote><p>„{{ zitat.text }}“</p></blockquote>
 <figcaption>{{ zitat.quelle }}</figcaption>
 </figure>
 </div>
 </section>
 
-<section class="abschnitt ich-abschnitt" aria-labelledby="ich-titel">
-<div class="wrap ich-raster">
-<figure class="portrait">
+<section class="abschnitt abschnitt-oben-eng" aria-labelledby="ich-titel">
+<div class="wrap zwei">
+<div class="links">
+<figure class="portrait-orbit">
+<div class="orbit-kugel"></div>
+<div class="po-bild">{% foto ich.bild, ich.bild_alt, "18rem" %}</div>
 {% include "teile/ring.njk" %}
-<div class="kreis">{% foto ich.bild, ich.bild_alt, "13rem" %}</div>
 </figure>
-<div class="spalte-text">
+</div>
+<div class="rechts">
 <h2 id="ich-titel">{{ ich.titel }}</h2>
 {{ ich.text | renderContent("md") | safe }}
 </div>

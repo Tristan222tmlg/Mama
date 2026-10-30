@@ -2,7 +2,7 @@ import path from "node:path";
 import yaml from "js-yaml";
 import Image from "@11ty/eleventy-img";
 import { EleventyRenderPlugin } from "@11ty/eleventy";
-import { beziehungsnetz, bluehkalender, monatsband } from "./lib/grafiken.js";
+import { beziehungsnetz, bluehkalender, bluehrad, kreisnetz, monatsband } from "./lib/grafiken.js";
 
 const MONATE = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
 
@@ -13,6 +13,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({
     "src/assets/css": "assets/css",
     "src/assets/fonts": "assets/fonts",
+    "src/assets/js": "assets/js",
     "src/assets/logo": "assets/logo",
     "src/assets/logo/favicon.svg": "favicon.svg",
     "src/statisch/.htaccess": ".htaccess",
@@ -51,6 +52,17 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("monatsband", monatsband);
   eleventyConfig.addFilter("bluehkalender", bluehkalender);
   eleventyConfig.addFilter("beziehungsnetz", beziehungsnetz);
+  eleventyConfig.addFilter("bluehrad", bluehrad);
+  eleventyConfig.addFilter("kreisnetz", kreisnetz);
+
+  // Symbole für die Trabanten: Tiergruppe und Art der Verbindung
+  eleventyConfig.addFilter("tiergruppe", (name = "") => (/falter|bläuling/i.test(name) ? "butterfly" : "bee"));
+  eleventyConfig.addFilter("artsymbol", (art) => ({ raupe: "caterpillar", nest: "nest" })[art] || "flower");
+  // Plätze der Trabanten auf dem Ring (0 = oben, im Uhrzeigersinn in Achteln)
+  eleventyConfig.addFilter("plaetze", (n) => ({ 1: [1], 2: [1, 5], 3: [7, 1, 4], 4: [7, 1, 3, 5] })[Math.min(n, 4)] || [1]);
+
+  // nur den ersten Buchstaben groß ("sammelt Pollen" -> "Sammelt Pollen")
+  eleventyConfig.addFilter("anfang", (text = "") => String(text).charAt(0).toUpperCase() + String(text).slice(1));
 
   // *Wörter* in Überschriften hervorheben, sonst nur reiner Text
   eleventyConfig.addFilter("betont", (text = "") =>

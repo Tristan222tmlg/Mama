@@ -16,10 +16,10 @@ abschluss: erstgespraech
 ## So ist es aufgebaut
 
 - **Sieben Wochen.** Das Programm ist ein Einstieg.
-- **Zwei Live-Calls pro Woche**, je anderthalb Stunden.
+- **Zwei Live-Calls pro Woche.** Je anderthalb Stunden.
 - **Gemeinsame Arbeit am Bildschirm.** Du erkundest deinen eigenen Garten: Was ist jetzt schon drin? Mit Hilfe der Materialien überlegst du, was du gern hineinbringen möchtest. Fragen kannst du sammeln oder gleich stellen. [[offen: wie oft, etwa alle zwei Wochen?]]
-- **Material zum Herunterladen**, das die Live-Calls begleitet.
-- **Eine Gruppe**, die gemeinsam lernt und sich gegenseitig unterstützt.
+- **Material zum Herunterladen.** Es begleitet die Live-Calls.
+- **Eine Gruppe.** Ihr lernt gemeinsam und unterstützt euch gegenseitig.
 - **Online.** Es ist egal, wo du wohnst.
 
 ## Was du lernst
@@ -27,9 +27,9 @@ abschluss: erstgespraech
 - **Natur verstehen.** Was bedeutet Boden, und wie unterstützt du gesundes Bodenleben?
 - **Garten in einem sich wandelnden Klima.** Was bedeutet das für deine Pflanzen, und wo sind unsere Einflussmöglichkeiten?
 - **Warum Biodiversität so wichtig ist.** Sie hält die Ökosysteme aufrecht, die uns frische Luft und frisches Wasser geben und den Boden gesund halten, damit dort unsere Nahrungsmittel wachsen können.
-- **Teil der Natur sein**, statt sich als ihr Gegenüber zu empfinden.
+- **Teil der Natur sein, statt sich als ihr Gegenüber zu empfinden.**
 - **Welche Pflanzen, wie pflanzen, wie anordnen.**
-- **Elemente im Garten** wie Totholzhaufen, Steinwall, Eidechsenburg und Käferkeller, und der Kompost.
+- **Elemente im Garten.** Totholzhaufen, Steinwall, Eidechsenburg und Käferkeller, und der Kompost.
 
 Das sind Schlagworte. Es gibt viel mehr Elemente, die im Garten Sinn machen, und man kann viel über sie lernen.
 

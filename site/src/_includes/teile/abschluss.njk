@@ -1,43 +1,53 @@
-{%- if abschluss == "beide" or abschluss == "gartenbrief" or abschluss == "abend" or abschluss == "erstgespraech" %}
+{#- Der nächste Schritt am Seitenende. abschluss: beide, gartenbrief, abend, erstgespraech oder keiner -#}
+{%- if abschluss == "beide" or abschluss == "erstgespraech" %}
 <section class="abschluss" aria-label="Nächster Schritt">
-<div class="wrap abschluss-raster">
-{%- if abschluss == "beide" or abschluss == "gartenbrief" %}
-<div class="tafel">
+{%- if abschluss == "beide" %}
+<div class="dunkel">
 <h2>Der Gartenbrief</h2>
 <p>Ich schicke ihn gelegentlich per E-Mail. Trag dich ein, dann erfährst du von den nächsten Online-Abenden und vom nächsten Start des Programms.</p>
 {%- set fid = "gb" %}
 {% include "teile/gartenbrief-formular.njk" %}
 </div>
-{%- endif %}
-{%- if abschluss == "beide" or abschluss == "abend" %}
-<div class="tafel tafel-wald">
-<div>
-<h2>{% if abschluss == "abend" %}Lern mich kennen{% else %}Der Online-Abend{% endif %}</h2>
-<p>Eine Dreiviertelstunde, kostenlos. Wir schauen uns gemeinsam ein Gartenthema an. So kannst du mich erleben, und danach weißt du, ob du mit mir arbeiten willst.</p>
-<p><a class="knopf knopf-hell" href="{{ base }}online-abend.html">Zum Online-Abend</a></p>
-</div>
-{% include "teile/dreiviertel.njk" %}
-</div>
-{%- endif %}
-{%- if abschluss == "gartenbrief" %}
-<p class="tafel-neben notiz">Lieber mich erst einmal erleben? <a href="{{ base }}online-abend.html">Zum kostenlosen Online-Abend</a></p>
-{%- elif abschluss == "abend" %}
-<p class="tafel-neben notiz">Oder erst einmal mitlesen: <a href="{{ base }}kontakt.html#gartenbrief">Gartenbrief abonnieren</a></p>
-{%- elif abschluss == "erstgespraech" %}
-<div class="tafel">
+{%- else %}
+<div class="dunkel">
 <h2>Passt das Programm zu dir?</h2>
 <p>Am Anfang steht ein Erstgespräch. Darin kannst du feststellen, ob du mit mir arbeiten willst, und ich auch.</p>
 <p><a class="knopf" href="{{ base }}kontakt.html#nachricht">Erstgespräch anfragen</a></p>
 </div>
-<div class="tafel tafel-wald">
+{%- endif %}
+<div class="licht abend-teil">
 <div>
-<h2>Erst einmal reinhören?</h2>
-<p>Beim kostenlosen Online-Abend schauen wir uns eine Dreiviertelstunde lang ein Gartenthema an.</p>
-<p><a class="knopf knopf-hell" href="{{ base }}online-abend.html">Zum Online-Abend</a></p>
+<h2>{% if abschluss == "beide" %}Der Online-Abend{% else %}Erst einmal reinhören?{% endif %}</h2>
+<p>Eine Dreiviertelstunde, kostenlos. Wir schauen uns gemeinsam ein Gartenthema an. So kannst du mich erleben, und danach weißt du, ob du mit mir arbeiten willst.</p>
+<p><a class="knopf knopf-dunkel" href="{{ base }}online-abend.html">Zum Online-Abend</a></p>
 </div>
 {% include "teile/dreiviertel.njk" %}
 </div>
-{%- endif %}
+</section>
+{%- elif abschluss == "gartenbrief" %}
+<section class="abschluss-eins dunkel" aria-labelledby="abschluss-titel">
+<div class="wrap zwei">
+<div class="links">
+<h2 id="abschluss-titel">Der Gartenbrief</h2>
+<p class="lead">Ich schicke ihn gelegentlich per E-Mail. Trag dich ein, dann erfährst du von den nächsten Online-Abenden und vom nächsten Start des Programms.</p>
+</div>
+<div class="rechts">
+{%- set fid = "gb" %}
+{% include "teile/gartenbrief-formular.njk" %}
+</div>
+</div>
+</section>
+{%- elif abschluss == "abend" %}
+<section class="abschluss-eins licht" aria-labelledby="abschluss-titel">
+<div class="wrap zwei">
+<div class="links">
+<h2 id="abschluss-titel">Lern mich kennen</h2>
+<p class="lead">Eine Dreiviertelstunde, kostenlos. Wir schauen uns gemeinsam ein Gartenthema an. So kannst du mich erleben, und danach weißt du, ob du mit mir arbeiten willst.</p>
+<p><a class="knopf knopf-dunkel" href="{{ base }}online-abend.html">Zum Online-Abend</a></p>
+</div>
+<div class="rechts">
+{% include "teile/dreiviertel.njk" %}
+</div>
 </div>
 </section>
 {%- endif %}

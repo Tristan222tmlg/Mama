@@ -1,0 +1,11 @@
+{#- Erdkugel, großes Foto, offener Ring und vier Trabanten. Erwartet: orbit = { haupt, trabanten[4] } -#}
+<div class="orbit" aria-hidden="true">
+<div class="orbit-kugel"></div>
+<div class="orbit-bild">{% foto orbit.haupt, "", "(min-width: 56rem) 34rem, 80vw", true %}</div>
+<div class="orbit-bahn">
+{% include "teile/ring.njk" %}
+{%- for t in orbit.trabanten %}
+<div class="trabant t{{ loop.index }}"><div>{% foto t, "", "8rem" %}</div></div>
+{%- endfor %}
+</div>
+</div>

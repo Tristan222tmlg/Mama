@@ -4,21 +4,13 @@ permalink: fragen.html
 title: Fragen
 description: Antworten von Sabine Schröder-Gravendyck auf Fragen zum naturnahen Gärtnern und zum Online-Programm – vom Nutzen kleiner Flächen bis zur Frage, ob ein Naturgarten unordentlich aussieht.
 kicker: Gefragt und beantwortet
+kopf_liste: fragen
 ueberschrift: Es gibt keine *dummen* Fragen
 lead: Es gibt nichts, was falsch wäre, ins Gespräch zu bringen.
 breit: true
 abschluss: abend
 ---
-<div class="fragen-raster">
-<nav class="fragen-liste" aria-label="Alle Fragen auf dieser Seite">
-<p class="kicker">Alle Fragen</p>
-<ul>
-{%- for f in fragen %}
-<li><a href="#{{ f.anker }}">{{ f.frage }}</a></li>
-{%- endfor %}
-</ul>
-</nav>
-<div>
+<div class="wrap fragen-raster">
 {%- for f in fragen %}
 <section class="frage" id="{{ f.anker }}" aria-labelledby="{{ f.anker }}-titel">
 <h2 id="{{ f.anker }}-titel">{{ f.frage }}</h2>
@@ -26,5 +18,4 @@ abschluss: abend
 </section>
 {%- endfor %}
 <p class="frage-weiter">Deine Frage ist nicht dabei? <a href="{{ base }}kontakt.html#nachricht">Schreib mir</a>.</p>
-</div>
 </div>

@@ -4,7 +4,6 @@ permalink: index.html
 title: Bessere Welt ergärtnern
 seitentitel: Bessere Welt ergärtnern – naturnah gärtnern, online begleitet
 description: Sabine Schröder-Gravendyck begleitet dich online dabei, deinen Garten, Balkon oder Gemeinschaftsgarten so zu gestalten, dass Wildbienen, Schmetterlinge und Vögel Wohnung und Nahrung finden.
-kicker: Naturnah gärtnern, online begleitet
 ueberschrift: Damit Schmetterlinge, Bienen, Igel und Vögel bei dir *Wohnung und Nahrung* finden
 lead: Ich helfe Menschen, ihr Stückchen Erde so zu gestalten, dass viele Schmetterlinge, Bienen, Maulwürfe, Igel und Vögel dort leben können. Im Garten, auf dem Balkon oder im Gemeinschaftsgarten.
 knoepfe:
@@ -14,18 +13,19 @@ knoepfe:
     ziel: online-abend.html
 bilder:
   - datei: bilder/minze-kleiner-feuerfalter.jpg
-    alt: Ein Kleiner Feuerfalter mit orangen, schwarz gepunkteten Flügeln auf den hellen Blüten einer Minze
-    notiz: Kleiner Feuerfalter an der Minze
   - datei: bilder/dost-hauhechel-blaeuling.jpg
-    alt: Ein Hauhechel-Bläuling auf den rosa Blüten des Dosts
   - datei: bilder/witwenblume-dickkopffalter.jpg
-    alt: Ein Dickkopffalter auf der lila Blüte einer Wiesen-Witwenblume
+  - datei: bilder/natternkopf.jpg
+  - datei: bilder/nisthilfe-mauerbiene.jpg
+chips:
+  - bilder/minze-kleiner-feuerfalter.jpg
+  - bilder/moschusmalve.jpg
 worum:
   titel: Worum es geht
   text: |
     Es geht um einen naturnahen und eher pflegeleichten Garten. Das bedeutet nicht, dass da gar nichts zu tun ist. Aber es bedeutet, dass man Pflanzen aussucht, die mit den Tieren gut zusammenleben können.
 
-    Die Tiere sucht man nicht aus. Man sucht die Pflanzen aus, die mit besonders vielen Tieren in Beziehung stehen.
+    Die Moschus-Malve zum Beispiel: Die Steinhummel sammelt an ihr Pollen und Nektar, die Raupen des Malven-Dickkopffalters fressen ihre Blätter, und die Stahlblaue Mauerbiene baut mit ihnen ihr Nest.
 nutzen:
   titel: Nützt das überhaupt etwas?
   text: |
@@ -33,16 +33,14 @@ nutzen:
 
     Jeder Garten kann ein Trittstein sein, von dem aus andere Flächen erreicht und neue besiedelt werden.
 
-    <a class="pfeil-link" href="fragen.html#nutzen">Mehr dazu, mit Quellen</a>
+    <a class="weiter" href="fragen.html#nutzen">Mehr dazu, mit Quellen</a>
 programm:
-  kicker: Das Online-Begleitprogramm
-  titel: Sieben Wochen, in einer Gruppe, von zu Hause aus
-  text: |
-    - gemeinsame Zeit am Bildschirm, in der du an deinem eigenen Gartenplan arbeitest
-    - Material zum Herunterladen
-    - eine Gruppe, die gemeinsam lernt und sich gegenseitig unterstützt
-
-    Am Anfang steht ein Erstgespräch, in dem wir beide sehen, ob es passt.
+  titel: Das Online-Begleitprogramm, sieben Wochen in einer Gruppe
+  bausteine:
+    - Gemeinsame Zeit am Bildschirm, in der du an deinem eigenen Gartenplan arbeitest
+    - Material zum Herunterladen, das die Live-Calls begleitet
+    - Eine Gruppe, die gemeinsam lernt und sich gegenseitig unterstützt
+  erstgespraech: Am Anfang steht ein Erstgespräch, in dem wir beide sehen, ob es passt.
 zitat:
   text: Das war eine beglückende Stunde. Jetzt kann ich einschätzen, welche Pflanzen für Tiere wirklich nützlich sind.
   quelle: Eine Kundin nach einem gemeinsamen Gang durch ihren Garten
@@ -53,6 +51,6 @@ ich:
   text: |
     Ich bin Tierärztin und mache seit mehr als 15 Jahren Naturprojekte. Im Studium habe ich Botanik, Zoologie, Futtermittelkunde, Chemie und Biochemie gelernt. Das sind sehr gute Grundlagen für die Arbeit in der Natur. Ich bin Mitglied im Naturgarten e. V.
 
-    <a class="pfeil-link" href="ueber-mich.html">Mehr über mich</a>
+    <a class="weiter" href="ueber-mich.html">Mehr über mich</a>
 abschluss: beide
 ---

@@ -31,8 +31,7 @@ content:
       - { name: title, label: Name der Website, type: string, readonly: true }
       - { name: seitentitel, label: Titel im Browser-Tab, type: string }
       - { name: description, label: Kurzbeschreibung für Suchmaschinen, type: text, required: true }
-      - { name: kicker, label: Zeile über der Überschrift, type: string }
-      - { name: ueberschrift, label: Überschrift, type: string, required: true, description: "*Wörter zwischen Sternchen* bekommen den grünen Pinselstrich." }
+      - { name: ueberschrift, label: Überschrift, type: string, required: true, description: "*Wörter zwischen Sternchen* erscheinen hellgrün." }
       - { name: lead, label: Einleitung, type: text }
       - name: knoepfe
         label: Knöpfe unter der Einleitung
@@ -42,13 +41,15 @@ content:
           - { name: text, label: Text, type: string }
           - { name: ziel, label: Ziel (Seite), type: string }
       - name: bilder
-        label: Fotos oben (ein großes, zwei kleine)
+        label: Fotos oben (das erste groß im Kreis, vier kleine kreisen darum; reiner Schmuck)
         type: object
-        list: true
+        list: { min: 5, max: 5 }
         fields:
           - { name: datei, label: Foto, type: image }
-          - { name: alt, label: Beschreibung für Menschen, die das Foto nicht sehen, type: string }
-          - { name: notiz, label: Handschriftliche Notiz (nur beim großen Foto), type: string }
+      - name: chips
+        label: Zwei kleine Fotos mitten im großen Satz („Die Tiere … sucht man nicht aus“)
+        type: image
+        list: { min: 2, max: 2 }
       - name: worum
         label: Abschnitt „Worum es geht“
         type: object
@@ -65,9 +66,9 @@ content:
         label: Abschnitt zum Programm
         type: object
         fields:
-          - { name: kicker, label: Zeile über der Überschrift, type: string }
           - { name: titel, label: Überschrift, type: string }
-          - { name: text, label: Text, type: text }
+          - { name: bausteine, label: Drei Bausteine, type: string, list: { min: 3, max: 3 } }
+          - { name: erstgespraech, label: Satz neben dem Knopf, type: string }
       - name: zitat
         label: Zitat
         type: object
@@ -94,7 +95,7 @@ content:
     fields:
       - { name: title, label: Titel, type: string, required: true }
       - { name: description, label: Kurzbeschreibung für Suchmaschinen, type: text, required: true }
-      - { name: kicker, label: Zeile über dem Titel, type: string }
+      - { name: kicker, label: Zeile unter der Überschrift, type: string }
       - { name: lead, label: Einleitung, type: text }
       - { name: bild, component: bild }
       - { name: layout, type: string, hidden: true }
@@ -111,8 +112,8 @@ content:
     fields:
       - { name: title, label: Titel, type: string, required: true }
       - { name: description, label: Kurzbeschreibung für Suchmaschinen, type: text, required: true }
-      - { name: kicker, label: Zeile über der Überschrift, type: string }
-      - { name: ueberschrift, label: Überschrift, type: string, description: "*Wörter zwischen Sternchen* bekommen den grünen Pinselstrich." }
+      - { name: kicker, label: Zeile unter der Überschrift, type: string }
+      - { name: ueberschrift, label: Überschrift, type: string, description: "*Wörter zwischen Sternchen* erscheinen grün." }
       - { name: lead, label: Einleitung, type: text }
       - { name: bild, component: bild }
       - name: projekte
@@ -120,7 +121,7 @@ content:
         type: object
         list: true
         fields:
-          - { name: art, label: Art (handschriftlich), type: string }
+          - { name: art, label: Art (Schule, Workshop …), type: string }
           - { name: titel, label: Titel, type: string }
           - { name: text, label: Text, type: text }
       - { name: layout, type: string, hidden: true }

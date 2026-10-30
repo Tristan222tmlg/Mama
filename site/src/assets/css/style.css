@@ -1,575 +1,606 @@
-/* Bessere Welt ergärtnern
-   Gestaltungsidee: ein Feldbuch mit Kreisen. Runde Fotos und handschriftliche
-   Notizen wie auf Sabines Steckbrief, der offene Ring und die Erdkugel aus dem
-   Logo, Belege wie auf einem Herbar-Etikett. Grafiken zeigen echte Daten:
-   Blühmonate, belegte Verbindungen, die sieben Programmwochen.
-   Farben: Blattgrün und Kugelblau aus dem Logo, Malve aus dem Rahmen ihres
-   Steckbriefs. Schriften: Fraunces (weich, mit Eigenheiten; Achsen SOFT 100,
-   WONK 1 und opsz fest eingestellt, damit die Datei klein bleibt), Source Sans 3,
-   Caveat für Notizen. Alles liegt auf dem eigenen Server; JavaScript ist nicht nötig. */
+/* Bessere Welt ergärtnern – „Kreislauf“
+   Alles kreist: die Erdkugel und der offene Ring aus dem Logo, Fotos als
+   Trabanten, das Blüten-Jahresrad, das runde Netz der belegten Verbindungen.
+   Die Seiten nutzen die ganze Breite: große Schrift über alle Spalten, Text und
+   Bild teilen sich jede Zeile, Fließtext steht in zwei Spalten.
+   Farben: Moosgrün und Kugelblau aus dem Logo, Triebgrün als Licht, Blütenfarben
+   nur dort, wo sie Daten tragen. Schriften: Bricolage Grotesque (breit bis schmal)
+   für Überschriften, Atkinson Hyperlegible Next für den Text – gebaut für gute
+   Lesbarkeit. Alles liegt auf dem eigenen Server; JavaScript ist eine Zugabe. */
 
-@font-face { font-family: "Fraunces"; font-style: normal; font-weight: 400 800; font-display: swap; src: url("../fonts/fraunces.woff2") format("woff2"); }
-@font-face { font-family: "Fraunces"; font-style: italic; font-weight: 400 800; font-display: swap; src: url("../fonts/fraunces-italic.woff2") format("woff2"); }
-@font-face { font-family: "Source Sans 3"; font-style: normal; font-weight: 200 900; font-display: swap; src: url("../fonts/source-sans-3.woff2") format("woff2"); }
-@font-face { font-family: "Source Sans 3"; font-style: italic; font-weight: 200 900; font-display: swap; src: url("../fonts/source-sans-3-italic.woff2") format("woff2"); }
-@font-face { font-family: "Caveat"; font-style: normal; font-weight: 600; font-display: swap; src: url("../fonts/caveat.woff2") format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 400 800; font-stretch: 75% 100%; font-display: swap; src: url("../fonts/bricolage.woff2") format("woff2"); }
+@font-face { font-family: "Atkinson Hyperlegible Next"; font-style: normal; font-weight: 400 700; font-display: swap; src: url("../fonts/atkinson.woff2") format("woff2"); }
+@font-face { font-family: "Atkinson Hyperlegible Next"; font-style: italic; font-weight: 400; font-display: swap; src: url("../fonts/atkinson-italic.woff2") format("woff2"); }
 
 :root {
   /* Farben */
-  --papier: #F4F5EE;
-  --papier-hell: #FBFBF7;
-  --salbei: #E4EBD8;
-  --salbei-tief: #D3DEC3;
-  --linie: #CBD5BD;
-  --tinte: #16271C;
-  --tinte-weich: #4A5A4E;
-  --wald: #163824;
-  --wald-tief: #0F2A1A;
+  --moos: #0F2A1B;
+  --moos-tief: #0A1F14;
+  --wald: #1B4229;
   --blatt: #2C6334;
-  --trieb: #8DB43F;
-  --trieb-hell: #BBD67A;
+  --trieb: #9CC74A;
+  --trieb-hell: #D7EAA6;
   --kugel: #2A639B;
-  --malve: #B86BC4;
-  --malve-tief: #7E3A8A;
+  --kugel-tief: #163B63;
+  --malve: #D58BCB;
+  --papier: #F3F4EE;
+  --weiss: #FCFCF9;
+  --tinte: #0F1F15;
+  --tinte-weich: #4A584E;
+  --linie: #C9D2C1;
+  --hell: #E8EFE0;
+  --hell-weich: #B9C9B4;
   --offen: #F9EEDA;
   --offen-rand: #A86B00;
 
   /* Schriften */
-  --titel: "Fraunces", Georgia, "Times New Roman", serif;
-  --text: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
-  --hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+  --anzeige: "Bricolage Grotesque", "Arial Narrow", "Helvetica Neue", system-ui, sans-serif;
+  --text: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
 
-  --stufe-klein: 0.94rem;
-  --stufe-0: 1.125rem;
-  --stufe-1: 1.3rem;
-  --stufe-2: clamp(1.45rem, 1.2rem + 1vw, 1.9rem);
-  --stufe-3: clamp(1.85rem, 1.35rem + 2vw, 2.9rem);
-  --stufe-4: clamp(2.4rem, 1.4rem + 4.2vw, 4.9rem);
-
-  /* Raster: eine breite Spalte mit Seitenrand, Lesespalte 42rem */
-  --breite: 76rem;
-  --rand: max(1rem, min(4vw, 3rem));
-  --rund: 0.6rem;
-  --abstand: clamp(3.5rem, 8vw, 7rem);
+  /* Raster: zwölf Spalten über die volle Breite */
+  --rand: max(1rem, min(5vw, 4.5rem));
+  --luecke: clamp(1rem, 2.4vw, 2.2rem);
+  --abstand: clamp(4rem, 9vw, 8.5rem);
 }
+
+@view-transition { navigation: auto; }
 
 /* ---------- Grundlagen ---------- */
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-body {
-  margin: 0; background: var(--papier); color: var(--tinte);
-  font-family: var(--text); font-size: var(--stufe-0); line-height: 1.62; overflow-wrap: break-word;
-}
+body { margin: 0; background: var(--papier); color: var(--tinte); font-family: var(--text); font-size: 1.15rem; line-height: 1.6; overflow-wrap: break-word; }
 img { max-width: 100%; height: auto; display: block; }
 picture { display: block; }
-
-h1, h2, h3 { font-family: var(--titel); color: var(--wald); line-height: 1.08; text-wrap: balance; font-optical-sizing: auto; }
-h1 { font-size: var(--stufe-4); font-weight: 560; margin: 0 0 1.2rem; letter-spacing: -0.02em; font-variation-settings: "SOFT" 100, "WONK" 1; }
-h2 { font-size: var(--stufe-3); font-weight: 580; margin: 0 0 1rem; letter-spacing: -0.012em; font-variation-settings: "SOFT" 70; }
-h3 { font-size: var(--stufe-1); font-weight: 620; margin: 1.6rem 0 0.5rem; font-variation-settings: "SOFT" 50; }
 p, ul, ol { margin: 0 0 1rem; }
 ul, ol { padding-left: 1.3rem; }
 li + li { margin-top: 0.4rem; }
-li::marker { color: var(--blatt); }
-strong { font-weight: 650; }
+strong { font-weight: 700; }
 
-a { color: var(--blatt); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
-a:hover { color: var(--malve-tief); text-decoration-thickness: 2px; }
-:focus-visible { outline: 3px solid var(--kugel); outline-offset: 3px; border-radius: 3px; }
+h1, h2, h3 { font-family: var(--anzeige); line-height: 0.95; margin: 0 0 1rem; text-wrap: balance; letter-spacing: -0.025em; -webkit-hyphens: auto; hyphens: auto; hyphenate-limit-chars: 10 4 4; }
+h1 { font-size: clamp(3rem, 1.4rem + 6.2vw, 8.2rem); font-weight: 780; font-stretch: 78%; }
+h2 { font-size: clamp(2.2rem, 1.3rem + 3.4vw, 4.6rem); font-weight: 740; font-stretch: 82%; }
+h3 { font-size: clamp(1.35rem, 1.1rem + 0.8vw, 1.8rem); font-weight: 700; font-stretch: 90%; line-height: 1.05; letter-spacing: -0.01em; }
 
-.latein { font-style: italic; font-weight: 400; color: var(--tinte-weich); }
+a { color: var(--blatt); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; }
+a:hover { color: var(--kugel); }
+:focus-visible { outline: 3px solid var(--kugel); outline-offset: 3px; }
+.dunkel :focus-visible, .blau :focus-visible { outline-color: var(--trieb); }
+
+.latein { font-style: italic; font-weight: 400; }
 .sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.symbole { display: none; }
+.sym { width: 1.4em; height: 1.4em; flex: 0 0 auto; }
 
-.wrap { width: 100%; max-width: var(--breite); margin-inline: auto; padding-inline: var(--rand); }
-.prosa > * { max-width: 42rem; }
+.wrap { width: 100%; max-width: 96rem; margin-inline: auto; padding-inline: var(--rand); }
+.raster { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--luecke); }
 
-.kicker {
-  font-size: 0.86rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--blatt); margin: 0 0 1rem;
-}
+.dunkel { background: var(--moos); color: var(--hell); }
+.dunkel h1, .dunkel h2, .dunkel h3 { color: #fff; }
+.dunkel a { color: #fff; }
+.blau { background: var(--kugel-tief); color: #EEF3F9; }
+.blau h2, .blau h3, .blau a { color: #fff; }
+.licht { background: var(--trieb-hell); color: var(--tinte); }
 
-/* Handschriftliche Notiz, wie auf Sabines Steckbrief */
-.notiz {
-  font-family: var(--hand); font-weight: 600; font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.6rem);
-  line-height: 1.05; color: var(--blatt); margin: 0;
-}
-.pfeil { width: 3.4rem; height: auto; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-
-/* Hervorhebung mit einem Pinselstrich darunter */
-.strich {
-  font-style: normal;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M3 10 C 45 4 95 3 128 7 S 184 11 197 5' fill='none' stroke='%238DB43F' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E") left 92% / 100% 0.32em no-repeat;
-  -webkit-box-decoration-break: clone; box-decoration-break: clone;
-  padding-bottom: 0.06em;
-}
-
-.sprung { position: absolute; left: 1rem; top: -4rem; z-index: 10; background: var(--wald); color: #fff; padding: 0.6rem 1rem; border-radius: var(--rund); }
+.sprung { position: absolute; left: 1rem; top: -4rem; z-index: 20; background: var(--moos); color: #fff; padding: 0.6rem 1rem; }
 .sprung:focus { top: 1rem; color: #fff; }
 main:focus { outline: none; }
 
 /* ---------- Knöpfe ---------- */
 
-.knoepfe { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 0; }
 .knopf, button {
-  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 3.1rem;
-  padding: 0.7rem 1.5rem; border-radius: 999px; border: 2px solid var(--wald);
-  background: var(--wald); color: #fff; font: inherit; font-weight: 650; line-height: 1.2; text-decoration: none; cursor: pointer;
-  transition: background-color 0.2s, color 0.2s, transform 0.2s;
+  display: inline-flex; align-items: center; gap: 0.6rem; min-height: 3.2rem; padding: 0.75rem 1.4rem;
+  border: 0; border-radius: 0; background: var(--trieb); color: var(--moos-tief);
+  font: inherit; font-weight: 700; line-height: 1.2; text-decoration: none; cursor: pointer;
+  box-shadow: inset 0 -0.25rem 0 rgba(15, 42, 27, 0.25); transition: background-color 0.2s, box-shadow 0.2s;
 }
-.knopf:hover, button:hover { background: var(--blatt); border-color: var(--blatt); color: #fff; transform: translateY(-1px); }
-.knopf-zwei { background: transparent; color: var(--wald); }
-.knopf-zwei:hover { background: var(--salbei); color: var(--wald); border-color: var(--wald); }
-/* zwei Klassen, damit die Linkfarbe auf dunklem Grund nicht gewinnt */
-.knopf.knopf-hell { background: var(--trieb-hell); border-color: var(--trieb-hell); color: var(--wald-tief); }
-.knopf.knopf-hell:hover { background: #fff; border-color: #fff; color: var(--wald-tief); }
+.knopf:hover, button:hover { background: #B6DA6E; color: var(--moos-tief); box-shadow: inset 0 -0.4rem 0 rgba(15, 42, 27, 0.3); }
+.dunkel .knopf, .blau .knopf { color: var(--moos-tief); }
+.knopf.knopf-dunkel { background: var(--moos); color: #fff; box-shadow: inset 0 -0.25rem 0 rgba(0, 0, 0, 0.35); }
+.knopf.knopf-dunkel:hover { background: var(--wald); color: #fff; }
+.weiter { font-weight: 700; text-decoration: none; border-bottom: 0.14em solid var(--trieb); padding-bottom: 0.05em; }
+.weiter:hover { border-bottom-color: var(--kugel); }
+.dunkel .weiter, .blau .weiter { color: #fff; }
+.aktionen { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.6rem; margin: 0; }
 
-/* ---------- Kopf ---------- */
+/* ---------- Kopf und Menü ---------- */
 
-.kopf { position: relative; z-index: 2; }
-.kopf-innen {
-  max-width: var(--breite); margin-inline: auto; padding: 1rem var(--rand);
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.8rem 2rem;
-}
-.marke { display: inline-flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--wald); }
-.marke img { width: 3.6rem; }
-.marke-wort {
-  font-family: var(--titel); font-style: italic; font-weight: 760; font-size: 1.32rem; line-height: 0.98;
-  font-variation-settings: "SOFT" 100, "WONK" 1; color: var(--blatt);
-}
-.marke-wort span { display: block; }
-.marke:hover .marke-wort { color: var(--wald); }
-
-.menue ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.2rem 1.4rem; }
-.menue li + li { margin-top: 0; }
-.menue a { display: inline-block; padding: 0.4rem 0 0.35rem; color: var(--tinte); text-decoration: none; font-weight: 550; }
-.menue a:hover { color: var(--malve-tief); }
-.menue a[aria-current="page"] {
-  color: var(--wald);
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M3 10 C 45 4 95 3 128 7 S 184 11 197 5' fill='none' stroke='%238DB43F' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E") left bottom / 100% 0.42em no-repeat;
-}
+.kopf { position: relative; z-index: 10; view-transition-name: kopf; }
+.kopf-innen { display: flex; align-items: center; justify-content: space-between; gap: 1rem 2rem; padding-block: 1rem; }
+.dunkel-kopf { background: var(--moos); }
+.marke { display: inline-flex; align-items: center; gap: 0.7rem; text-decoration: none; color: inherit; }
+.marke img { width: 3.2rem; }
+.marke-wort { font-family: var(--anzeige); font-weight: 800; font-stretch: 80%; font-size: 1.32rem; line-height: 0.92; letter-spacing: -0.02em; color: var(--blatt); }
+.dunkel-kopf .marke-wort { color: #fff; }
+.menue-knopf { display: none; }
+.menue ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.2rem 1.6rem; }
+.menue li + li { margin: 0; }
+.menue a { display: inline-block; padding: 0.35rem 0; color: var(--tinte); text-decoration: none; font-weight: 700; border-bottom: 0.15em solid transparent; }
+.menue a:hover { border-bottom-color: var(--trieb); color: var(--tinte); }
+.menue a[aria-current="page"] { border-bottom-color: var(--blatt); }
+.dunkel-kopf .menue a { color: #fff; }
+.dunkel-kopf .menue a[aria-current="page"] { border-bottom-color: var(--trieb); }
+.menue-zu { display: none; }
 
 /* ---------- Fuß ---------- */
 
-.fuss { background: var(--wald); color: #DCE7D3; padding: clamp(3rem, 7vw, 5rem) 0 2.5rem; }
-.fuss-innen { max-width: var(--breite); margin-inline: auto; padding-inline: var(--rand); display: grid; gap: 2.5rem; grid-template-columns: minmax(0, 1fr); }
-.fuss-oben { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); align-items: end; }
-.fuss-logo img { width: min(100%, 17rem); }
-.fuss-satz { font-family: var(--hand); font-weight: 600; font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); line-height: 1.15; color: var(--trieb-hell); margin: 0; max-width: 22rem; }
+.fuss { background: var(--moos-tief); color: var(--hell-weich); padding-block: clamp(3.5rem, 8vw, 6rem) 2rem; }
 .fuss a { color: #fff; }
-.fuss a:hover { color: var(--trieb-hell); }
-.fuss :focus-visible { outline-color: var(--trieb-hell); }
-.fuss-unten { display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 255, 255, 0.18); padding-top: 1.5rem; font-size: var(--stufe-klein); }
+.fuss-oben { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2rem var(--luecke); align-items: end; }
+.fuss-logo { grid-column: 1 / span 5; margin: 0; }
+.fuss-logo img { width: min(100%, 24rem); }
+.fuss-satz { grid-column: 7 / -1; margin: 0; font-family: var(--anzeige); font-weight: 600; font-stretch: 85%; font-size: clamp(1.5rem, 1rem + 1.6vw, 2.6rem); line-height: 1.05; color: var(--hell); }
+.fuss-unten { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem 2rem; margin-top: clamp(2.5rem, 6vw, 4.5rem); padding-top: 1.4rem; border-top: 1px solid rgba(255, 255, 255, 0.16); font-size: 1rem; }
 .fuss-unten p { margin: 0; }
-.fuss ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; }
-.fuss li + li { margin-top: 0; }
+.fuss ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem; }
+.fuss li + li { margin: 0; }
 
-/* ---------- Kreise, Ring und Fotos ---------- */
+/* ---------- Orbit: Erdkugel, Foto, offener Ring, Trabanten ---------- */
 
-.kreis { margin: 0; border-radius: 50%; overflow: hidden; background: var(--salbei); }
-.kreis img { width: 100%; aspect-ratio: 1; object-fit: cover; }
-
-/* Der offene Ring aus dem Logo; zeichnet sich beim Laden einmal */
+.orbit { position: relative; aspect-ratio: 1; margin: 0; }
+.orbit-kugel { position: absolute; width: 56%; aspect-ratio: 1; right: 5%; bottom: 7%; border-radius: 50%; background: var(--kugel); }
+.orbit-bild { position: absolute; inset: 11% 20% 20% 11%; border-radius: 50%; overflow: hidden; background: var(--wald); view-transition-name: hauptkreis; }
+.orbit-bild img, .trabant img { width: 100%; height: 100%; object-fit: cover; }
+.orbit-bild picture, .trabant picture { height: 100%; }
+.orbit-bahn { position: absolute; inset: 0; animation: kreisen 160s linear infinite; }
 .ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.ring path {
-  fill: none; stroke: var(--trieb); stroke-width: 1.15; stroke-linecap: round;
-  stroke-dasharray: 79 21; transform: rotate(-128deg); transform-origin: 50% 50%; transform-box: fill-box;
-  animation: ring-zeichnen 1.6s cubic-bezier(0.6, 0.05, 0.25, 1) both;
-}
-@keyframes ring-zeichnen { from { stroke-dasharray: 0 100; } to { stroke-dasharray: 79 21; } }
+.ring path { fill: none; stroke: var(--trieb); stroke-width: 0.9; stroke-linecap: round; stroke-dasharray: 52 6 30 12; }
+.trabant { position: absolute; aspect-ratio: 1; border-radius: 50%; overflow: hidden; transform: translate(-50%, -50%); border: 0.3rem solid var(--papier); background: var(--wald); }
+.trabant > * { animation: gegenkreisen 160s linear infinite; height: 100%; }
+.dunkel .trabant { border-color: var(--moos); }
+.t1 { width: 17%; left: 74%; top: 8.4%; }
+.t2 { width: 14%; left: 97.3%; top: 58.3%; }
+.t3 { width: 19%; left: 26%; top: 91.6%; }
+.t4 { width: 13%; left: 4.9%; top: 33.6%; }
+.orbit:hover .orbit-bahn, .orbit:hover .trabant > * { animation-play-state: paused; }
+@keyframes kreisen { to { transform: rotate(360deg); } }
+@keyframes gegenkreisen { to { transform: rotate(-360deg); } }
 
-/* ---------- Startseite: Kopf ---------- */
+/* ---------- Startseite ---------- */
 
-.held { padding: clamp(1.5rem, 4vw, 3.5rem) 0 var(--abstand); overflow-x: hidden; overflow-x: clip; }
-.held-raster { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
-.held-titel { font-size: clamp(2.5rem, 1.4rem + 4.1vw, 4.8rem); }
-.held .lead { max-width: 36rem; }
-.lead { font-size: var(--stufe-1); line-height: 1.5; color: var(--tinte-weich); margin-bottom: 1.6rem; }
+.held { padding-block: clamp(1rem, 3vw, 2.5rem) clamp(3.5rem, 8vw, 7rem); overflow: hidden; overflow: clip; }
+.held-innen { display: flow-root; }
+.held .orbit { float: right; width: min(50vw, 46rem); margin: 0 calc(var(--rand) * -0.5) 1.5rem 1.5rem; shape-outside: circle(47% at 50% 50%); shape-margin: 1.6rem; }
+.held h1 { font-size: clamp(2.6rem, 0.9rem + 4.9vw, 6rem); color: #fff; margin-top: clamp(1rem, 4vw, 3.5rem); }
+.held h1 em { font-style: normal; color: var(--trieb); }
+.held .lead { max-width: 40rem; }
+.lead { font-size: clamp(1.2rem, 1.05rem + 0.5vw, 1.45rem); line-height: 1.5; margin-bottom: 2rem; }
 
-.komposition { position: relative; width: min(100%, 31rem); aspect-ratio: 1; justify-self: center; margin: 0; }
-.komposition .kreis-gross { position: absolute; inset: 9%; box-shadow: 0 30px 60px -38px rgba(22, 39, 28, 0.7); }
-.komposition .kreis-a, .komposition .kreis-b { position: absolute; border: 0.35rem solid var(--papier); box-shadow: 0 18px 30px -22px rgba(22, 39, 28, 0.8); }
-.komposition .kreis-a { width: 31%; left: -3%; bottom: 3%; }
-.komposition .kreis-b { width: 24%; right: -1%; top: 1%; }
-.komposition .notiz { position: absolute; right: -2%; bottom: -5%; display: flex; flex-direction: column; align-items: flex-start; transform: rotate(-4deg); max-width: 11rem; }
-.komposition .notiz .pfeil { transform: scaleX(-1) rotate(10deg); margin-bottom: 0.2rem; margin-left: -0.6rem; }
+/* große Aussage über die volle Breite, mit Fotos mitten im Satz */
+.aussage { padding-block: var(--abstand) clamp(2.5rem, 5vw, 4rem); }
+.aussage-text { font-family: var(--anzeige); font-weight: 720; font-stretch: 82%; font-size: clamp(2.1rem, 0.9rem + 4.6vw, 6.6rem); line-height: 1; letter-spacing: -0.03em; margin: 0; color: var(--moos); text-wrap: balance; }
+.chip { display: inline-block; width: 1.25em; height: 0.82em; vertical-align: -0.06em; border-radius: 999px; overflow: hidden; margin-inline: 0.06em; background: var(--wald); }
+.chip img { width: 100%; height: 100%; object-fit: cover; }
+.chip picture { height: 100%; }
 
-/* ---------- Abschnitte ---------- */
-
+.zwei { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2.5rem var(--luecke); align-items: center; }
+.zwei > .links { grid-column: 1 / span 5; }
+.zwei > .rechts { grid-column: 7 / -1; }
+.zwei.breit-links > .links { grid-column: 1 / span 6; }
+.zwei.breit-links > .rechts { grid-column: 8 / -1; }
+.text-spalten { columns: 2 18rem; column-gap: var(--luecke); }
+.text-spalten > * { break-inside: avoid; }
 .abschnitt { padding-block: var(--abstand); }
-.band-salbei { background: var(--salbei); }
-.band-wald { background: var(--wald); color: #E4ECDD; }
-.band-wald h2, .band-wald h3 { color: #fff; }
-.band-wald .kicker { color: var(--trieb-hell); }
-.band-wald a { color: #fff; }
+.abschnitt-oben-eng { padding-top: 0; }
 
-.zwei-spalten { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(2.5rem, 6vw, 5.5rem); align-items: center; }
-.zwei-spalten.umgekehrt > :first-child { order: 2; }
-.spalte-text > * { max-width: 36rem; }
-.spalte-text p:last-child { margin-bottom: 0; }
+/* Pflanzen-Orbit: eine Pflanze, ihre Tiere als Trabanten */
+.pflanzenorbit { position: relative; width: min(100%, 30rem); aspect-ratio: 1; margin: 0 auto; }
+.po-kreis { position: absolute; inset: 0; }
+.pflanzenorbit .po-bild { position: absolute; inset: 17%; border-radius: 50%; overflow: hidden; background: var(--wald); }
+.pflanzenorbit .po-bild img { width: 100%; height: 100%; object-fit: cover; }
+.pflanzenorbit .po-bild picture { height: 100%; }
+.pflanzenorbit .po-leer { display: grid; place-items: center; background: var(--farbe); color: var(--moos); }
+.po-leer .sym { width: 34%; height: 34%; }
+.pflanzenorbit .ring path { stroke: var(--blatt); stroke-width: 0.7; stroke-dasharray: 60 8 22 10; }
+.dunkel .pflanzenorbit .ring path { stroke: var(--trieb); }
+.po-tiere { list-style: none; padding: 0; margin: 0; }
+.po-tier { position: absolute; margin: 0 !important; display: flex; align-items: center; gap: 0.5rem; transform: translate(-1.6rem, -50%); }
+.po-tier.seite-links { flex-direction: row-reverse; transform: translate(calc(-100% + 1.6rem), -50%); text-align: right; }
+.po-symbol { display: grid; place-items: center; width: 3.2rem; height: 3.2rem; border-radius: 50%; background: var(--weiss); color: var(--moos); box-shadow: 0 0 0 2px currentColor; flex: 0 0 auto; }
+.po-symbol .sym { width: 1.7rem; height: 1.7rem; }
+.po-symbol.art-bluete { color: #8A3F7F; }
+.po-symbol.art-raupe { color: var(--blatt); }
+.po-symbol.art-nest { color: var(--kugel); }
+.po-name { font-weight: 700; font-size: 0.95rem; line-height: 1.15; max-width: 9rem; background: var(--papier); padding: 0.1rem 0.25rem; }
+.slot-0 { left: 50%; top: 3%; } .slot-1 { left: 83.2%; top: 16.8%; } .slot-2 { left: 97%; top: 50%; } .slot-3 { left: 83.2%; top: 83.2%; }
+.slot-4 { left: 50%; top: 97%; } .slot-5 { left: 16.8%; top: 83.2%; } .slot-6 { left: 3%; top: 50%; } .slot-7 { left: 16.8%; top: 16.8%; }
 
-.pfeil-link { font-weight: 650; text-decoration: none; border-bottom: 2px solid var(--trieb); padding-bottom: 0.05rem; }
-.pfeil-link::after { content: " →"; }
-.pfeil-link:hover { border-bottom-color: var(--malve); }
-
-/* Beziehungsstern: eine Pflanze und ihre Tiere */
-.stern { margin: 0; }
-.stern-flaeche { position: relative; width: min(100%, 32rem); aspect-ratio: 1; margin-inline: auto; }
-.stern-linien { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.stern-mitte { position: absolute; left: 50%; top: 50%; width: 38%; transform: translate(-50%, -50%); margin: 0; text-align: center; }
-.stern-mitte .kreis { border: 0.35rem solid var(--papier); box-shadow: 0 0 0 2px var(--malve); }
-.stern-pflanze { display: block; margin-top: 0.5rem; font-family: var(--titel); font-weight: 650; font-size: 1.05rem; color: var(--wald); line-height: 1.1; }
-.stern-tiere { list-style: none; padding: 0; margin: 0; }
-.stern-tiere li { position: absolute; width: 40%; margin: 0; display: grid; gap: 0.1rem; font-size: 0.98rem; line-height: 1.25; }
-.stern-tiere .pos-1 { left: 0; top: 0; }
-.stern-tiere .pos-2 { right: 0; top: 0; text-align: right; justify-items: end; }
-.stern-tiere .pos-3 { left: 0; bottom: 0; }
-.stern-tiere .pos-4 { right: 0; bottom: 0; text-align: right; justify-items: end; }
-.stern-tiere strong { font-family: var(--titel); font-size: 1.12rem; font-weight: 650; color: var(--wald); line-height: 1.1; }
-.stern-kurz { color: var(--tinte-weich); }
-.stern figcaption { margin-top: 1.5rem; font-size: var(--stufe-klein); color: var(--tinte-weich); max-width: 32rem; margin-inline: auto; }
-
-/* Art der Verbindung: Blüte, Raupe, Nest */
-.art { display: inline-block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-.art-bluete { color: var(--malve-tief); }
-.art-raupe { color: var(--blatt); }
-.art-nest { color: var(--kugel); }
-
-/* Linien in Stern und Netz: Farbe = Art, Linie = Beleg */
-.kante { fill: none; stroke-width: 2.4; stroke-linecap: round; }
-.kante.art-bluete { stroke: var(--malve); }
-.kante.art-raupe { stroke: #5E8F2A; }
-.kante.art-nest { stroke: var(--kugel); }
-.kante.status-eigenes-foto { stroke-dasharray: 7 5; }
-.kante.status-bestimmen-lassen { stroke-dasharray: 1 5; stroke-width: 3; }
-
-/* Belege wie auf einem Herbar-Etikett */
-.beleg { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.82rem; font-weight: 650; color: var(--tinte-weich); border: 1.5px solid var(--linie); border-radius: 999px; padding: 0.05rem 0.55rem; }
-.beleg-quelle { border-style: solid; border-color: var(--tinte-weich); }
-.beleg-foto { border-style: dashed; border-color: var(--tinte-weich); }
-.beleg-offen { border-style: dotted; border-color: var(--offen-rand); color: #6E4A00; background: var(--offen); }
-
-/* Trittsteine: Gärten im Flugradius */
-.tritt { margin: 1.6rem 0 0; }
-.tritt-flaeche { position: relative; width: 100%; }
+/* Trittsteine: Flugradien, die sich überlappen */
+.tritt { margin: 0; }
+.tritt-flaeche { position: relative; }
 .tritt svg { width: 100%; height: auto; display: block; overflow: visible; }
-.tritt-ring { fill: rgba(141, 180, 63, 0.12); stroke: var(--blatt); stroke-width: 2; stroke-dasharray: 82 18; transform-origin: 50% 50%; transform-box: fill-box; }
-.tritt-ring.r2 { transform: rotate(120deg); }
-.tritt-ring.r3 { transform: rotate(240deg); }
-.tritt-garten { fill: var(--blatt); }
-.tritt-mass-linie { fill: none; stroke: var(--wald); stroke-width: 2; stroke-linecap: round; }
-.tritt-hilfslinie { fill: none; stroke: var(--wald); stroke-width: 1.2; stroke-dasharray: 3 5; opacity: 0.6; }
-.tritt-flug { fill: none; stroke: var(--malve); stroke-width: 2.5; stroke-dasharray: 2 7; stroke-linecap: round; }
-.tritt-biene { fill: var(--malve); }
-.tritt-label { position: absolute; transform: translate(-50%, 0); font-weight: 650; font-size: 0.95rem; color: var(--wald); white-space: nowrap; }
-.tritt-label.l1 { left: 22%; top: 61%; }
-.tritt-label.l2 { left: 50%; top: 61%; }
-.tritt-label.l3 { left: 78%; top: 61%; }
-.tritt-mass { position: absolute; left: 31%; top: 4%; transform: translate(-50%, -100%); font-family: var(--hand); font-size: clamp(1.1rem, 0.9rem + 0.8vw, 1.45rem); color: var(--wald); white-space: nowrap; line-height: 1; }
-.tritt figcaption { margin-top: 1.2rem; font-size: var(--stufe-klein); color: var(--tinte-weich); }
+.welle { fill: none; stroke: var(--blatt); stroke-width: 1.4; }
+.welle.w2 { opacity: 0.55; }
+.welle.w3 { opacity: 0.28; }
+.tritt-garten { fill: var(--moos); }
+.tritt-flug { fill: none; stroke: var(--kugel); stroke-width: 2.6; stroke-dasharray: 2 8; stroke-linecap: round; }
+.tritt-mass-linie { fill: none; stroke: var(--moos); stroke-width: 2; }
+.tritt-label { position: absolute; transform: translate(-50%, 0.6rem); font-weight: 700; font-size: 0.95rem; white-space: nowrap; }
+.tritt-mass { position: absolute; transform: translate(-50%, -110%); font-family: var(--anzeige); font-weight: 700; font-stretch: 85%; font-size: clamp(1rem, 0.8rem + 0.8vw, 1.4rem); white-space: nowrap; }
+.licht .tritt-label { background: var(--trieb-hell); padding: 0 0.3rem; }
+.tritt figcaption { margin-top: 1rem; font-size: 1rem; color: var(--tinte-weich); max-width: 40rem; }
 
-/* Das Programm: sieben Wochen */
-.programm .wrap > h2 { max-width: 46rem; }
-.zahlen { display: grid; grid-template-columns: repeat(3, minmax(0, max-content)); gap: 1rem clamp(1.5rem, 5vw, 4.5rem); margin: 2rem 0 2.2rem; }
-.zahlen div { display: flex; flex-direction: column-reverse; }
-.zahlen dd { margin: 0; font-family: var(--titel); font-size: clamp(3rem, 2rem + 4vw, 5.6rem); font-weight: 500; line-height: 0.95; font-variation-settings: "SOFT" 100, "WONK" 1; color: var(--trieb-hell); font-variant-numeric: lining-nums; }
-.zahlen dt { font-weight: 600; margin-top: 0.3rem; }
-.wochen { list-style: none; padding: 0; margin: 0 0 0.8rem; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0.5rem; }
-.wochen li { margin: 0; border-top: 2px solid currentColor; padding-top: 0.6rem; display: grid; gap: 0.5rem; }
-.woche-name { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; }
-.calls { display: flex; gap: 0.35rem; }
-.call { width: 1.05rem; height: 1.05rem; border-radius: 50%; border: 2px solid var(--trieb); background: var(--trieb); }
-.wochen-summe { font-size: var(--stufe-klein); margin-bottom: 2rem; }
-.programm-text { max-width: 42rem; }
-.band-wald li::marker { color: var(--trieb-hell); }
-.inhalt-wochen { color: var(--wald); padding-bottom: clamp(2rem, 5vw, 3.5rem); }
-.inhalt-wochen .zahlen dd { color: var(--blatt); }
-.inhalt-wochen .call { border-color: var(--blatt); background: var(--blatt); }
+/* Programm: sieben Wochen als Kreise */
+.programm h2 { max-width: 22ch; }
+.wochen { margin: clamp(2rem, 5vw, 3.5rem) 0 0; }
+.wochen svg { width: 100%; height: auto; display: block; overflow: visible; }
+.woche-linie { stroke: rgba(255, 255, 255, 0.35); stroke-width: 2; }
+.woche-kreis { fill: var(--kugel-tief); stroke: #fff; stroke-width: 2.5; }
+.woche-call { fill: var(--trieb); }
+.woche-nr { fill: #fff; font-family: var(--anzeige); font-weight: 760; font-stretch: 80%; font-size: 30px; }
+.wochen-text { font-size: clamp(1.2rem, 1rem + 0.6vw, 1.5rem); line-height: 1.4; margin: 1.6rem 0 0; max-width: 46rem; }
+.bausteine { list-style: none; padding: 0; margin: clamp(2rem, 5vw, 3.5rem) 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--luecke); }
+.bausteine li { margin: 0; border-top: 2px solid currentColor; padding-top: 1rem; font-size: 1.15rem; }
+.inhalt-wochen { padding-bottom: clamp(2.5rem, 6vw, 4.5rem); }
+.inhalt-wochen .woche-linie { stroke: var(--linie); }
+.inhalt-wochen .woche-kreis { fill: var(--papier); stroke: var(--moos); }
+.inhalt-wochen .woche-call { fill: var(--blatt); }
+.inhalt-wochen .woche-nr { fill: var(--moos); }
 
-/* Großes Zitat */
-.zitat-gross { margin: 0; max-width: 58rem; position: relative; padding-left: clamp(0rem, 6vw, 5rem); }
-.zitat-gross::before {
-  content: "„"; position: absolute; left: 0; top: -0.62em; font-family: var(--titel); font-style: italic;
-  font-size: clamp(6rem, 4rem + 8vw, 11rem); line-height: 1; color: var(--malve);
+/* Blüten-Jahresrad */
+.radteil { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2.5rem var(--luecke); align-items: center; }
+.radteil .rad-flaeche { grid-column: 1 / span 7; position: relative; overflow: hidden; overflow: clip; }
+.radteil .rad-seite { grid-column: 8 / -1; }
+.rad { width: 100%; height: auto; display: block; overflow: visible; }
+.rad-speiche { stroke: rgba(255, 255, 255, 0.14); stroke-width: 1; }
+.rad-spur { fill: none; stroke: rgba(255, 255, 255, 0.06); stroke-width: 6; }
+.rad-bogen { fill: none; stroke: var(--farbe); stroke-linecap: round; transition: opacity 0.25s; }
+.rad-bogen.aus { opacity: 0.16; }
+.rad-keil { fill: rgba(156, 199, 74, 0.16); }
+.rad-monat { fill: var(--hell-weich); font-family: var(--text); font-size: 12.5px; font-weight: 700; }
+.rad-monat.jetzt { fill: var(--trieb); }
+.rad-mitte { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 30%; text-align: center; line-height: 1.1; pointer-events: none; }
+.rad-mitte strong { display: block; font-family: var(--anzeige); font-weight: 760; font-stretch: 80%; font-size: clamp(1.4rem, 0.8rem + 2vw, 2.6rem); color: #fff; }
+.rad-mitte span { font-size: clamp(0.8rem, 0.7rem + 0.3vw, 0.95rem); color: var(--hell-weich); }
+.rad-knoepfe { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0.35rem; margin: 1.5rem 0; }
+.rad-knoepfe[hidden] { display: none; }
+.rad-knoepfe button { min-height: 2.6rem; padding: 0.4rem 0; justify-content: center; background: transparent; color: var(--hell); box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.3); font-weight: 700; }
+.rad-knoepfe button:hover { background: rgba(255, 255, 255, 0.08); color: #fff; box-shadow: inset 0 0 0 1.5px var(--trieb); }
+.rad-knoepfe button[aria-pressed="true"] { background: var(--trieb); color: var(--moos-tief); box-shadow: none; }
+.rad-liste { list-style: none; padding: 0; margin: 0; }
+.rad-liste li { margin: 0; display: grid; grid-template-columns: 1rem minmax(0, 1fr) auto; gap: 0.8rem; align-items: center; padding: 0.55rem 0; border-top: 1px solid rgba(255, 255, 255, 0.14); }
+.rad-liste li.aus { color: var(--hell-weich); }
+.rad-liste li.aus .rad-name { font-weight: 400; }
+.rad-liste li.aus .rad-farbe { background: transparent; box-shadow: inset 0 0 0 2px var(--farbe); }
+.gewaehlt .rad-liste li:not(.aus) .rad-name { color: #fff; }
+.gewaehlt .rad-liste li:not(.aus) .rad-zeit { color: var(--trieb); }
+.rad-farbe { width: 1rem; height: 1rem; border-radius: 50%; background: var(--farbe); }
+.rad-name { font-weight: 700; }
+.rad-zeit { font-size: 0.95rem; color: var(--hell-weich); }
+.rad-quelle { font-size: 0.95rem; color: var(--hell-weich); margin-top: 1.2rem; }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .rad { animation: rad-einrollen linear both; animation-timeline: view(); animation-range: entry 0% entry 100%; }
+  }
 }
+@keyframes rad-einrollen { from { transform: rotate(-40deg) scale(0.92); } to { transform: none; } }
+
+/* Zitat */
+.zitat-band { padding-block: var(--abstand); }
+.zitat-gross { margin: 0; }
 .zitat-gross blockquote { margin: 0; }
-.zitat-gross p { font-family: var(--titel); font-style: italic; font-weight: 420; font-size: clamp(1.7rem, 1.1rem + 2.6vw, 3.1rem); line-height: 1.18; color: var(--wald); margin: 0; font-variation-settings: "SOFT" 100, "WONK" 1; text-wrap: balance; }
-.zitat-gross figcaption { margin-top: 1.2rem; color: var(--tinte-weich); }
+.zitat-gross p { font-family: var(--anzeige); font-weight: 640; font-stretch: 86%; font-size: clamp(2rem, 1rem + 3.8vw, 5.4rem); line-height: 1.02; letter-spacing: -0.025em; margin: 0; text-wrap: balance; }
+.zitat-gross figcaption { margin-top: 1.6rem; font-size: 1.1rem; }
 
 /* Wer ich bin */
-.ich-raster { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(1.5rem, 5vw, 4rem); align-items: center; }
-.portrait { position: relative; width: clamp(9rem, 20vw, 13rem); aspect-ratio: 1; margin: 0; }
-.portrait .kreis { position: absolute; inset: 8%; }
-.ich-raster .spalte-text > * { max-width: 40rem; }
+.portrait-orbit { position: relative; width: min(100%, 22rem); aspect-ratio: 1; margin: 0 auto; }
+.portrait-orbit .po-bild { position: absolute; inset: 14%; border-radius: 50%; overflow: hidden; }
+.portrait-orbit .po-bild picture { height: 100%; }
+.portrait-orbit .po-bild img { width: 100%; height: 100%; object-fit: cover; }
+.portrait-orbit .orbit-kugel { width: 46%; right: 2%; bottom: 4%; }
 
-/* ---------- Abschluss: Gartenbrief, Online-Abend, Erstgespräch ---------- */
+/* ---------- Abschluss: Gartenbrief und Online-Abend ---------- */
 
-.abschluss { background: var(--salbei); padding-block: var(--abstand); }
-.abschluss-raster { display: grid; gap: clamp(1.2rem, 3vw, 2rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); align-items: stretch; }
-.tafel { background: var(--papier-hell); border-radius: 1.4rem; padding: clamp(1.6rem, 4vw, 2.8rem); }
-.tafel h2 { font-size: var(--stufe-2); }
-.tafel-wald { background: var(--wald); color: #E4ECDD; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; align-items: center; }
-.tafel-wald h2 { color: #fff; }
-.tafel-wald a { color: #fff; }
-.tafel-wald .dreiviertel { width: clamp(6.5rem, 14vw, 9rem); }
-.tafel p:last-child { margin-bottom: 0; }
-.tafel-neben { margin: 0; color: var(--tinte-weich); align-self: center; }
+.abschluss, .kontakt-split { container-type: inline-size; }
+.abschluss { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.abschluss > div { padding: var(--abstand) var(--rand); }
+.abschluss > div:first-child, .kontakt-split > :first-child { padding-left: max(var(--rand), (100cqw - 96rem) / 2 + var(--rand)); }
+.abschluss > div:last-child, .kontakt-split > :last-child { padding-right: max(var(--rand), (100cqw - 96rem) / 2 + var(--rand)); }
+.abschluss > div > * { max-width: 36rem; }
+.abschluss h2 { font-size: clamp(2rem, 1.2rem + 2.6vw, 3.8rem); }
+.abschluss .abend-teil { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem 2rem; align-items: center; align-content: center; }
+.abschluss .abend-teil > * { max-width: none; }
+.abschluss-eins { padding-block: var(--abstand); }
+.abschluss-eins .formular { margin: 0; }
+.abschluss-eins .links > :last-child { margin-bottom: 0; }
+.abschluss-eins .dreiviertel { width: clamp(10rem, 22vw, 17rem); margin-inline: auto; }
+.abschluss-eins .dreiviertel figcaption { font-size: clamp(0.9rem, 0.7rem + 0.6vw, 1.3rem); }
+.abschluss-eins .dv-zahl { font-size: clamp(3rem, 2rem + 3vw, 5.4rem); }
 
-/* Dreiviertelstunde: 45 von 60 Minuten */
-.dreiviertel { position: relative; margin: 0; aspect-ratio: 1; width: 9rem; }
+/* Dreiviertelstunde */
+.dreiviertel { position: relative; margin: 0; width: clamp(7rem, 14vw, 10rem); aspect-ratio: 1; }
 .dreiviertel svg { width: 100%; height: 100%; display: block; }
-.dv-spur { fill: none; stroke: rgba(255, 255, 255, 0.16); stroke-width: 9; }
-.dv-zeit { fill: none; stroke: var(--malve); stroke-width: 9; stroke-linecap: round; stroke-dasharray: 45 15; }
-.dreiviertel figcaption { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; line-height: 1; font-weight: 650; font-size: 0.85rem; }
-.dv-zahl { display: block; font-family: var(--titel); font-size: 2.3rem; font-weight: 560; font-variation-settings: "SOFT" 100; color: #fff; }
-.licht .dv-spur { stroke: var(--salbei-tief); }
-.licht .dv-zahl, .licht figcaption { color: var(--wald); }
+.dv-spur { fill: none; stroke: rgba(15, 42, 27, 0.14); stroke-width: 10; }
+.dv-zeit { fill: none; stroke: var(--malve); stroke-width: 10; stroke-dasharray: 45 15; }
+.dreiviertel figcaption { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; line-height: 1; font-weight: 700; font-size: 0.85rem; }
+.dv-zahl { display: block; font-family: var(--anzeige); font-weight: 780; font-stretch: 80%; font-size: clamp(2rem, 1.4rem + 1.6vw, 3rem); }
+.dunkel .dv-spur { stroke: rgba(255, 255, 255, 0.16); }
 
 /* ---------- Unterseiten: Kopf ---------- */
 
-.seitenkopf { padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(2rem, 5vw, 3.5rem); overflow-x: hidden; overflow-x: clip; }
-.seitenkopf-raster { display: grid; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
-.mit-bild .seitenkopf-raster { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
-.seitenkopf-text { max-width: 46rem; }
-.kreisbild { margin: 0; justify-self: center; width: min(100%, 25rem); }
-.kreisbild.klein { width: min(70%, 15rem); }
-.kreisbild-rahmen { position: relative; aspect-ratio: 1; }
-.kreisbild-rahmen .kreis { position: absolute; inset: 8%; box-shadow: 0 30px 60px -38px rgba(22, 39, 28, 0.7); }
-.kreisbild figcaption { display: flex; align-items: flex-end; gap: 0.3rem; justify-content: flex-end; margin-top: -1.2rem; transform: rotate(-3deg); }
-.kreisbild figcaption .pfeil { width: 2.8rem; transform: rotate(-80deg) scaleY(-1); margin-bottom: 0.4rem; }
+.seitenkopf { padding-block: clamp(1rem, 3vw, 2.5rem) clamp(2.5rem, 6vw, 5rem); overflow: hidden; overflow: clip; }
+.seitenkopf .raster { align-items: center; row-gap: 2rem; }
+.seitenkopf-text { grid-column: 1 / span 7; }
+.ohne-bild .seitenkopf-text { grid-column: 1 / -1; }
+.ohne-bild h1 { max-width: 16ch; }
+.seitenkopf h1 em { font-style: normal; color: var(--blatt); }
+.unterzeile { font-family: var(--anzeige); font-weight: 600; font-stretch: 88%; font-size: clamp(1.2rem, 1rem + 0.8vw, 1.7rem); margin: -0.2rem 0 1.4rem; color: var(--blatt); }
+.seitenkopf .lead { max-width: 38rem; }
+.seitenkopf-bild { grid-column: 8 / -1; position: relative; width: 100%; aspect-ratio: 1; margin: 0; }
+.seitenkopf-bild .orbit-kugel { width: 52%; right: 0; bottom: 4%; }
+.seitenkopf-bild .orbit-bild { inset: 8% 14% 14% 6%; }
+.seitenkopf-bild figcaption { position: absolute; top: 100%; left: 0; right: 0; margin-top: 0.9rem; text-align: center; font-size: 0.95rem; font-weight: 700; line-height: 1.25; }
+.seitenkopf-liste { grid-column: 8 / -1; align-self: end; }
+.seitenkopf-liste ul { list-style: none; padding: 0; margin: 0; }
+.seitenkopf-liste li { margin: 0; border-top: 1px solid var(--linie); }
+.seitenkopf-liste a { display: block; padding: 0.55rem 0; color: var(--tinte); font-weight: 700; line-height: 1.3; text-decoration: none; }
+.seitenkopf-liste a:hover { color: var(--blatt); text-decoration: underline; }
+.seitenkopf-bild:has(figcaption) { margin-bottom: 2.6rem; }
+.seitenkopf-bild.klein { width: min(100%, 22rem); justify-self: center; }
+.ring-zeit { position: absolute; inset: 1%; width: 98%; height: 98%; overflow: visible; }
+.ring-zeit path { fill: none; stroke: var(--malve); stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 75 25; }
+.ring-zeit-text { position: absolute; left: 0; top: 1%; font-family: var(--anzeige); font-weight: 780; font-stretch: 80%; font-size: clamp(1.4rem, 1rem + 1.4vw, 2.4rem); line-height: 0.95; color: #8A3F7F; }
 
-/* ---------- Inhalt der Unterseiten ---------- */
+/* ---------- Inhalt als Rubriken: Überschrift links, Text rechts ---------- */
 
 .inhalt { padding-bottom: var(--abstand); }
-.inhalt > :first-child, .prosa > :first-child { margin-top: 0; }
-.inhalt h2 { margin-top: 3rem; }
-.inhalt h2:first-child { margin-top: 0; }
-.prosa ul { list-style: none; padding-left: 0; }
-.prosa ul > li { position: relative; padding-left: 1.6rem; }
-.prosa ul > li::before {
-  content: ""; position: absolute; left: 0; top: 0.42em; width: 0.8rem; height: 0.8rem; border-radius: 50%;
-  border: 2px solid var(--trieb); border-top-color: transparent; transform: rotate(-30deg);
-}
-.zitat { margin: 3rem 0 0; }
-.zitat blockquote { margin: 0; }
-.zitat p { font-family: var(--titel); font-style: italic; font-size: var(--stufe-2); line-height: 1.3; color: var(--wald); margin: 0; }
-.zitat figcaption { margin-top: 0.6rem; color: var(--tinte-weich); font-size: var(--stufe-klein); }
+.rubrik { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--luecke); }
+.rubrik > * { grid-column: 5 / -1; }
+.rubrik > h2 { grid-column: 1 / span 4; font-size: clamp(1.8rem, 1.2rem + 1.8vw, 3rem); padding-top: 0.15em; }
+.rubrik > h2:not(:first-child) { margin-top: clamp(2.5rem, 6vw, 4.5rem); }
+.rubrik > h2:not(:first-child) + * { margin-top: clamp(2.5rem, 6vw, 4.5rem); }
+.rubrik > p { max-width: 46rem; }
+.rubrik ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: 0 var(--luecke); }
+.rubrik ul > li { margin: 0; padding: 0.9rem 0; border-top: 2px solid var(--moos); }
+.rubrik ul > li strong:first-child { display: block; font-family: var(--anzeige); font-weight: 700; font-stretch: 90%; font-size: 1.3rem; line-height: 1.1; margin-bottom: 0.2rem; }
 
-mark.offen {
-  background: var(--offen); color: #5A3A00; outline: 1px dashed var(--offen-rand);
-  padding: 0 0.3em; border-radius: 3px; font-size: 0.88em; font-weight: 600;
-}
+mark.offen { background: var(--offen); color: #5A3A00; outline: 1px dashed var(--offen-rand); padding: 0 0.3em; font-size: 0.88em; font-weight: 700; }
 
-/* Projekte auf „Über mich“ */
+/* Projekte */
 .projekte { padding-bottom: var(--abstand); }
-.projekte h2 { margin-bottom: 1.6rem; }
-.projekt-liste { list-style: none; padding: 0; margin: 0; display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); }
-.projekt-liste li { margin: 0; background: var(--papier-hell); border-radius: 1.2rem; padding: 1.5rem 1.6rem 1.6rem; border: 1px solid var(--linie); }
-.projekt-art { font-family: var(--hand); font-weight: 600; font-size: 1.45rem; color: var(--malve-tief); line-height: 1; display: block; margin-bottom: 0.35rem; }
-.projekt-liste h3 { margin: 0 0 0.6rem; font-size: 1.25rem; }
+.projekte h2 { margin-bottom: 2rem; }
+.projekt-liste { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem var(--luecke); }
+.projekt-liste li { margin: 0; border-top: 2px solid var(--moos); padding-top: 1rem; }
+.projekt-liste h3 { margin: 0 0 0.4rem; }
+.projekt-art { display: block; font-weight: 700; color: var(--blatt); margin-bottom: 0.6rem; }
 .projekt-liste p { margin: 0; }
 
 /* ---------- Formulare ---------- */
 
-.formular { display: grid; gap: 1rem; max-width: 32rem; margin: 1.2rem 0 1.5rem; }
+.formular { display: grid; gap: 1rem; margin: 1.4rem 0 0; }
 .feld { display: grid; gap: 0.35rem; }
-.feld label { font-weight: 650; }
-.freiwillig { font-weight: 400; color: var(--tinte-weich); }
+.feld label { font-weight: 700; }
+.freiwillig { font-weight: 400; }
 input[type="text"], input[type="email"], select, textarea {
-  width: 100%; font: inherit; color: var(--tinte); background: #fff;
-  border: 1.5px solid #8F9E83; border-radius: var(--rund); padding: 0.65rem 0.85rem; min-height: 3.1rem;
+  width: 100%; font: inherit; color: var(--tinte); background: var(--weiss);
+  border: 0; border-bottom: 2px solid var(--moos); border-radius: 0; padding: 0.7rem 0.8rem; min-height: 3.2rem;
 }
 textarea { resize: vertical; }
-input:focus-visible, select:focus-visible, textarea:focus-visible { outline-offset: 1px; border-color: var(--kugel); }
-input:user-invalid, textarea:user-invalid { border-color: #A23B2C; box-shadow: inset 0 0 0 1px #A23B2C; }
+.dunkel input[type="text"], .dunkel input[type="email"] { background: #fff; border-bottom-color: var(--trieb); }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline-offset: 0; }
+input:user-invalid, textarea:user-invalid { border-bottom-color: #C0392B; }
 .formular button { justify-self: start; }
-.formular-hinweis { font-size: var(--stufe-klein); color: var(--tinte-weich); margin: 0; }
-.tafel-wald .formular-hinweis { color: #CFDCC6; }
+.formular-hinweis { font-size: 1rem; margin: 0; }
+.dunkel .formular-hinweis { color: var(--hell-weich); }
 .honig { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
-.vorschau-hinweis { background: #E2ECF4; color: var(--tinte); border-radius: var(--rund); padding: 0.7rem 0.9rem; margin: 0; }
-.vorschau-band { margin: 0; padding: 0.55rem var(--rand); background: #E2ECF4; color: #19466F; font-size: var(--stufe-klein); text-align: center; }
+.vorschau-hinweis { background: #E2ECF4; color: var(--tinte); padding: 0.7rem 0.9rem; margin: 0; }
+.vorschau-band { margin: 0; padding: 0.55rem var(--rand); background: #E2ECF4; color: #19466F; font-size: 1rem; text-align: center; }
 
-.kontakt-raster { display: grid; gap: clamp(1.2rem, 3vw, 2rem); grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr)); align-items: start; padding-bottom: var(--abstand); }
-.kontakt-raster .tafel { border: 1px solid var(--linie); }
-.kontakt-raster .formular { max-width: none; }
-.kontakt-raster h2 { margin-top: 0; }
-.kontakt-notiz { margin: 0 0 0.8rem; transform: rotate(-2deg); transform-origin: left; }
+.kontakt-split { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); }
+.kontakt-split > .dunkel { grid-column: 1 / span 5; padding: var(--abstand) var(--rand); }
+.kontakt-split > .nachricht { grid-column: 6 / -1; padding: var(--abstand) var(--rand); }
+.kontakt-split > * > * { max-width: 40rem; }
+.kontakt-split h2 { font-size: clamp(2rem, 1.2rem + 2.6vw, 3.8rem); }
+.kontakt-aussage { font-family: var(--anzeige); font-weight: 760; font-stretch: 80%; font-size: clamp(2.4rem, 1.2rem + 4vw, 5.6rem); line-height: 0.95; letter-spacing: -0.03em; color: var(--trieb); margin: 0 0 2.5rem; }
 
 /* ---------- Pflanzen und Tiere ---------- */
 
-.einleitung { display: grid; gap: 1rem 4rem; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: start; margin-bottom: var(--abstand); }
-.einleitung p { margin: 0; }
-.quellen-hinweis { font-size: var(--stufe-klein); color: var(--tinte-weich); }
+.quellen { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1rem var(--luecke); margin-bottom: var(--abstand); }
+.quellen p { grid-column: span 6; margin: 0; font-size: 1.05rem; color: var(--tinte-weich); }
 
-.grafik-titel { font-size: var(--stufe-2); margin: 0 0 0.4rem; }
-.grafik-unter { color: var(--tinte-weich); margin-bottom: 1.8rem; max-width: 46rem; }
+.netzteil { padding-block: var(--abstand); }
+.kopfzeile { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1rem var(--luecke); align-items: end; margin-bottom: 1.5rem; }
+.kopfzeile h2 { grid-column: 1 / span 6; margin: 0; }
+.kopfzeile p { grid-column: 7 / -1; margin: 0; }
+.kreisnetz { position: relative; }
+.kreisnetz svg { width: 100%; height: auto; display: block; }
+.netz-kreis { fill: none; stroke: var(--linie); stroke-width: 1; }
+.kante { fill: none; stroke-width: 3; stroke-linecap: round; opacity: 0.9; }
+.kante.art-bluete { stroke: #B5559F; }
+.kante.art-raupe { stroke: #4F8A23; }
+.kante.art-nest { stroke: var(--kugel); }
+.kante.status-eigenes-foto { stroke-dasharray: 9 7; }
+.kante.status-bestimmen-lassen { stroke-dasharray: 1 7; stroke-width: 3.6; }
+.netz-punkt { stroke: var(--moos); stroke-width: 2; fill: var(--farbe, var(--trieb)); }
+.netz-punkt.tier { fill: var(--weiss); }
+.kreisnetz ul { list-style: none; padding: 0; margin: 0; }
+.netz-etikett { position: absolute; margin: 0 !important; width: max-content; max-width: 19%; line-height: 1.1; font-weight: 700; font-size: clamp(0.8rem, 0.6rem + 0.45vw, 1.02rem); transform: translateY(-50%); }
+.netz-etikett.links { text-align: right; transform: translate(calc(-100% - 1.1rem), -50%); }
+.netz-etikett.rechts { transform: translate(1.1rem, -50%); }
+.netz-etikett small { display: block; font-weight: 400; font-size: 0.82em; color: var(--tinte-weich); }
+.netz-linear { display: none; }
+.legende { list-style: none; padding: 0; margin: 1.6rem 0 0; display: flex; flex-wrap: wrap; gap: 0.6rem 2rem; font-size: 1rem; }
+.legende li { margin: 0; display: flex; align-items: center; gap: 0.6rem; }
+.legende svg { width: 2.8rem; height: 0.8rem; flex: 0 0 auto; }
+.legende .grau { stroke: var(--tinte-weich); }
 
-/* Netz: Pflanzen links, Tiere rechts */
-.netz { margin: 0 0 var(--abstand); }
-.netz-flaeche { display: grid; grid-template-columns: minmax(0, 1fr) minmax(3rem, 1.1fr) minmax(0, 1fr); }
+/* lineare Fassung für schmale Bildschirme */
+.netz-flaeche { display: grid; grid-template-columns: minmax(0, 1fr) 2.4rem minmax(0, 1fr); }
 .netz-links, .netz-rechts { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; justify-content: space-around; }
-.netz-knoten { margin: 0 !important; min-height: 3.3rem; display: flex; align-items: center; gap: 0.6rem; line-height: 1.15; }
+.netz-knoten { margin: 0 !important; min-height: 3.6rem; display: flex; align-items: center; gap: 0.4rem; line-height: 1.12; }
 .netz-links .netz-knoten { flex-direction: row-reverse; text-align: right; }
-.netz-name { font-weight: 650; font-size: 0.98rem; }
-.netz-unter { display: block; font-weight: 400; font-size: 0.82rem; color: var(--tinte-weich); font-style: italic; }
-.netz-punkt { flex: 0 0 auto; width: 0.85rem; height: 0.85rem; border-radius: 50%; border: 2px solid var(--wald); background: var(--farbe, var(--trieb)); }
+.netz-name { font-weight: 700; font-size: 0.86rem; }
+.netz-unter { display: block; font-weight: 400; font-size: 0.74rem; font-style: italic; color: var(--tinte-weich); }
+.netz-flaeche .netz-punkt { width: 0.8rem; height: 0.8rem; border-radius: 50%; border: 2px solid var(--moos); background: var(--farbe, var(--trieb)); flex: 0 0 auto; }
 .netz-linien { width: 100%; height: 100%; overflow: visible; }
-.zeilen-11 { min-height: 38rem; }
-.netz-legende { list-style: none; padding: 0; margin: 1.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.6rem; font-size: var(--stufe-klein); }
-.netz-legende li { margin: 0; display: flex; align-items: center; gap: 0.5rem; }
-.netz-legende svg { width: 2.6rem; height: 0.8rem; flex: 0 0 auto; }
-.netz-legende .kante { stroke-width: 3; }
-.netz-legende .grau { stroke: var(--tinte-weich); }
-.netz figcaption { margin-top: 1rem; }
+.netz-linien .kante { stroke-width: 2.4; }
+.zeilen-11 { min-height: 44rem; }
 
-/* Farben der Blüten (Kalender, Netz, Monatsband) */
-.farbe-rosa { --farbe: #D98CCB; }
-.farbe-purpur { --farbe: #B85C98; }
-.farbe-lila { --farbe: #A48ED2; }
-.farbe-blau { --farbe: #4A63B8; }
-.farbe-hellblau { --farbe: #86AEE0; }
+/* Blütenfarben */
+.farbe-rosa { --farbe: #E096D5; }
+.farbe-purpur { --farbe: #C564A6; }
+.farbe-lila { --farbe: #A996DE; }
+.farbe-blau { --farbe: #5A78D6; }
+.farbe-hellblau { --farbe: #93BCEF; }
 .farbe-weiss { --farbe: #FFFFFF; }
-.farbe-gelb { --farbe: #E3C230; }
-.farbe-gruen { --farbe: #8DB43F; }
+.farbe-gelb { --farbe: #EBC93B; }
+.farbe-gruen { --farbe: #9CC74A; }
 .farbe-holz { --farbe: #C49A6C; }
-.farbe-tier { --farbe: #FBFBF7; }
+.farbe-tier { --farbe: #FCFCF9; }
 
-/* Blühkalender */
-.kalender { margin: 0 0 var(--abstand); }
-.kalender-kopf, .kalender-zeile { display: grid; grid-template-columns: minmax(7.5rem, 13rem) minmax(0, 1fr); gap: 1rem; align-items: center; }
-.kalender-monate { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); font-size: 0.8rem; font-weight: 700; color: var(--tinte-weich); text-align: center; }
-.kalender-zeilen { list-style: none; padding: 0; margin: 0.4rem 0 0; }
-.kalender-zeile { margin: 0 !important; padding: 0.35rem 0; border-top: 1px solid var(--linie); }
-.kalender-name { font-weight: 600; font-size: 0.98rem; line-height: 1.2; }
-.kalender-spur {
-  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); height: 1.5rem;
-  background: repeating-linear-gradient(to right, transparent 0 calc(100% / 12 - 1px), var(--linie) calc(100% / 12 - 1px) calc(100% / 12));
-}
-.kalender-balken { grid-row: 1; border-radius: 999px; background: var(--farbe); border: 1.5px solid rgba(22, 39, 28, 0.35); }
-.von-1 { grid-column-start: 1; } .von-2 { grid-column-start: 2; } .von-3 { grid-column-start: 3; } .von-4 { grid-column-start: 4; }
-.von-5 { grid-column-start: 5; } .von-6 { grid-column-start: 6; } .von-7 { grid-column-start: 7; } .von-8 { grid-column-start: 8; }
-.von-9 { grid-column-start: 9; } .von-10 { grid-column-start: 10; } .von-11 { grid-column-start: 11; } .von-12 { grid-column-start: 12; }
-.bis-1 { grid-column-end: 2; } .bis-2 { grid-column-end: 3; } .bis-3 { grid-column-end: 4; } .bis-4 { grid-column-end: 5; }
-.bis-5 { grid-column-end: 6; } .bis-6 { grid-column-end: 7; } .bis-7 { grid-column-end: 8; } .bis-8 { grid-column-end: 9; }
-.bis-9 { grid-column-end: 10; } .bis-10 { grid-column-end: 11; } .bis-11 { grid-column-end: 12; } .bis-12 { grid-column-end: 13; }
-.kalender figcaption { margin-top: 1rem; font-size: var(--stufe-klein); color: var(--tinte-weich); }
+/* Pflanzen als Doppelseiten: Orbit und Steckbrief, abwechselnd links und rechts */
+.pflanze { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2.5rem var(--luecke); align-items: center; padding-block: clamp(3rem, 7vw, 6rem); border-top: 1px solid var(--linie); }
+.pflanze > .pflanze-orbit { grid-column: 1 / span 5; }
+.pflanze > .pflanze-text { grid-column: 7 / -1; }
+.pflanze.gerade > .pflanze-orbit { grid-column: 8 / -1; order: 2; }
+.pflanze.gerade > .pflanze-text { grid-column: 1 / span 6; }
+.pflanze h2 { font-size: clamp(2.4rem, 1.4rem + 3.6vw, 5.2rem); margin-bottom: 0.3rem; }
+.pflanze h2 .latein { display: block; font-family: var(--text); font-size: 1.15rem; font-weight: 400; letter-spacing: 0; margin-top: 0.5rem; color: var(--tinte-weich); }
+.daten { display: flex; flex-wrap: wrap; gap: 0.6rem 2rem; margin: 1.2rem 0; padding: 0.9rem 0; border-block: 2px solid var(--moos); font-size: 1rem; }
+.daten div { min-width: 0; }
+.daten dt { font-size: 0.85rem; color: var(--tinte-weich); }
+.daten dd { margin: 0; font-weight: 700; }
+.monatsband { display: grid; grid-template-columns: repeat(12, 0.62rem); gap: 2px; margin-top: 0.3rem; }
+.mb { height: 0.62rem; background: var(--linie); }
+.mb.an { background: var(--farbe); box-shadow: inset 0 0 0 1px rgba(15, 42, 27, 0.35); }
+.pflanze-zitat { font-family: var(--anzeige); font-weight: 650; font-stretch: 86%; font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.2rem); line-height: 1.05; color: var(--blatt); margin: 1rem 0; }
+.hinweis { display: inline-block; background: var(--offen); padding: 0.25rem 0.6rem; font-size: 1rem; margin: 0.4rem 0 0; }
 
-/* Pflanzenkarten mit Herbar-Etikett */
-.pflanze {
-  display: grid; grid-template-columns: minmax(10rem, 16rem) minmax(0, 1fr); gap: 1.5rem clamp(1.5rem, 4vw, 3.5rem); align-items: start;
-  padding: clamp(2rem, 5vw, 3.5rem) 0; border-top: 1px solid var(--linie);
-}
-.pflanze-bild .kreis { box-shadow: 0 22px 40px -30px rgba(22, 39, 28, 0.8); }
-.pflanze-text { max-width: 46rem; }
-.pflanze h2 { font-size: var(--stufe-3); margin-bottom: 0.2rem; }
-.pflanze h2 .latein { display: block; font-family: var(--text); font-size: 1.05rem; margin-top: 0.35rem; letter-spacing: 0; }
-.pflanze-zitat { font-family: var(--hand); font-weight: 600; font-size: 1.6rem; color: var(--blatt); line-height: 1.1; margin: 0.8rem 0; transform: rotate(-1.5deg); transform-origin: left; }
-.hinweis { font-size: var(--stufe-klein); background: var(--offen); border-radius: var(--rund); padding: 0.3rem 0.7rem; display: inline-block; margin: 0.6rem 0 0; }
-
-.etikett {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 0.7rem 1.5rem; margin: 1.1rem 0 1.2rem;
-  padding: 0.9rem 1.1rem; background: var(--papier-hell); border: 1px solid var(--linie); border-left: 4px solid var(--trieb);
-  border-radius: 0.3rem; font-size: 0.95rem;
-}
-.etikett div { min-width: 0; }
-.etikett dt { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tinte-weich); }
-.etikett dd { margin: 0.1rem 0 0; font-weight: 600; }
-.monatsband { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; margin-top: 0.35rem; max-width: 9.5rem; }
-.mb { height: 0.55rem; border-radius: 2px; background: var(--salbei-tief); }
-.mb.an { background: var(--farbe); box-shadow: inset 0 0 0 1px rgba(22, 39, 28, 0.3); }
-
-.wer-titel { font-family: var(--text); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blatt); margin: 1.6rem 0 0.6rem; }
-.beziehungen { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.8rem; }
-.beziehungen > li { margin: 0; padding: 1rem 1.15rem; background: var(--papier-hell); border: 1px solid var(--linie); border-radius: 0.9rem; }
+.pflanze h3 { margin: 2rem 0 0.2rem; }
+.beziehungen { list-style: none; padding: 0; margin: 1.2rem 0 0; }
+.beziehungen > li { margin: 0; display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); gap: 0 1rem; padding: 1rem 0; border-top: 1px solid var(--linie); }
+.beziehungen .po-symbol { width: 2.6rem; height: 2.6rem; box-shadow: 0 0 0 1.5px currentColor; }
+.beziehungen .po-symbol .sym { width: 1.4rem; height: 1.4rem; }
 .beziehungen p { margin: 0; }
-.beziehung-kopf { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.7rem; margin-bottom: 0.35rem !important; }
-.beziehung-kopf strong { font-family: var(--titel); font-size: 1.15rem; font-weight: 640; color: var(--wald); }
-.beziehung-fuss { margin-top: 0.6rem !important; display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.raupen { margin-top: 0.75rem !important; padding-top: 0.7rem; border-top: 1px dashed var(--linie); }
+.bz-tier { font-family: var(--anzeige); font-weight: 700; font-stretch: 90%; font-size: 1.3rem; line-height: 1.1; }
+.bz-tier .latein { font-family: var(--text); font-size: 0.95rem; font-weight: 400; color: var(--tinte-weich); letter-spacing: 0; }
+.beleg { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 1rem; margin-top: 0.45rem !important; font-size: 0.95rem; color: var(--tinte-weich); }
+.beleg > span { display: inline-flex; align-items: center; gap: 0.45rem; min-width: 0; }
+.beleg svg { width: 1.8rem; height: 0.6rem; flex: 0 0 auto; }
+.beleg .linie-quelle { stroke: var(--tinte-weich); stroke-width: 3; }
+.beleg .linie-foto { stroke: var(--tinte-weich); stroke-width: 3; stroke-dasharray: 6 4; }
+.beleg .linie-offen { stroke: var(--offen-rand); stroke-width: 3.4; stroke-dasharray: 1 5; stroke-linecap: round; }
+.raupen { margin-top: 0.8rem !important; padding-top: 0.8rem; border-top: 1px dashed var(--linie); }
 
-.steckbrief { display: flex; gap: 1rem; align-items: center; margin: 1rem 0 1.2rem; }
+.steckbrief { display: flex; gap: 1rem; align-items: center; margin: 1.2rem 0; }
 .steckbrief a { flex: 0 0 auto; }
-.steckbrief img { width: 5.5rem; border-radius: 4px; border: 1px solid var(--linie); background: #fff; transform: rotate(-2deg); }
-.steckbrief figcaption { font-size: var(--stufe-klein); color: var(--tinte-weich); }
+.steckbrief img { width: 5.5rem; border: 1px solid var(--linie); background: #fff; }
+.steckbrief figcaption { font-size: 1rem; color: var(--tinte-weich); }
 
-.weitere { border-top: 1px solid var(--linie); padding: clamp(2rem, 5vw, 3.5rem) 0 var(--abstand); }
-.weitere-liste { list-style: none; padding: 0; display: grid; gap: 1.2rem 2rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
+.weitere { padding-block: clamp(3rem, 7vw, 6rem) var(--abstand); }
+.weitere-liste { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem var(--luecke); margin-top: 2rem; }
 .weitere-liste li { margin: 0; display: flex; gap: 1rem; align-items: center; }
-.weitere-foto { flex: 0 0 5.5rem; }
+.weitere-foto { flex: 0 0 6rem; border-radius: 50%; overflow: hidden; }
+.weitere-foto img { aspect-ratio: 1; object-fit: cover; }
 .weitere-liste p { margin: 0; }
-.steckdaten { font-size: var(--stufe-klein); color: var(--tinte-weich); }
+.steckdaten { font-size: 1rem; color: var(--tinte-weich); }
 
 /* ---------- Fragen ---------- */
 
-.fragen-raster { display: grid; grid-template-columns: minmax(14rem, 20rem) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); align-items: start; padding-bottom: var(--abstand); }
-.fragen-liste { position: sticky; top: 1.5rem; background: var(--papier-hell); border: 1px solid var(--linie); border-radius: 1rem; padding: 1.2rem 1.3rem; }
-.fragen-liste .kicker { margin-bottom: 0.6rem; }
-.fragen-liste ul { list-style: none; padding: 0; margin: 0; }
-.fragen-liste li { margin: 0; padding: 0; }
-.fragen-liste a { display: block; padding: 0.45rem 0; text-decoration: none; color: var(--tinte); line-height: 1.3; border-bottom: 1px solid var(--linie); }
-.fragen-liste li:last-child a { border-bottom: 0; }
-.fragen-liste a:hover { color: var(--malve-tief); }
-.frage { padding-bottom: 2.4rem; margin-bottom: 2.4rem; border-bottom: 1px solid var(--linie); max-width: 44rem; }
-.frage h2 { font-size: var(--stufe-2); }
+.fragen-raster { columns: 2 24rem; column-gap: calc(var(--luecke) * 2); padding-bottom: var(--abstand); }
+.frage { break-inside: avoid; border-top: 2px solid var(--moos); padding: 1.2rem 0 2.2rem; }
+.frage h2 { font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.4rem); margin-bottom: 0.8rem; }
 .frage p:last-child { margin-bottom: 0; }
-.frage-weiter { font-family: var(--hand); font-weight: 600; font-size: 1.7rem; color: var(--blatt); margin: 0; }
+.frage-weiter { break-inside: avoid; border-top: 2px solid var(--moos); padding-top: 1.2rem; font-family: var(--anzeige); font-weight: 720; font-stretch: 84%; font-size: clamp(1.8rem, 1.2rem + 2vw, 3rem); line-height: 1; margin: 0; }
 
-.termine { padding-left: 0; }
+/* ---------- Online-Abend ---------- */
+
+.abend-raster { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2.5rem var(--luecke); padding-bottom: var(--abstand); }
+.abend-raster > .links { grid-column: 1 / span 6; }
+.abend-raster > .rechts { grid-column: 8 / -1; }
+.abend-raster h2 { font-size: clamp(1.9rem, 1.2rem + 2.2vw, 3.4rem); }
+.abend-raster .links h2:not(:first-child) { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+.termine { list-style: none; padding: 0; }
 
 /* ---------- Schmale Bildschirme ---------- */
 
+@media (max-width: 64rem) {
+  .menue-knopf { display: inline-flex; min-height: 2.8rem; padding: 0.5rem 1rem; }
+  .menue[popover] { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; border: 0; padding: 5rem var(--rand) 2rem; background: var(--moos); color: #fff; }
+  .menue[popover] ul { flex-direction: column; gap: 0.4rem; }
+  .menue[popover] a { color: #fff; font-family: var(--anzeige); font-weight: 760; font-stretch: 80%; font-size: clamp(2.2rem, 8vw, 3.6rem); line-height: 1.05; }
+  .menue[popover] a[aria-current="page"] { border-bottom-color: var(--trieb); }
+  .menue[popover] .menue-zu { display: inline-flex; position: absolute; top: 1rem; right: var(--rand); }
+  .menue[popover]::backdrop { background: rgba(10, 31, 20, 0.6); }
+  /* Erdkugel und offener Ring aus dem Logo, halb aus dem Bild geschoben */
+  .menue[popover] { overflow: hidden; opacity: 0; transform: translateY(-0.8rem); transition: opacity 0.25s, transform 0.25s, overlay 0.25s allow-discrete, display 0.25s allow-discrete; }
+  .menue[popover]:popover-open { opacity: 1; transform: none; }
+  .menue[popover]::before, .menue[popover]::after { content: ""; position: absolute; aspect-ratio: 1; border-radius: 50%; pointer-events: none; }
+  .menue[popover]::before { width: min(70vw, 26rem); right: -14vw; bottom: -10vw; background: var(--kugel); }
+  .menue[popover]::after { width: min(96vw, 36rem); right: -26vw; bottom: -22vw; border: 2px solid var(--trieb); border-left-color: transparent; transform: rotate(20deg); }
+  .menue[popover] ul { position: relative; z-index: 1; }
+  .menue[popover] .menue-zu { z-index: 1; }
+  @starting-style {
+    .menue[popover]:popover-open { opacity: 0; transform: translateY(-0.8rem); }
+  }
+}
+@supports not selector(:popover-open) {
+  .menue-knopf { display: none !important; }
+}
+@media (min-width: 64.01rem) {
+  .menue[popover] { display: block; position: static; inset: auto; width: auto; height: auto; margin: 0; padding: 0; border: 0; background: none; color: inherit; overflow: visible; }
+}
+
+@media (max-width: 75rem) {
+  .pflanzenorbit { aspect-ratio: auto; }
+  .po-kreis { position: relative; width: min(84%, 22rem); aspect-ratio: 1; margin: 0 auto; }
+  .po-tiere { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem 1rem; margin-top: 1.2rem; }
+  .po-tier, .po-tier.seite-links { position: static; transform: none; flex-direction: row; text-align: left; }
+  .po-name { max-width: none; background: none; padding: 0; }
+  .pflanze .po-tiere { display: none; }
+}
+
 @media (max-width: 56rem) {
-  .held-raster, .mit-bild .seitenkopf-raster, .zwei-spalten, .einleitung, .fragen-raster { grid-template-columns: minmax(0, 1fr); }
-  .zwei-spalten.umgekehrt > :first-child { order: 0; }
-  .komposition { width: min(88%, 26rem); margin-top: 0.5rem; }
-  .kreisbild { width: min(82%, 21rem); }
-  .fragen-liste { position: static; }
-  .zahlen { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .held .orbit { float: none; width: min(100%, 30rem); margin: 0 auto 0.5rem; shape-outside: none; }
+  .zwei > .links, .zwei > .rechts, .zwei.breit-links > .links, .zwei.breit-links > .rechts,
+  .radteil .rad-flaeche, .radteil .rad-seite, .seitenkopf-text, .seitenkopf-bild, .seitenkopf-liste,
+  .rubrik > *, .rubrik > h2, .pflanze > .pflanze-orbit, .pflanze > .pflanze-text,
+  .pflanze.gerade > .pflanze-orbit, .pflanze.gerade > .pflanze-text,
+  .abend-raster > .links, .abend-raster > .rechts, .fuss-logo, .fuss-satz,
+  .kopfzeile h2, .kopfzeile p, .quellen p { grid-column: 1 / -1; }
+  .pflanze.gerade > .pflanze-orbit { order: 0; }
+  .rubrik > h2:not(:first-child) + * { margin-top: 0; }
+  .seitenkopf-bild { width: min(100%, 26rem); justify-self: center; }
+  .abschluss, .kontakt-split { grid-template-columns: minmax(0, 1fr); }
+  .kontakt-split > .dunkel, .kontakt-split > .nachricht { grid-column: 1 / -1; }
+  .projekt-liste, .weitere-liste { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kreisnetz { display: none; }
+  .netz-linear { display: block; }
 }
 
 @media (max-width: 40rem) {
-  .kopf-innen { padding-block: 0.8rem; }
-  .marke img { width: 3rem; }
+  body { font-size: 1.08rem; }
+  .marke img { width: 2.7rem; }
   .marke-wort { font-size: 1.15rem; }
-  .menue ul { gap: 0 1rem; }
-  .menue a { font-size: 0.98rem; padding: 0.3rem 0; }
-  .knoepfe .knopf { flex: 1 1 100%; }
-  .komposition .notiz { right: -4%; bottom: -9%; }
-  .stern-tiere li { width: 44%; font-size: 0.86rem; }
-  .stern-tiere strong { font-size: 0.98rem; }
-  .stern-mitte { width: 34%; }
-  .stern-pflanze { font-size: 0.92rem; }
-  .wochen { gap: 0.3rem; }
-  .woche-name { font-size: 0.72rem; }
-  .call { width: 0.8rem; height: 0.8rem; }
-  .zahlen dt { font-size: 0.9rem; line-height: 1.25; }
-  .ich-raster { grid-template-columns: minmax(0, 1fr); }
-  .tafel-wald { grid-template-columns: minmax(0, 1fr); }
-  .pflanze { grid-template-columns: minmax(0, 1fr); }
-  .pflanze-bild { width: min(64%, 14rem); }
-  .netz-flaeche { grid-template-columns: minmax(0, 1fr) 2.2rem minmax(0, 1fr); }
-  .netz-name { font-size: 0.86rem; }
-  .netz-unter { font-size: 0.74rem; }
-  .netz-knoten { gap: 0.4rem; min-height: 3.6rem; }
-  .zeilen-11 { min-height: 44rem; }
-  .kalender-kopf, .kalender-zeile { grid-template-columns: 6.2rem minmax(0, 1fr); gap: 0.6rem; }
-  .kalender-name { font-size: 0.86rem; }
-  .tritt-label { font-size: 0.8rem; }
+  .bausteine, .projekt-liste, .weitere-liste { grid-template-columns: minmax(0, 1fr); }
+  .rad-knoepfe { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .abschluss .abend-teil { grid-template-columns: minmax(0, 1fr); }
+  .pflanzenorbit .po-bild { inset: 10%; }
+  .po-symbol { width: 2.6rem; height: 2.6rem; }
+  .po-symbol .sym { width: 1.4rem; height: 1.4rem; }
+  .po-name { font-size: 0.95rem; }
+  .rad-monat { font-size: 15px; }
+  .woche-nr { font-size: 34px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
+  @view-transition { navigation: none; }
 }
 
 @media print {
-  .kopf .menue, .abschluss, .fuss, .sprung, .vorschau-band { display: none; }
+  .kopf .menue, .menue-knopf, .abschluss, .fuss, .sprung, .vorschau-band { display: none; }
   body { background: #fff; }
-  a { color: inherit; }
 }
 
-/* Online-Abend: Dreiviertelstunde neben dem Text */
-.abend-einstieg { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.5rem 2rem; align-items: center; margin-bottom: 1rem; }
-.abend-einstieg h2 { margin-top: 0; }
-.abend-einstieg .dreiviertel { width: clamp(7rem, 16vw, 9.5rem); }
-@media (max-width: 40rem) { .abend-einstieg { grid-template-columns: minmax(0, 1fr); } }
-.zitat-abschnitt + .ich-abschnitt, .ich-abschnitt { padding-top: 0; }
+/* Positionen für Beschriftungen in Grafiken (in Prozent der Fläche) */
+.x-0{left:0%}.x-1{left:1%}.x-2{left:2%}.x-3{left:3%}.x-4{left:4%}.x-5{left:5%}.x-6{left:6%}.x-7{left:7%}.x-8{left:8%}.x-9{left:9%}.x-10{left:10%}.x-11{left:11%}.x-12{left:12%}.x-13{left:13%}.x-14{left:14%}.x-15{left:15%}.x-16{left:16%}.x-17{left:17%}.x-18{left:18%}.x-19{left:19%}.x-20{left:20%}.x-21{left:21%}.x-22{left:22%}.x-23{left:23%}.x-24{left:24%}.x-25{left:25%}.x-26{left:26%}.x-27{left:27%}.x-28{left:28%}.x-29{left:29%}.x-30{left:30%}.x-31{left:31%}.x-32{left:32%}.x-33{left:33%}.x-34{left:34%}.x-35{left:35%}.x-36{left:36%}.x-37{left:37%}.x-38{left:38%}.x-39{left:39%}.x-40{left:40%}.x-41{left:41%}.x-42{left:42%}.x-43{left:43%}.x-44{left:44%}.x-45{left:45%}.x-46{left:46%}.x-47{left:47%}.x-48{left:48%}.x-49{left:49%}.x-50{left:50%}.x-51{left:51%}.x-52{left:52%}.x-53{left:53%}.x-54{left:54%}.x-55{left:55%}.x-56{left:56%}.x-57{left:57%}.x-58{left:58%}.x-59{left:59%}.x-60{left:60%}.x-61{left:61%}.x-62{left:62%}.x-63{left:63%}.x-64{left:64%}.x-65{left:65%}.x-66{left:66%}.x-67{left:67%}.x-68{left:68%}.x-69{left:69%}.x-70{left:70%}.x-71{left:71%}.x-72{left:72%}.x-73{left:73%}.x-74{left:74%}.x-75{left:75%}.x-76{left:76%}.x-77{left:77%}.x-78{left:78%}.x-79{left:79%}.x-80{left:80%}.x-81{left:81%}.x-82{left:82%}.x-83{left:83%}.x-84{left:84%}.x-85{left:85%}.x-86{left:86%}.x-87{left:87%}.x-88{left:88%}.x-89{left:89%}.x-90{left:90%}.x-91{left:91%}.x-92{left:92%}.x-93{left:93%}.x-94{left:94%}.x-95{left:95%}.x-96{left:96%}.x-97{left:97%}.x-98{left:98%}.x-99{left:99%}.x-100{left:100%}
+.y-0{top:0%}.y-1{top:1%}.y-2{top:2%}.y-3{top:3%}.y-4{top:4%}.y-5{top:5%}.y-6{top:6%}.y-7{top:7%}.y-8{top:8%}.y-9{top:9%}.y-10{top:10%}.y-11{top:11%}.y-12{top:12%}.y-13{top:13%}.y-14{top:14%}.y-15{top:15%}.y-16{top:16%}.y-17{top:17%}.y-18{top:18%}.y-19{top:19%}.y-20{top:20%}.y-21{top:21%}.y-22{top:22%}.y-23{top:23%}.y-24{top:24%}.y-25{top:25%}.y-26{top:26%}.y-27{top:27%}.y-28{top:28%}.y-29{top:29%}.y-30{top:30%}.y-31{top:31%}.y-32{top:32%}.y-33{top:33%}.y-34{top:34%}.y-35{top:35%}.y-36{top:36%}.y-37{top:37%}.y-38{top:38%}.y-39{top:39%}.y-40{top:40%}.y-41{top:41%}.y-42{top:42%}.y-43{top:43%}.y-44{top:44%}.y-45{top:45%}.y-46{top:46%}.y-47{top:47%}.y-48{top:48%}.y-49{top:49%}.y-50{top:50%}.y-51{top:51%}.y-52{top:52%}.y-53{top:53%}.y-54{top:54%}.y-55{top:55%}.y-56{top:56%}.y-57{top:57%}.y-58{top:58%}.y-59{top:59%}.y-60{top:60%}.y-61{top:61%}.y-62{top:62%}.y-63{top:63%}.y-64{top:64%}.y-65{top:65%}.y-66{top:66%}.y-67{top:67%}.y-68{top:68%}.y-69{top:69%}.y-70{top:70%}.y-71{top:71%}.y-72{top:72%}.y-73{top:73%}.y-74{top:74%}.y-75{top:75%}.y-76{top:76%}.y-77{top:77%}.y-78{top:78%}.y-79{top:79%}.y-80{top:80%}.y-81{top:81%}.y-82{top:82%}.y-83{top:83%}.y-84{top:84%}.y-85{top:85%}.y-86{top:86%}.y-87{top:87%}.y-88{top:88%}.y-89{top:89%}.y-90{top:90%}.y-91{top:91%}.y-92{top:92%}.y-93{top:93%}.y-94{top:94%}.y-95{top:95%}.y-96{top:96%}.y-97{top:97%}.y-98{top:98%}.y-99{top:99%}.y-100{top:100%}
+
+/* Netz: Verbindungen eines Tiers oder einer Pflanze hervorheben (grafik.js) */
+.kante, .netz-etikett { transition: opacity 0.2s; }
+.kreisnetz.hervor .kante { opacity: 0.08; }
+.kreisnetz.hervor .kante.an { opacity: 1; stroke-width: 4.6; }
+.kreisnetz.hervor .netz-etikett { opacity: 0.3; }
+.kreisnetz.hervor .netz-etikett.an { opacity: 1; }

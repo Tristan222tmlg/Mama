@@ -6,18 +6,28 @@ Die Website von Dr. Sabine Schröder-Gravendyck, gebaut mit
 Bessere Welt ergärtnern“): Positionierung, Angebote, Seitenplan, Wortliste
 und die Pflanzen-Tier-Tabelle mit Quellen.
 
-Kleiner als der Prototyp in `v2/`, dafür mit echten Adressen, ohne
-JavaScript, ohne Cookies und ohne fremde Dienste.
+Kleiner als der Prototyp in `v2/`, dafür mit echten Adressen, ohne Cookies,
+ohne fremde Dienste und mit nur einem kleinen Skript für die Grafiken.
 
-**Gestaltung:** ein Feldbuch mit Kreisen. Runde Fotos und handschriftliche
-Notizen wie auf Sabines Moschusmalven-Steckbrief, der offene Ring und die
-Erdkugel aus dem Logo, Belege wie auf einem Herbar-Etikett. Die Grafiken
-zeigen echte Daten aus `src/_data/pflanzen.yml` und den Antworten: das Netz der
-belegten Verbindungen, den Blühkalender, die sieben Programmwochen, die
-Dreiviertelstunde des Online-Abends. Sie entstehen beim Bauen
-(`lib/grafiken.js`, `src/_includes/teile/`), ganz ohne JavaScript im Browser.
-Schriften: Fraunces (weich, mit festen Achsen, damit die Datei klein bleibt),
-Source Sans 3 und Caveat für Notizen, alle unter der SIL Open Font License.
+**Gestaltung „Kreislauf“:** Alles kreist, wie im Logo: Erdkugel und offener
+Ring, dazu Fotos als Trabanten, die langsam um das große Foto ziehen. Die
+Seiten nutzen die ganze Breite: Überschrift links, Text rechts, die Pflanzen
+als Doppelseiten im Wechsel. Die Grafiken zeigen echte Daten aus
+`src/_data/pflanzen.yml` und den Antworten: das runde Netz der belegten
+Verbindungen, das Blüten-Jahresrad (beim Öffnen steht es auf dem aktuellen
+Monat), jede Pflanze mit ihren Tieren als Trabanten, die sieben Programmwochen,
+die Flugradien der Trittsteine, die Dreiviertelstunde des Online-Abends. Sie
+entstehen beim Bauen (`lib/grafiken.js`, `src/_includes/teile/`) und
+funktionieren ohne JavaScript; `src/assets/js/grafik.js` macht Rad und Netz
+nur bedienbar.
+
+Moderne Browser-Technik, ohne Bibliotheken: das Menü als Popover, weiche
+Übergänge zwischen den Seiten (View Transitions, der Kreis wandert mit), Text,
+der um den Kreis fließt (`shape-outside`), ein Rad, das sich beim Scrollen
+eindreht. Wer in seinem Gerät „Bewegung reduzieren“ eingestellt hat, sieht
+alles ruhig. Schriften: Bricolage Grotesque für Überschriften (mit
+Breitenachse) und Atkinson Hyperlegible Next für den Text, gebaut für gute
+Lesbarkeit. Beide unter der SIL Open Font License, auf dem eigenen Server.
 
 | Seite | Datei | Inhalt |
 | --- | --- | --- |
@@ -71,7 +81,8 @@ für Programme, ungültige Eingaben, kein seitliches Scrollen bei 320 und 390 px
 Breite, der Sprunglink als erster Tab-Schritt.
 
 **Stand 30. Oktober 2026:** alles bestanden. axe: keine Verstöße auf 12 Seiten.
-Lighthouse mobil (13.5.0, lokal, ohne Komprimierung): Leistung 93–98,
+Kein seitliches Scrollen von 320 bis 1920 px Breite.
+Lighthouse mobil (13.5.0, lokal, ohne Komprimierung): Leistung 96–100,
 Barrierefreiheit, Best Practices und SEO je 100 auf allen 9 Hauptseiten. Ob die Formular-Mails
 in Sabines echtem Postfach ankommen, lässt sich erst auf dem Webspace testen.
 

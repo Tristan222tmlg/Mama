@@ -5,21 +5,24 @@ title: Gartenbrief und Kontakt
 description: Den Gartenbrief von Sabine Schröder-Gravendyck abonnieren oder ihr eine Nachricht schreiben, zum Beispiel für ein Erstgespräch zum Online-Programm.
 kicker: Am liebsten per E-Mail
 lead: Abonnier den Gartenbrief oder schreib mir eine Nachricht. Ich antworte per E-Mail.
+bild:
+  datei: bilder/kuckucks-lichtnelke.jpg
+  alt: Rosa, fein zerschlitzte Blüten der Kuckucks-Lichtnelke in einer Wiese
+  unterschrift: Kuckucks-Lichtnelke
 breit: true
 abschluss: keiner
 ---
-<div class="kontakt-raster">
-<section id="gartenbrief" class="tafel" aria-labelledby="gartenbrief-titel">
+<div class="kontakt-split">
+<section id="gartenbrief" class="dunkel" aria-labelledby="gartenbrief-titel">
 <h2 id="gartenbrief-titel">Der Gartenbrief</h2>
 <p>Mein Newsletter, den ich gelegentlich per E-Mail schicke. Darin erfährst du von den nächsten Online-Abenden und vom nächsten Start des Programms.</p>
 {%- set fid = "kgb" %}
 {% include "teile/gartenbrief-formular.njk" %}
 </section>
 
-<section id="nachricht" class="tafel" aria-labelledby="nachricht-titel">
-<p class="notiz kontakt-notiz">Es gibt keine dummen Fragen.</p>
+<section id="nachricht" class="nachricht" aria-labelledby="nachricht-titel">
 <h2 id="nachricht-titel">Schreib mir</h2>
-<p>Für eine Frage, ein Erstgespräch zum Online-Programm oder alles andere.</p>
+<p>Für eine Frage, ein Erstgespräch zum Online-Programm oder alles andere. Es gibt keine dummen Fragen.</p>
 <form class="formular" action="{{ base }}formular.php" method="post">
 <input type="hidden" name="formular" value="kontakt">
 <div class="feld">

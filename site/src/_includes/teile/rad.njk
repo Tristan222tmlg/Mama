@@ -1,0 +1,15 @@
+{%- set rad = pflanzen | bluehrad %}
+<div class="radteil">
+<div class="rad-flaeche">
+{{ rad.svg | safe }}
+<p class="rad-mitte" aria-hidden="true"><strong data-rad-monat>Das Jahr</strong><span data-rad-zahl>{{ rad.anzahl }} Pflanzen, zwölf Monate</span></p>
+</div>
+<div class="rad-seite">
+<h2 id="rad-titel">{{ rad_titel or "Wann sie blühen" }}</h2>
+<p class="sr" data-rad-ansage aria-live="polite"></p>
+<p data-rad-satz>Jeder Bogen ist eine Pflanze, von ihrem ersten bis zu ihrem letzten Blühmonat. Die Farbe ist die Farbe der Blüte.</p>
+<div class="rad-knoepfe" role="group" aria-label="Monat wählen" hidden>{{ rad.knoepfe | safe }}</div>
+<ul class="rad-liste">{{ rad.liste | safe }}</ul>
+<p class="rad-quelle">Blühmonate laut FloraWeb (Rothmaler), nicht aus eigenen Beobachtungen.</p>
+</div>
+</div>

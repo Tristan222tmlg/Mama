@@ -1,49 +1,69 @@
 ---
 layout: basis.njk
 ---
-<header class="seitenkopf{% if bild %} mit-bild{% endif %}">
-<div class="wrap seitenkopf-raster">
+<header class="seitenkopf{% if not bild and not kopf_liste %} ohne-bild{% endif %}">
+<div class="wrap raster">
 <div class="seitenkopf-text">
-{%- if kicker %}
-<p class="kicker">{{ kicker }}</p>
-{%- endif %}
 <h1>{{ (ueberschrift or title) | betont | safe }}</h1>
+{%- if kicker %}
+<p class="unterzeile">{{ kicker }}</p>
+{%- endif %}
 {%- if lead %}
 <p class="lead">{{ lead }}</p>
 {%- endif %}
 {%- if knoepfe %}
-<p class="knoepfe">
+<p class="aktionen">
 {%- for k in knoepfe %}
-<a class="knopf{% if not loop.first %} knopf-zwei{% endif %}" href="{{ base }}{{ k.ziel }}">{{ k.text }}</a>
+<a class="{% if loop.first %}knopf{% else %}weiter{% endif %}" href="{{ base }}{{ k.ziel }}">{{ k.text }}</a>
 {%- endfor %}
 </p>
 {%- endif %}
 </div>
 {%- if bild %}
-<figure class="kreisbild{% if bild.klein %} klein{% endif %}">
-<div class="kreisbild-rahmen">
+<figure class="seitenkopf-bild{% if bild.klein %} klein{% endif %}">
+<div class="orbit-kugel"></div>
+<div class="orbit-bild">{% foto bild.datei, bild.alt, "(min-width: 56rem) 34vw, 26rem", true %}</div>
+{%- if zeitring %}
+<svg class="ring-zeit" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M50 2a48 48 0 1 1 0 96a48 48 0 1 1 0-96" pathLength="100"/></svg>
+<p class="ring-zeit-text" aria-hidden="true">45<br>Minuten</p>
+{%- else %}
 {% include "teile/ring.njk" %}
-<div class="kreis">{% foto bild.datei, bild.alt, "(min-width: 56rem) 22rem, 70vw", true %}</div>
-</div>
+{%- endif %}
 {%- if bild.unterschrift %}
-<figcaption class="notiz">{% include "teile/pfeil.njk" %}<span>{{ bild.unterschrift }}</span></figcaption>
+<figcaption>{{ bild.unterschrift }}</figcaption>
 {%- endif %}
 </figure>
+{%- elif kopf_liste == "fragen" %}
+<nav class="seitenkopf-liste" aria-label="Alle Fragen auf dieser Seite">
+<ul>
+{%- for f in fragen %}
+<li><a href="#{{ f.anker }}">{{ f.frage }}</a></li>
+{%- endfor %}
+</ul>
+</nav>
 {%- endif %}
 </div>
 </header>
 {%- if grafik == "wochen" %}
 <div class="wrap inhalt-wochen">{% include "teile/wochen.njk" %}</div>
 {%- endif %}
-<div class="wrap{% if not breit %} prosa{% endif %} inhalt">
+{%- if breit %}
 {{ content | safe }}
+{%- else %}
+<div class="wrap rubrik inhalt">
+{{ content | safe }}
+</div>
+{%- endif %}
 {%- if zitat %}
-<figure class="zitat">
+<section class="zitat-band licht" aria-label="Rückmeldung">
+<div class="wrap">
+<figure class="zitat-gross">
 <blockquote><p>„{{ zitat.text }}“</p></blockquote>
 <figcaption>{{ zitat.quelle }}</figcaption>
 </figure>
-{%- endif %}
 </div>
+</section>
+{%- endif %}
 {%- if projekte %}
 <section class="wrap projekte" aria-labelledby="projekte-titel">
 <h2 id="projekte-titel">Aus meinen letzten Projekten</h2>

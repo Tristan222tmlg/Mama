@@ -1,0 +1,14 @@
+{#- Beleg einer Verbindung, mit derselben Linienart wie im Netz. Erwartet: b -#}
+<p class="beleg">
+{%- if b.status == "belegt" %}
+<span><svg viewBox="0 0 30 10" aria-hidden="true" focusable="false"><path class="linie-quelle" d="M1 5H29"/></svg><span>Quelle: <a href="{{ b.url }}">{{ b.quelle }}</a>{% if b.quelle_name %}, dort: {{ b.quelle_name }}{% endif %}</span></span>
+{%- else %}
+<span><svg viewBox="0 0 30 10" aria-hidden="true" focusable="false"><path class="linie-foto" d="M1 5H29"/></svg><span>Beleg: mein Foto</span></span>
+{%- endif %}
+{%- if b.status == "bestimmen-lassen" %}
+<span><svg viewBox="0 0 30 10" aria-hidden="true" focusable="false"><path class="linie-offen" d="M2 5H28"/></svg><span>Art noch nicht sicher bestimmt</span></span>
+{%- if b.url %}
+<span><span>Quelle zur Art: <a href="{{ b.url }}">{{ b.quelle }}</a></span></span>
+{%- endif %}
+{%- endif %}
+</p>

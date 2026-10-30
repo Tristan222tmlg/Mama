@@ -21,14 +21,15 @@
 <link rel="icon" href="{{ base }}favicon.svg" type="image/svg+xml">
 <link rel="icon" href="{{ base }}favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="{{ base }}apple-touch-icon.png">
-<link rel="preload" href="{{ base }}assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="{{ base }}assets/fonts/source-sans-3.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ base }}assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ base }}assets/fonts/atkinson.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ base }}assets/css/style.css">
 {%- if page.url == "/" %}
 <script type="application/ld+json">{{ jsonld | dump | safe }}</script>
 {%- endif %}
 </head>
 <body>
+{% include "teile/symbole.njk" %}
 <a class="sprung" href="#inhalt">Zum Inhalt</a>
 {%- if build.vorschau %}
 <p class="vorschau-band">Vorschau: Die Formulare schicken hier nichts ab. Gelb markiert ist, was noch fehlt.</p>
@@ -38,6 +39,9 @@
 {{ content | safe }}
 </main>
 {% include "teile/fuss.njk" %}
+{%- if grafik_js %}
+<script src="{{ base }}assets/js/grafik.js" defer></script>
+{%- endif %}
 {%- if build.vorschau %}
 <script src="{{ base }}assets/vorschau.js"></script>
 {%- endif %}
