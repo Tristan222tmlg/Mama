@@ -1,0 +1,62 @@
+---
+layout: seite.njk
+permalink: online-abend.html
+title: Der kostenlose Online-Abend
+description: Eine Dreiviertelstunde online und kostenlos – gemeinsam ein Gartenthema anschauen und Sabine Schröder-Gravendyck kennenlernen.
+kicker: Eine Dreiviertelstunde, kostenlos
+lead: Ich lade dich ein, dir mit mir ein Gartenthema anzuschauen. So kannst du mich erleben, und danach weißt du, ob du mit mir arbeiten willst.
+bild:
+  datei: bilder/witwenblume-dickkopffalter.jpg
+  alt: Ein orangebrauner Dickkopffalter sitzt auf der lila Blüte einer Wiesen-Witwenblume
+  unterschrift: Braun-Dickkopffalter an der Wiesen-Witwenblume
+abschluss: gartenbrief
+---
+{%- set kommende = termine.abende | kuenftig %}
+<h2>Was an dem Abend passiert</h2>
+<p>Wir schauen uns eine Dreiviertelstunde lang gemeinsam ein Gartenthema an. Du lernst mich und meine Art zu erklären kennen. Danach weißt du, ob du mit mir arbeiten willst, und ich weiß es auch.</p>
+
+<h2 id="termine">Nächste Termine</h2>
+{%- if kommende | length %}
+<ul class="termine">
+{%- for t in kommende %}
+<li><strong>{{ t.datum | datum }}</strong>, {{ t.uhrzeit }}{% if t.thema %}: {{ t.thema }}{% endif %}</li>
+{%- endfor %}
+</ul>
+{%- else %}
+<p>Die nächsten Termine stehen noch nicht fest. Melde dich unten an, dann lade ich dich zum nächsten Abend ein.</p>
+{%- endif %}
+
+<h2 id="anmelden">Anmelden</h2>
+<form class="formular" action="{{ base }}formular.php" method="post">
+<input type="hidden" name="formular" value="abend">
+<div class="feld">
+<label for="ab-name">Dein Name</label>
+<input id="ab-name" name="name" type="text" autocomplete="name" required>
+</div>
+<div class="feld">
+<label for="ab-email">Deine E-Mail-Adresse</label>
+<input id="ab-email" name="email" type="email" autocomplete="email" required>
+</div>
+{%- if kommende | length %}
+<div class="feld">
+<label for="ab-termin">Termin</label>
+<select id="ab-termin" name="termin">
+{%- for t in kommende %}
+<option>{{ t.datum | datum }}, {{ t.uhrzeit }}</option>
+{%- endfor %}
+<option>Der nächste Termin, der mir passt</option>
+</select>
+</div>
+{%- else %}
+<input type="hidden" name="termin" value="Einladung zum nächsten Termin">
+{%- endif %}
+<div class="honig" aria-hidden="true">
+<label for="ab-web">Dieses Feld bitte leer lassen</label>
+<input id="ab-web" name="website" type="text" tabindex="-1" autocomplete="off">
+</div>
+<p class="formular-hinweis">Ich nutze deine Angaben nur für die Einladung. Mehr dazu in der <a href="{{ base }}datenschutz.html#online-abend">Datenschutzerklärung</a>.</p>
+<button type="submit">{% if kommende | length %}Anmelden{% else %}Zum nächsten Abend einladen lassen{% endif %}</button>
+</form>
+
+<h2>Was du brauchst</h2>
+<p>Einen Computer, ein Tablet oder ein Handy mit Internet. Den Link zum Abend schicke ich dir per E-Mail. [[offen: Videodienst]]</p>

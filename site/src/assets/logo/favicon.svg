@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>Bessere Welt ergärtnern</title>
+  <!-- Vereinfachtes Zeichen für kleine Größen: Erde, offener Ring, ein Blatt.
+       Vorschlag, abgeleitet aus dem Logo; braucht Sabines Freigabe. -->
+  <style>
+    .ring { stroke: #2C6334; }
+    @media (prefers-color-scheme: dark) { .ring { stroke: #8DB43F; } }
+  </style>
+  <defs>
+    <linearGradient id="blatt" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#5E9640"/>
+      <stop offset="1" stop-color="#A3C548"/>
+    </linearGradient>
+  </defs>
+  <circle class="ring" cx="16" cy="16" r="13.4" fill="none" stroke-width="2.6"
+          stroke-linecap="round" stroke-dasharray="66 18.2" transform="rotate(262 16 16)"/>
+  <circle cx="16" cy="16" r="8.8" fill="#2A639B"/>
+  <path d="M15.2 27.6C8.6 23.8 8.4 13.6 17.6 6.6c3.6 6.8 4 15.6-2.4 21z" fill="url(#blatt)"/>
+  <path d="M15.4 26.2c.3-5.6 1-11 2.2-17" fill="none" stroke="#2C6334" stroke-width=".9" stroke-linecap="round"/>
+</svg>

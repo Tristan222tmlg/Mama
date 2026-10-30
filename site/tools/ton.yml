@@ -1,0 +1,41 @@
+# Wortliste aus Sabines Tonalität (Konzept, Abschnitt „Tonalität“).
+# nie:     ein Treffer stoppt "npm run ton"
+# bedacht: Treffer werden aufgelistet und einzeln entschieden
+# Ausnahme: Text in einem Element mit data-ton-ok wird übersprungen, etwa die
+# Antwort, warum es bei Sabine keine Schädlinge und Nützlinge gibt.
+# Die Muster sind reguläre Ausdrücke ohne Groß- und Kleinschreibung; sie
+# gelten nur am Wortanfang.
+
+nie:
+  - { wort: Krieg, muster: "krieg\\p{L}*" }
+  - { wort: Kampf, kämpfen, muster: "k[aä]mpf\\p{L}*" }
+  - { wort: bekämpfen, muster: "bek[aä]mpf\\p{L}*" }
+  - { wort: Front, muster: "front(en)?(?!\\p{L})" }
+  - { wort: Attacke, muster: "attack\\p{L}*" }
+  - { wort: Feind, muster: "feind\\p{L}*" }
+  - { wort: Invasion, muster: "invasion\\p{L}*" }
+  - { wort: Untergang, muster: "untergang\\p{L}*" }
+  - { wort: Endzeit, muster: "endzeit\\p{L}*" }
+  - { wort: Katastrophe, muster: "katastroph\\p{L}*" }
+  - { wort: dramatisch, muster: "dramatisch\\p{L}*" }
+  - { wort: Mangel, muster: "m[aä]ngel\\p{L}*" }
+  - { wort: Notfall, muster: "notf[aä]ll\\p{L}*" }
+  - { wort: Alarm, alarmierend, muster: "alarm\\p{L}*" }
+  - { wort: Insektensterben, muster: "insektensterben" }
+  - { wort: Artensterben, muster: "artensterben" }
+  - { wort: Schädling, muster: "sch[aä]dling\\p{L}*" }
+  - { wort: Nützling, muster: "n[uü]tzling\\p{L}*" }
+  - { wort: verurteilen, muster: "verurteil\\p{L}*" }
+  - { wort: schuld, muster: "schuld(ig\\p{L}*)?(?!\\p{L})" }
+
+bedacht:
+  - { wort: weniger werden, muster: "weniger\\s+werd\\p{L}*" }
+  - { wort: Rückgang, muster: "r[uü]ckg[aä]ng\\p{L}*" }
+  - { wort: müssen, muster: "(m[uü]ss|mu[sß]|m[uü]ß)\\p{L}*" }
+  - { wort: sofort, muster: "sofort\\p{L}*" }
+  - { wort: dringend, muster: "dringend\\p{L}*" }
+  - { wort: Unkraut, muster: "unkr[aä]ut\\p{L}*" }
+  - { wort: invasiv, muster: "invasiv\\p{L}*" }
+  - { wort: retten, muster: "rett(e|en|est|et|ung)(?!\\p{L})" }
+  - { wort: schützen, muster: "sch[uü]tz(e|en|t|st)(?!\\p{L})" }
+  - { wort: Problem, muster: "problem\\p{L}*" }

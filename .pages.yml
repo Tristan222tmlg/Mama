@@ -1,0 +1,219 @@
+# Pages CMS (https://pagescms.org): So kann Sabine Texte, Pflanzen, Fragen und
+# Termine im Browser bearbeiten, ohne Dateien anzufassen. Jede Änderung wird
+# als Commit gespeichert; die Website baut sich danach neu
+# (.github/workflows/website.yml).
+#
+# Impressum und Datenschutz sind hier nicht als Text bearbeitbar. Ihre Angaben
+# kommen aus den Einstellungen, damit die Pflichttexte nicht versehentlich
+# zerbrechen.
+
+media:
+  input: site/src/bilder
+  output: bilder
+
+components:
+  bild:
+    type: object
+    label: Foto oben
+    fields:
+      - { name: datei, label: Foto, type: image }
+      - { name: alt, label: Beschreibung für Menschen, die das Foto nicht sehen, type: string }
+      - { name: unterschrift, label: Bildunterschrift, type: string }
+      - { name: klein, label: klein anzeigen, type: boolean, hidden: true }
+
+content:
+  - name: start
+    label: Startseite
+    type: file
+    path: site/src/index.md
+    format: yaml-frontmatter
+    fields:
+      - { name: title, label: Name der Website, type: string, readonly: true }
+      - { name: seitentitel, label: Titel im Browser-Tab, type: string }
+      - { name: description, label: Kurzbeschreibung für Suchmaschinen, type: text, required: true }
+      - { name: kicker, label: Zeile über der Überschrift, type: string }
+      - { name: ueberschrift, label: Überschrift, type: string, required: true }
+      - { name: lead, label: Einleitung, type: text }
+      - name: knoepfe
+        label: Knöpfe unter der Einleitung
+        type: object
+        list: true
+        fields:
+          - { name: text, label: Text, type: string }
+          - { name: ziel, label: Ziel (Seite), type: string }
+      - { name: bild, component: bild }
+      - name: zitat
+        label: Zitat
+        type: object
+        fields:
+          - { name: text, label: Zitat, type: text }
+          - { name: quelle, label: Von wem (nur mit Einwilligung namentlich), type: string }
+      - { name: layout, type: string, hidden: true }
+      - { name: permalink, type: string, hidden: true }
+      - { name: abschluss, type: string, hidden: true }
+      - { name: body, label: Text, type: rich-text }
+
+  - name: programm
+    label: Online-Programm
+    type: file
+    path: site/src/online-programm.md
+    format: yaml-frontmatter
+    fields:
+      - { name: title, label: Titel, type: string, required: true }
+      - { name: description, label: Kurzbeschreibung für Suchmaschinen, type: text, required: true }
+      - { name: kicker, label: Zeile über dem Titel, type: string }
+      - { name: lead, label: Einleitung, type: text }
+      - { name: bild, component: bild }
+      - { name: layout, type: string, hidden: true }
+      - { name: permalink, type: string, hidden: true }
+      - { name: abschluss, type: string, hidden: true }
+      - { name: body, label: Text, type: rich-text }
+
+  - name: ueber-mich
+    label: Über mich
+    type: file
+    path: site/src/ueber-mich.md
+    format: yaml-frontmatter
+    fields:
+      - { name: title, label: Titel, type: string, required: true }
+      - { name: description, label: Kurzbeschreibung für Suchmaschinen, type: text, required: true }
+      - { name: kicker, label: Zeile über dem Titel, type: string }
+      - { name: lead, label: Einleitung, type: text }
+      - { name: bild, component: bild }
+      - { name: layout, type: string, hidden: true }
+      - { name: permalink, type: string, hidden: true }
+      - { name: abschluss, type: string, hidden: true }
+      - { name: body, label: Text, type: rich-text }
+
+  - name: termine
+    label: Termine
+    type: file
+    path: site/src/_data/termine.yml
+    format: yaml
+    fields:
+      - name: abende
+        label: Online-Abende
+        type: object
+        list: true
+        fields:
+          - { name: datum, label: Datum, type: date, required: true }
+          - { name: uhrzeit, label: Uhrzeit, type: string, description: "z. B. 19:00 bis 19:45 Uhr" }
+          - { name: thema, label: Thema, type: string }
+      - { name: programmstart, label: Start des Online-Programms, type: date }
+
+  - name: fragen
+    label: Fragen
+    type: file
+    path: site/src/_data/fragen.yml
+    format: yaml
+    list: true
+    fields:
+      - { name: frage, label: Frage, type: string, required: true }
+      - name: anker
+        label: Kurzname für Links
+        type: string
+        required: true
+        pattern: { regex: "^[a-z0-9-]+$", message: "nur Kleinbuchstaben, Ziffern und Bindestriche" }
+      - { name: antwort, label: Antwort, type: text, required: true }
+
+  - name: pflanzen
+    label: Pflanzen und Tiere
+    type: file
+    path: site/src/_data/pflanzen.yml
+    format: yaml
+    fields:
+      - { name: stand, label: Stand, type: date }
+      - name: pflanzen
+        label: Pflanzen mit belegten Tieren
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string, required: true }
+          - { name: latein, label: Wissenschaftlicher Name, type: string }
+          - { name: art_offen, label: Hinweis, falls die Art noch nicht bestimmt ist, type: string }
+          - { name: foto, label: Foto, type: image }
+          - { name: foto_alt, label: Fotobeschreibung, type: string }
+          - { name: zitat, label: Eigener Satz, type: string }
+          - { name: floraweb, label: Link zu FloraWeb, type: string }
+          - { name: floraweb_name, label: Name bei FloraWeb, falls anders, type: string }
+          - name: status
+            label: Status laut FloraWeb
+            type: select
+            options: { values: [einheimisch, eingebürgert, unbeständig] }
+          - { name: bluete, label: "Blühmonate laut FloraWeb (von, bis)", type: number, list: true }
+          - { name: rote_liste, label: Rote Liste Deutschland, type: string }
+          - { name: steckbrief, label: Aus meinem Steckbrief, type: text }
+          - { name: steckbrief_bild, label: Steckbrief als Bild, type: image }
+          - { name: steckbrief_alt, label: Text des Steckbriefs, type: text }
+          - name: beziehungen
+            label: Tiere
+            type: object
+            list: true
+            fields:
+              - { name: tier, label: Tier, type: string, required: true }
+              - { name: latein, label: Wissenschaftlicher Name, type: string }
+              - { name: was, label: Was das Tier hier findet, type: text, required: true }
+              - name: status
+                label: Beleg
+                type: select
+                required: true
+                options: { values: [belegt, eigenes-foto, bestimmen-lassen] }
+              - { name: quelle, label: Quelle (Name), type: string, description: "nur bei Status „belegt“" }
+              - { name: url, label: Quelle (Link), type: string }
+              - { name: quelle_name, label: Name des Tiers in der Quelle, falls anders, type: string }
+              - { name: raupen, label: Raupen fressen an, type: text }
+              - { name: raupen_quelle, label: Quelle dazu (Name), type: string }
+              - { name: raupen_url, label: Quelle dazu (Link), type: string }
+      - name: nisthilfe
+        label: Nisthilfe
+        type: object
+        fields:
+          - { name: titel, label: Titel, type: string }
+          - { name: foto, label: Foto, type: image }
+          - { name: foto_alt, label: Fotobeschreibung, type: string }
+          - { name: tier, label: Tier, type: string }
+          - { name: latein, label: Wissenschaftlicher Name, type: string }
+          - { name: status, label: Beleg, type: select, options: { values: [belegt, eigenes-foto, bestimmen-lassen] } }
+          - { name: text, label: Text, type: text }
+          - { name: quelle, label: Quelle (Name), type: string }
+          - { name: url, label: Quelle (Link), type: string }
+      - name: weitere
+        label: Weitere Pflanzen, noch ohne belegtes Tier
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string, required: true }
+          - { name: latein, label: Wissenschaftlicher Name, type: string }
+          - { name: foto, label: Foto, type: image }
+          - { name: foto_alt, label: Fotobeschreibung, type: string }
+          - { name: floraweb, label: Link zu FloraWeb, type: string }
+          - { name: status, label: Status laut FloraWeb, type: select, options: { values: [einheimisch, eingebürgert, unbeständig] } }
+          - { name: bluete, label: "Blühmonate laut FloraWeb (von, bis)", type: number, list: true }
+          - { name: rote_liste, label: Rote Liste Deutschland, type: string }
+
+  - name: einstellungen
+    label: Einstellungen und Impressum
+    type: file
+    path: site/src/_data/site.yml
+    format: yaml
+    fields:
+      - { name: name, label: Name der Website, type: string, readonly: true }
+      - { name: person, label: Name auf der Website, type: string }
+      - { name: name_impressum, label: Vollständiger Name für das Impressum, type: string }
+      - { name: url, label: "Adresse der Website, z. B. https://www.beispiel.de", type: string }
+      - { name: email, label: E-Mail-Adresse (Formular und Website), type: string }
+      - { name: absender, label: Absender der Formular-Mails (Adresse auf der eigenen Domain), type: string }
+      - name: anschrift
+        label: Anschrift
+        type: object
+        fields:
+          - { name: strasse, label: Straße und Hausnummer, type: string }
+          - { name: plz, label: Postleitzahl, type: string }
+          - { name: ort, label: Ort, type: string }
+      - { name: telefon, label: Telefon (freiwillig), type: string }
+      - { name: ust_id, label: Umsatzsteuer-ID, type: string }
+      - { name: keine_ust_id, label: Ich habe keine Umsatzsteuer-ID, type: boolean }
+      - { name: tieraerztekammer, label: Tierärztekammer (nur bei tierärztlicher Tätigkeit), type: string }
+      - { name: hoster, label: "Hoster und Standort, z. B. „Uberspace, Mainz“", type: string }
+      - { name: newsletter_dienst, label: Versanddienst für den Gartenbrief, type: string }
+      - { name: videodienst, label: Videodienst für Online-Abend und Live-Calls, type: string }

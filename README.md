@@ -3,8 +3,12 @@
 Statische Website (reines HTML/CSS/JS, kein Build-Schritt nötig) für
 Sabine Schröder-Gravendycks Biodiversitätsberatung.
 
-> **Version 2** (mit Logo, Pflanzen-Finder, Blühkalender und Journal) liegt in
-> [`v2/`](v2/README.md). Dieser Hauptordner enthält Version 1.
+> **Die neue Website** liegt in [`site/`](site/README.md): kleiner, aus Sabines
+> eigenen Antworten, mit echten Seitenadressen, Kontaktformular und Quellen für
+> jede Pflanzen-Tier-Verbindung. Sie ersetzt die beiden älteren Fassungen.
+>
+> **Version 2** (Prototyp mit Logo, Pflanzen-Finder, Blühkalender und Journal)
+> liegt in [`v2/`](v2/README.md). Dieser Hauptordner enthält Version 1.
 
 ## Lokal ansehen
 

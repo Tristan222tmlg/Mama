@@ -1,0 +1,23 @@
+---
+layout: seite.njk
+permalink: fragen.html
+title: Fragen
+description: Antworten von Sabine Schröder-Gravendyck auf Fragen zum naturnahen Gärtnern und zum Online-Programm – vom Nutzen kleiner Flächen bis zur Frage, ob ein Naturgarten unordentlich aussieht.
+kicker: Gefragt und beantwortet
+lead: Es gibt keine dummen Fragen. Es gibt nichts, was falsch wäre, ins Gespräch zu bringen.
+abschluss: abend
+---
+<nav class="fragen-liste" aria-label="Alle Fragen auf dieser Seite">
+<ul>
+{%- for f in fragen %}
+<li><a href="#{{ f.anker }}">{{ f.frage }}</a></li>
+{%- endfor %}
+</ul>
+</nav>
+{%- for f in fragen %}
+<section class="frage" id="{{ f.anker }}" aria-labelledby="{{ f.anker }}-titel">
+<h2 id="{{ f.anker }}-titel">{{ f.frage }}</h2>
+{{ f.antwort | renderContent("md") | safe }}
+</section>
+{%- endfor %}
+<p class="frage-weiter">Deine Frage ist nicht dabei? <a href="{{ base }}kontakt.html#nachricht">Schreib mir</a>.</p>

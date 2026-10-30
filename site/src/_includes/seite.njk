@@ -1,0 +1,41 @@
+---
+layout: basis.njk
+---
+<div class="seitenkopf{% if bild %} mit-bild{% endif %}">
+<div class="wrap seitenkopf-raster">
+<div class="seitenkopf-text">
+{%- if kicker %}
+<p class="kicker">{{ kicker }}</p>
+{%- endif %}
+<h1>{{ ueberschrift or title }}</h1>
+{%- if lead %}
+<p class="lead">{{ lead }}</p>
+{%- endif %}
+{%- if knoepfe %}
+<p class="knoepfe">
+{%- for k in knoepfe %}
+<a class="knopf{% if not loop.first %} knopf-zwei{% endif %}" href="{{ base }}{{ k.ziel }}">{{ k.text }}</a>
+{%- endfor %}
+</p>
+{%- endif %}
+</div>
+{%- if bild %}
+<figure class="seitenkopf-bild{% if bild.klein %} klein{% endif %}">
+{% foto bild.datei, bild.alt, "(min-width: 56rem) 24rem, 72vw", true %}
+{%- if bild.unterschrift %}
+<figcaption>{{ bild.unterschrift }}</figcaption>
+{%- endif %}
+</figure>
+{%- endif %}
+</div>
+</div>
+<div class="wrap{% if not breit %} prosa{% endif %} inhalt">
+{{ content | safe }}
+{%- if zitat %}
+<figure class="zitat">
+<blockquote><p>{{ zitat.text }}</p></blockquote>
+<figcaption>{{ zitat.quelle }}</figcaption>
+</figure>
+{%- endif %}
+</div>
+{% include "teile/abschluss.njk" %}

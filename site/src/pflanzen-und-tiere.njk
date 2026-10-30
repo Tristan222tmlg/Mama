@@ -1,0 +1,93 @@
+---
+layout: seite.njk
+permalink: pflanzen-und-tiere.html
+title: Pflanzen und Tiere
+description: Welche Pflanze welchen Wildbienen und Schmetterlingen nützt – Moschus-Malve, Natternkopf, Wiesen-Witwenblume, Dost und mehr, jede Verbindung mit Quelle oder eigenem Foto.
+kicker: Mit Quellen
+lead: Die Tiere sucht man nicht aus. Man sucht die Pflanzen aus, die mit besonders vielen Tieren in Beziehung stehen.
+breit: true
+abschluss: gartenbrief
+---
+<div class="prosa">
+<p>Hier stehen nur Verbindungen mit Beleg: aus Fachquellen oder von meinen eigenen Fotos. Jede Quelle ist verlinkt. Stand: {{ pflanzen.stand | datum }}.</p>
+<p class="quellen-hinweis">Die Quellen: <a href="https://www.wildbienen.info/">Paul Westrich, wildbienen.info</a> für Wildbienen, das <a href="https://lepiforum.org/">Lepiforum</a> für Schmetterlinge und <a href="https://www.floraweb.de/">FloraWeb</a> vom Bundesamt für Naturschutz für die Pflanzen. „Einheimisch“ heißt dort: in Deutschland.</p>
+</div>
+
+{%- for p in pflanzen.pflanzen %}
+{%- set anker = p.name | slugify %}
+<article class="pflanze" id="{{ anker }}" aria-labelledby="{{ anker }}-titel">
+{%- if p.foto %}
+<div class="pflanze-foto">
+{% foto p.foto, p.foto_alt, "(min-width: 48rem) 13rem, 60vw", loop.first %}
+</div>
+{%- endif %}
+<div class="pflanze-text">
+<h2 id="{{ anker }}-titel">{{ p.name }} <span class="latein" lang="la">{{ p.latein }}</span></h2>
+{%- if p.art_offen %}
+<p class="hinweis">{{ p.art_offen }}</p>
+{%- endif %}
+{%- if p.zitat %}
+<p class="pflanze-zitat">„{{ p.zitat }}“</p>
+{%- endif %}
+{%- if p.floraweb %}
+<p class="steckdaten">{{ p.status | capitalize }} · blüht {{ p.bluete | monate }}{% if p.rote_liste and p.rote_liste != "ungefährdet" %} · Rote Liste: {{ p.rote_liste }}{% endif %} · <a href="{{ p.floraweb }}">FloraWeb</a>{% if p.floraweb_name %} (dort: {{ p.floraweb_name }}){% endif %}</p>
+{%- endif %}
+{%- if p.steckbrief %}
+<p>{{ p.steckbrief }}</p>
+{%- endif %}
+{%- if p.steckbrief_bild %}
+<figure class="steckbrief">
+<a href="bilder/{{ p.steckbrief_bild | dateiname }}-1200.jpeg">{% foto p.steckbrief_bild, p.steckbrief_alt, "7rem" %}</a>
+<figcaption>Mein Steckbrief zur Moschus-Malve, mit dem Foto der Steinhummel. Antippen zum Vergrößern.</figcaption>
+</figure>
+{%- endif %}
+<h3>Wer sie nutzt</h3>
+<ul class="beziehungen">
+{%- for b in p.beziehungen %}
+<li>
+<p><strong>{{ b.tier }}</strong>{% if b.latein %} <span class="latein" lang="la">{{ b.latein }}</span>{% endif %}: {{ b.was }}</p>
+{%- if b.status == "belegt" %}
+<p class="beleg">Quelle: <a href="{{ b.url }}">{{ b.quelle }}</a>{% if b.quelle_name %} (dort: {{ b.quelle_name }}){% endif %}</p>
+{%- elif b.status == "eigenes-foto" %}
+<p class="beleg">Beleg: mein Foto</p>
+{%- elif b.status == "bestimmen-lassen" %}
+<p class="beleg">Beleg: mein Foto. Die Art ist noch nicht sicher bestimmt.</p>
+{%- endif %}
+{%- if b.raupen %}
+<p class="raupen">{{ b.raupen }} <span class="beleg">Quelle: <a href="{{ b.raupen_url }}">{{ b.raupen_quelle }}</a></span></p>
+{%- endif %}
+</li>
+{%- endfor %}
+</ul>
+</div>
+</article>
+{%- endfor %}
+
+{%- set n = pflanzen.nisthilfe %}
+<article class="pflanze" id="nisthilfe" aria-labelledby="nisthilfe-titel">
+<div class="pflanze-foto">
+{% foto n.foto, n.foto_alt, "(min-width: 48rem) 13rem, 60vw" %}
+</div>
+<div class="pflanze-text">
+<p class="kicker">Und eine Wohnung</p>
+<h2 id="nisthilfe-titel">{{ n.titel }}</h2>
+<p>{{ n.text }}</p>
+<p class="beleg">Beleg: mein Foto. Quelle zur Art: <a href="{{ n.url }}">{{ n.quelle }}</a></p>
+</div>
+</article>
+
+<section class="weitere" aria-labelledby="weitere-titel">
+<h2 id="weitere-titel">Weitere Pflanzen von meinen Fotos</h2>
+<p>Zu diesen Pflanzen ist hier noch keine Verbindung zu einem Tier belegt. Ich trage sie nach, sobald es eine Quelle gibt.</p>
+<ul class="weitere-liste">
+{%- for p in pflanzen.weitere %}
+<li>
+{%- if p.foto %}
+<div class="weitere-foto">{% foto p.foto, p.foto_alt, "8rem" %}</div>
+{%- endif %}
+<p><strong>{{ p.name }}</strong> <span class="latein" lang="la">{{ p.latein }}</span><br>
+<span class="steckdaten">{{ p.status | capitalize }} · blüht {{ p.bluete | monate }}{% if p.rote_liste and p.rote_liste != "ungefährdet" %} · Rote Liste: {{ p.rote_liste }}{% endif %} · <a href="{{ p.floraweb }}">FloraWeb</a></span></p>
+</li>
+{%- endfor %}
+</ul>
+</section>

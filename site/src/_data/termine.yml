@@ -1,0 +1,9 @@
+# Termine für den kostenlosen Online-Abend.
+# Neuen Termin so eintragen (vergangene Termine blendet die Website aus):
+#   - datum: 2027-01-14
+#     uhrzeit: 19:00 bis 19:45 Uhr
+#     thema: Ein Gartenthema
+abende: []
+
+# Starttermin des Online-Begleitprogramms, z. B. 2027-03-01; leer = noch offen
+programmstart: ""

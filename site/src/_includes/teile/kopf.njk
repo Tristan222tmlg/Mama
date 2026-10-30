@@ -1,0 +1,15 @@
+<header class="kopf">
+<div class="kopf-innen">
+<a class="marke" href="{{ start }}"{% if page.url == "/" %} aria-current="page"{% endif %}>
+<img src="{{ base }}assets/logo/zeichen.svg" alt="" width="53" height="48">
+<span>Bessere Welt <span class="marke-zeile">ergärtnern</span></span>
+</a>
+<nav class="menue" aria-label="Hauptmenü">
+<ul>
+{%- for punkt in navigation %}
+<li><a href="{{ base }}{{ punkt.ziel }}"{% if page.url == "/" + punkt.ziel %} aria-current="page"{% endif %}>{{ punkt.text }}</a></li>
+{%- endfor %}
+</ul>
+</nav>
+</div>
+</header>

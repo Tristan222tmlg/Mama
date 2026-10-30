@@ -1,0 +1,17 @@
+<form class="formular" action="{{ base }}formular.php" method="post">
+<input type="hidden" name="formular" value="gartenbrief">
+<div class="feld">
+<label for="{{ fid }}-email">Deine E-Mail-Adresse</label>
+<input id="{{ fid }}-email" name="email" type="email" autocomplete="email" required>
+</div>
+<div class="feld">
+<label for="{{ fid }}-name">Dein Vorname <span class="freiwillig">(freiwillig)</span></label>
+<input id="{{ fid }}-name" name="name" type="text" autocomplete="given-name">
+</div>
+<div class="honig" aria-hidden="true">
+<label for="{{ fid }}-web">Dieses Feld bitte leer lassen</label>
+<input id="{{ fid }}-web" name="website" type="text" tabindex="-1" autocomplete="off">
+</div>
+<p class="formular-hinweis">Danach bekommst du eine E-Mail, mit der du die Anmeldung bestätigst. Abbestellen kannst du den Gartenbrief jederzeit. Mehr dazu in der <a href="{{ base }}datenschutz.html#gartenbrief">Datenschutzerklärung</a>.</p>
+<button type="submit">Gartenbrief abonnieren</button>
+</form>

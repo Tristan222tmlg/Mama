@@ -1,0 +1,24 @@
+{
+  "name": "bessere-welt-ergaertnern",
+  "private": true,
+  "type": "module",
+  "description": "Website von Dr. Sabine Schröder-Gravendyck: Bessere Welt ergärtnern",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve",
+    "ton": "node tools/ton.js",
+    "offen": "node tools/offen.js",
+    "bilder": "node tools/bilder.js",
+    "validate": "node tools/validate.js",
+    "check": "npm run build && npm run bilder && npm run ton && npm run validate && npm run offen",
+    "livegang": "npm run check && node tools/offen.js --streng"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.7",
+    "@11ty/eleventy-img": "7.0.0",
+    "axe-core": "4.14.0",
+    "js-yaml": "4.1.0",
+    "sharp": "0.35.5",
+    "vnu-jar": "26.10.12"
+  }
+}
