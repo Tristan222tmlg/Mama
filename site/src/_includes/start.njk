@@ -5,7 +5,7 @@ grafik_js: true
 ---
 <section class="held dunkel" aria-labelledby="held-titel">
 <div class="wrap held-innen">
-{%- set orbit = { haupt: bilder[0].datei, trabanten: [bilder[1].datei, bilder[2].datei, bilder[3].datei, bilder[4].datei] } %}
+{%- set orbit = bilder %}
 {% include "teile/orbit.njk" %}
 <h1 id="held-titel">{{ ueberschrift | betont | safe }}</h1>
 <p class="lead">{{ lead }}</p>
@@ -59,14 +59,14 @@ grafik_js: true
 </div>
 </section>
 
-<section class="abschnitt dunkel" aria-labelledby="rad-titel">
+<section class="abschnitt sanft" aria-labelledby="rad-titel">
 <div class="wrap">
 {%- set rad_titel = "Was wann blüht" %}
 {% include "teile/rad.njk" %}
 </div>
 </section>
 
-<section class="zitat-band" aria-label="Rückmeldung einer Kundin">
+<section class="zitat-band dunkel" aria-label="Rückmeldung einer Kundin">
 <div class="wrap">
 <figure class="zitat-gross">
 <blockquote><p>„{{ zitat.text }}“</p></blockquote>

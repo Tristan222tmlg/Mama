@@ -2,6 +2,7 @@
 layout: seite.njk
 permalink: datenschutz.html
 title: Datenschutzerklärung
+ueberschrift: "Datenschutz­erklärung"
 description: Wie die Website Bessere Welt ergärtnern mit deinen Daten umgeht – ohne Cookies, ohne Tracking und ohne fremde Dienste.
 abschluss: keiner
 ---

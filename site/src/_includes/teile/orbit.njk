@@ -1,11 +1,15 @@
-{#- Erdkugel, großes Foto, offener Ring und vier Trabanten. Erwartet: orbit = { haupt, trabanten[4] } -#}
-<div class="orbit" aria-hidden="true">
+{#- Erdkugel, großes Foto, offener Ring und vier Trabanten. Mit grafik.js holt ein Klick auf einen
+    Trabanten sein Foto in die Mitte; ohne Skript sind die Trabanten nur Schmuck.
+    Erwartet: orbit = Liste von Fotos { datei, alt, text, ziel }, das erste steht in der Mitte -#}
+{%- set mitte = orbit[0] %}
+<div class="orbit">
 <div class="orbit-kugel"></div>
-<div class="orbit-bild">{% foto orbit.haupt, "", "(min-width: 56rem) 34rem, 80vw", true %}</div>
-<div class="orbit-bahn">
+<div class="orbit-bild" data-alt="{{ mitte.alt }}" data-text="{{ mitte.text }}" data-ziel="{{ mitte.ziel }}">{% foto mitte.datei, mitte.alt, "(min-width: 56rem) 34rem, 80vw", true %}</div>
+<div class="orbit-bahn" aria-hidden="true">
 {% include "teile/ring.njk" %}
-{%- for t in orbit.trabanten %}
-<div class="trabant t{{ loop.index }}"><div>{% foto t, "", "8rem" %}</div></div>
-{%- endfor %}
+{%- for t in orbit %}{% if not loop.first %}
+<button type="button" class="trabant t{{ loop.index0 }}" data-alt="{{ t.alt }}" data-text="{{ t.text }}" data-ziel="{{ t.ziel }}" aria-label="Foto in die Mitte holen: {{ t.text }}" tabindex="-1"><span class="trabant-innen"><span class="trabant-foto">{% foto t.datei, "", "9rem" %}</span></span></button>
+{%- endif %}{% endfor %}
 </div>
+<p class="orbit-unterschrift"><a href="{{ base }}{{ mitte.ziel }}" data-orbit-link data-basis="{{ base }}">{{ mitte.text }}</a></p>
 </div>

@@ -17,17 +17,25 @@ als Doppelseiten im Wechsel. Die Grafiken zeigen echte Daten aus
 Verbindungen, das Blüten-Jahresrad (beim Öffnen steht es auf dem aktuellen
 Monat), jede Pflanze mit ihren Tieren als Trabanten, die sieben Programmwochen,
 die Flugradien der Trittsteine, die Dreiviertelstunde des Online-Abends. Sie
-entstehen beim Bauen (`lib/grafiken.js`, `src/_includes/teile/`) und
-funktionieren ohne JavaScript; `src/assets/js/grafik.js` macht Rad und Netz
-nur bedienbar.
+entstehen beim Bauen (`lib/grafiken.js`, `src/_includes/teile/`) und zeigen
+auch ohne JavaScript alles.
+
+**Zum Anfassen** (`src/assets/js/grafik.js`, wie in Version 2): Im Blütenrad
+wählt man einen Monat direkt im Rad oder mit den Knöpfen; ein Bogen zeigt beim
+Darüberfahren seine Pflanze, ein Klick führt zu ihr. Im Netz leuchten die
+Verbindungen einer Pflanze, eines Tiers oder einer Linie auf, darunter steht,
+wer was nutzt; auf dem Handy reicht Antippen. Bei jeder Pflanze zeigt der
+Kreis, was ein Tier an ihr tut, und hebt den Eintrag mit der Quelle hervor. Auf
+der Startseite holt ein Klick auf einen Trabanten sein Foto in die Mitte, und
+mit dem Regler bei den Trittsteinen lassen sich die Gärten auseinanderschieben.
 
 Moderne Browser-Technik, ohne Bibliotheken: das Menü als Popover, weiche
 Übergänge zwischen den Seiten (View Transitions, der Kreis wandert mit), Text,
 der um den Kreis fließt (`shape-outside`), ein Rad, das sich beim Scrollen
 eindreht. Wer in seinem Gerät „Bewegung reduzieren“ eingestellt hat, sieht
-alles ruhig. Schriften: Bricolage Grotesque für Überschriften (mit
-Breitenachse) und Atkinson Hyperlegible Next für den Text, gebaut für gute
-Lesbarkeit. Beide unter der SIL Open Font License, auf dem eigenen Server.
+alles ruhig. Schriften wie in Version 2: Fraunces für Überschriften (kursiv wie
+der Schriftzug im Logo) und Source Sans 3 für den Text. Beide unter der SIL Open
+Font License, auf dem eigenen Server.
 
 | Seite | Datei | Inhalt |
 | --- | --- | --- |
@@ -82,7 +90,7 @@ Breite, der Sprunglink als erster Tab-Schritt.
 
 **Stand 30. Oktober 2026:** alles bestanden. axe: keine Verstöße auf 12 Seiten.
 Kein seitliches Scrollen von 320 bis 1920 px Breite.
-Lighthouse mobil (13.5.0, lokal, ohne Komprimierung): Leistung 96–100,
+Lighthouse mobil (13.5.0, lokal, ohne Komprimierung): Leistung 94–99,
 Barrierefreiheit, Best Practices und SEO je 100 auf allen 9 Hauptseiten. Ob die Formular-Mails
 in Sabines echtem Postfach ankommen, lässt sich erst auf dem Webspace testen.
 

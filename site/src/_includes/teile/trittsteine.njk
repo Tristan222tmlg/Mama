@@ -1,19 +1,30 @@
-<figure class="tritt">
+{#- Trittsteine: drei Gärten mit ihrem Flugkreis. Mit grafik.js lassen sie sich auseinanderschieben;
+    liegt der nächste Garten außerhalb des Flugkreises, reißt die Verbindung ab. -#}
+{%- set r = 108 %}{%- set abstand = 104 %}{%- set m = 340 %}
+<figure class="tritt" data-radius="{{ r }}" data-mitte="{{ m }}" data-breite="680">
 <div class="tritt-flaeche">
-<svg viewBox="0 0 600 300" aria-hidden="true" focusable="false">
-<path class="tritt-mass-linie" d="M132 22H240M132 12v20M240 12v20"/>
-{%- for cx in [132, 300, 468] %}
-<circle class="welle" cx="{{ cx }}" cy="165" r="108"/>
+<svg viewBox="0 0 680 300" aria-hidden="true" focusable="false">
+<path class="tritt-mass-linie" d="M{{ m - abstand }} 22H{{ m - abstand + r }}M{{ m - abstand }} 12v20M{{ m - abstand + r }} 12v20"/>
+{%- for i in [-1, 0, 1] %}
+{%- set cx = m + i * abstand %}
+<g class="tritt-garten-gruppe" data-nr="{{ i + 1 }}">
+<circle class="welle" cx="{{ cx }}" cy="165" r="{{ r }}"/>
 <circle class="welle w2" cx="{{ cx }}" cy="165" r="74"/>
 <circle class="welle w3" cx="{{ cx }}" cy="165" r="40"/>
 <circle class="tritt-garten" cx="{{ cx }}" cy="165" r="9"/>
+</g>
 {%- endfor %}
-<path class="tritt-flug" d="M132 165C185 100 247 100 300 165S415 230 468 165"/>
+<path class="tritt-flug" d="M{{ m - abstand }} 165C{{ m - abstand * 0.68 }} 112 {{ m - abstand * 0.32 }} 112 {{ m }} 165S{{ m + abstand * 0.68 }} 218 {{ m + abstand }} 165"/>
 </svg>
-<span class="tritt-label x-22 y-58" aria-hidden="true">Garten</span>
-<span class="tritt-label x-50 y-58" aria-hidden="true">Garten</span>
-<span class="tritt-label x-78 y-58" aria-hidden="true">Garten</span>
-<span class="tritt-mass x-31 y-4" aria-hidden="true">wenige hundert Meter</span>
+<span class="tritt-label x-35 y-58" data-nr="0" aria-hidden="true">Garten</span>
+<span class="tritt-label x-50 y-58" data-nr="1" aria-hidden="true">Garten</span>
+<span class="tritt-label x-65 y-58" data-nr="2" aria-hidden="true">Garten</span>
+<span class="tritt-mass x-43 y-4" aria-hidden="true">wenige hundert Meter</span>
+</div>
+<div class="tritt-regler" hidden>
+<label for="tritt-abstand">Gärten auseinanderschieben</label>
+<input id="tritt-abstand" type="range" min="70" max="220" step="2" value="{{ abstand }}" aria-describedby="tritt-satz">
+<p class="tritt-satz" id="tritt-satz" aria-live="polite">Der nächste Garten liegt im Flugkreis: Er ist ein Trittstein.</p>
 </div>
 <figcaption>Schema: Jeder Kreis steht für die wenigen hundert Meter, die viele Wildbienen fliegen. Liegen Gärten so nah beieinander, wird jeder zum Trittstein.</figcaption>
 </figure>

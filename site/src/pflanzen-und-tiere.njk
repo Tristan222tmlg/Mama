@@ -26,7 +26,7 @@ abschluss: gartenbrief
 <p>Links die Pflanzen und eine Nisthilfe, rechts die Tiere. Jede Linie ist eine belegte Verbindung. Manche Tiere brauchen zwei Pflanzen: eine für den Nektar, eine für ihre Raupen.</p>
 </div>
 {{ pflanzen | kreisnetz | safe }}
-<div class="netz-linear">{{ pflanzen | beziehungsnetz | safe }}</div>
+<div class="netz-linear"><p class="netz-tipp" hidden>Tipp auf eine Pflanze oder ein Tier, um ihre Verbindungen zu sehen.</p>{{ pflanzen | beziehungsnetz | safe }}</div>
 <ul class="legende">
 <li><svg viewBox="0 0 40 10" aria-hidden="true" focusable="false"><path class="kante art-bluete" d="M2 5H38"/></svg>Pollen oder Nektar</li>
 <li><svg viewBox="0 0 40 10" aria-hidden="true" focusable="false"><path class="kante art-raupe" d="M2 5H38"/></svg>Futter für die Raupen</li>
@@ -39,7 +39,7 @@ abschluss: gartenbrief
 </div>
 </section>
 
-<section class="abschnitt dunkel" aria-labelledby="rad-titel">
+<section class="abschnitt sanft" aria-labelledby="rad-titel">
 <div class="wrap">
 {% include "teile/rad.njk" %}
 </div>
@@ -81,7 +81,7 @@ abschluss: gartenbrief
 <h3>Wer sie nutzt</h3>
 <ul class="beziehungen">
 {%- for b in p.beziehungen %}
-<li>
+<li id="{{ anker }}-{{ b.tier | slugify }}">
 <span class="po-symbol art-{{ b.art }}" aria-hidden="true"><svg class="sym" focusable="false"><use href="#i-{{ b.tier | tiergruppe }}"/></svg></span>
 <div>
 <p class="bz-tier">{{ b.tier }}{% if b.latein %} <span class="latein" lang="la">{{ b.latein }}</span>{% endif %}</p>
@@ -100,7 +100,7 @@ abschluss: gartenbrief
 {%- endfor %}
 
 {%- set n = pflanzen.nisthilfe %}
-{%- set po = { name: n.titel, foto: n.foto, foto_alt: n.foto_alt, beziehungen: [n] } %}
+{%- set po = { name: n.titel, anker: "nisthilfe", foto: n.foto, foto_alt: n.foto_alt, beziehungen: [n] } %}
 <article class="pflanze{% if pflanzen.pflanzen | length is odd %} gerade{% endif %}" id="nisthilfe" aria-labelledby="nisthilfe-titel">
 <div class="pflanze-orbit">
 {% include "teile/pflanzenorbit.njk" %}
@@ -109,7 +109,7 @@ abschluss: gartenbrief
 <h2 id="nisthilfe-titel">{{ n.titel }}</h2>
 <p class="unterzeile">Keine Pflanze, sondern eine Wohnung</p>
 <ul class="beziehungen">
-<li>
+<li id="nisthilfe-{{ n.tier | slugify }}">
 <span class="po-symbol art-{{ n.art }}" aria-hidden="true"><svg class="sym" focusable="false"><use href="#i-{{ n.tier | tiergruppe }}"/></svg></span>
 <div>
 <p class="bz-tier">{{ n.tier }} <span class="latein" lang="la">{{ n.latein }}</span></p>
@@ -131,7 +131,7 @@ abschluss: gartenbrief
 </div>
 <ul class="weitere-liste">
 {%- for p in pflanzen.weitere %}
-<li>
+<li id="{{ p.name | slugify }}">
 {%- if p.foto %}
 <div class="weitere-foto">{% foto p.foto, p.foto_alt, "8rem" %}</div>
 {%- endif %}
