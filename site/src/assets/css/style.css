@@ -129,7 +129,7 @@ main:focus { outline: none; }
 
 /* ---------- Seitenkopf ---------- */
 
-.seitenkopf { padding: clamp(2rem, 5vw, 4.5rem) 0 clamp(1.5rem, 4vw, 3rem); overflow-x: clip; }
+.seitenkopf { padding: clamp(2rem, 5vw, 4.5rem) 0 clamp(1.5rem, 4vw, 3rem); overflow-x: hidden; overflow-x: clip; }
 .seitenkopf-raster { display: grid; gap: 2.5rem; align-items: center; }
 .mit-bild .seitenkopf-raster { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
 .seitenkopf-text { max-width: 42rem; }
