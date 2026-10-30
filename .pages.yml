@@ -32,7 +32,7 @@ content:
       - { name: seitentitel, label: Titel im Browser-Tab, type: string }
       - { name: description, label: Kurzbeschreibung für Suchmaschinen, type: text, required: true }
       - { name: kicker, label: Zeile über der Überschrift, type: string }
-      - { name: ueberschrift, label: Überschrift, type: string, required: true }
+      - { name: ueberschrift, label: Überschrift, type: string, required: true, description: "*Wörter zwischen Sternchen* bekommen den grünen Pinselstrich." }
       - { name: lead, label: Einleitung, type: text }
       - name: knoepfe
         label: Knöpfe unter der Einleitung
@@ -41,17 +41,50 @@ content:
         fields:
           - { name: text, label: Text, type: string }
           - { name: ziel, label: Ziel (Seite), type: string }
-      - { name: bild, component: bild }
+      - name: bilder
+        label: Fotos oben (ein großes, zwei kleine)
+        type: object
+        list: true
+        fields:
+          - { name: datei, label: Foto, type: image }
+          - { name: alt, label: Beschreibung für Menschen, die das Foto nicht sehen, type: string }
+          - { name: notiz, label: Handschriftliche Notiz (nur beim großen Foto), type: string }
+      - name: worum
+        label: Abschnitt „Worum es geht“
+        type: object
+        fields:
+          - { name: titel, label: Überschrift, type: string }
+          - { name: text, label: Text, type: text }
+      - name: nutzen
+        label: Abschnitt „Nützt das überhaupt etwas?“
+        type: object
+        fields:
+          - { name: titel, label: Überschrift, type: string }
+          - { name: text, label: Text, type: text }
+      - name: programm
+        label: Abschnitt zum Programm
+        type: object
+        fields:
+          - { name: kicker, label: Zeile über der Überschrift, type: string }
+          - { name: titel, label: Überschrift, type: string }
+          - { name: text, label: Text, type: text }
       - name: zitat
         label: Zitat
         type: object
         fields:
           - { name: text, label: Zitat, type: text }
           - { name: quelle, label: Von wem (nur mit Einwilligung namentlich), type: string }
+      - name: ich
+        label: Abschnitt „Wer ich bin“
+        type: object
+        fields:
+          - { name: titel, label: Überschrift, type: string }
+          - { name: bild, label: Foto, type: image }
+          - { name: bild_alt, label: Fotobeschreibung, type: string }
+          - { name: text, label: Text, type: text }
       - { name: layout, type: string, hidden: true }
       - { name: permalink, type: string, hidden: true }
       - { name: abschluss, type: string, hidden: true }
-      - { name: body, label: Text, type: rich-text }
 
   - name: programm
     label: Online-Programm
@@ -66,6 +99,7 @@ content:
       - { name: bild, component: bild }
       - { name: layout, type: string, hidden: true }
       - { name: permalink, type: string, hidden: true }
+      - { name: grafik, type: string, hidden: true }
       - { name: abschluss, type: string, hidden: true }
       - { name: body, label: Text, type: rich-text }
 
@@ -77,9 +111,18 @@ content:
     fields:
       - { name: title, label: Titel, type: string, required: true }
       - { name: description, label: Kurzbeschreibung für Suchmaschinen, type: text, required: true }
-      - { name: kicker, label: Zeile über dem Titel, type: string }
+      - { name: kicker, label: Zeile über der Überschrift, type: string }
+      - { name: ueberschrift, label: Überschrift, type: string, description: "*Wörter zwischen Sternchen* bekommen den grünen Pinselstrich." }
       - { name: lead, label: Einleitung, type: text }
       - { name: bild, component: bild }
+      - name: projekte
+        label: Projekte
+        type: object
+        list: true
+        fields:
+          - { name: art, label: Art (handschriftlich), type: string }
+          - { name: titel, label: Titel, type: string }
+          - { name: text, label: Text, type: text }
       - { name: layout, type: string, hidden: true }
       - { name: permalink, type: string, hidden: true }
       - { name: abschluss, type: string, hidden: true }
@@ -141,6 +184,10 @@ content:
             type: select
             options: { values: [einheimisch, eingebürgert, unbeständig] }
           - { name: bluete, label: "Blühmonate laut FloraWeb (von, bis)", type: number, list: true }
+          - name: bluetenfarbe
+            label: Blütenfarbe (für den Blühkalender)
+            type: select
+            options: { values: [rosa, purpur, lila, blau, hellblau, weiss, gelb] }
           - { name: rote_liste, label: Rote Liste Deutschland, type: string }
           - { name: steckbrief, label: Aus meinem Steckbrief, type: text }
           - { name: steckbrief_bild, label: Steckbrief als Bild, type: image }
@@ -153,6 +200,12 @@ content:
               - { name: tier, label: Tier, type: string, required: true }
               - { name: latein, label: Wissenschaftlicher Name, type: string }
               - { name: was, label: Was das Tier hier findet, type: text, required: true }
+              - { name: kurz, label: Kurz für die Grafiken (zwei, drei Wörter), type: string }
+              - name: art
+                label: Art der Verbindung
+                type: select
+                required: true
+                options: { values: [bluete, raupe, nest] }
               - name: status
                 label: Beleg
                 type: select
@@ -162,6 +215,7 @@ content:
               - { name: url, label: Quelle (Link), type: string }
               - { name: quelle_name, label: Name des Tiers in der Quelle, falls anders, type: string }
               - { name: raupen, label: Raupen fressen an, type: text }
+              - { name: raupen_an, label: Raupenfutter als kurzer Name für das Netz (nur mit Quelle), type: string }
               - { name: raupen_quelle, label: Quelle dazu (Name), type: string }
               - { name: raupen_url, label: Quelle dazu (Link), type: string }
       - name: nisthilfe
@@ -173,6 +227,8 @@ content:
           - { name: foto_alt, label: Fotobeschreibung, type: string }
           - { name: tier, label: Tier, type: string }
           - { name: latein, label: Wissenschaftlicher Name, type: string }
+          - { name: kurz, label: Kurz für die Grafiken, type: string }
+          - { name: art, label: Art der Verbindung, type: select, options: { values: [bluete, raupe, nest] } }
           - { name: status, label: Beleg, type: select, options: { values: [belegt, eigenes-foto, bestimmen-lassen] } }
           - { name: text, label: Text, type: text }
           - { name: quelle, label: Quelle (Name), type: string }
@@ -189,6 +245,10 @@ content:
           - { name: floraweb, label: Link zu FloraWeb, type: string }
           - { name: status, label: Status laut FloraWeb, type: select, options: { values: [einheimisch, eingebürgert, unbeständig] } }
           - { name: bluete, label: "Blühmonate laut FloraWeb (von, bis)", type: number, list: true }
+          - name: bluetenfarbe
+            label: Blütenfarbe (für den Blühkalender)
+            type: select
+            options: { values: [rosa, purpur, lila, blau, hellblau, weiss, gelb] }
           - { name: rote_liste, label: Rote Liste Deutschland, type: string }
 
   - name: einstellungen

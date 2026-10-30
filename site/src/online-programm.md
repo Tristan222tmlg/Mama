@@ -9,6 +9,7 @@ bild:
   datei: bilder/natternkopf.jpg
   alt: Blau blühender Natternkopf am Rand einer Wiese
   unterschrift: Gewöhnlicher Natternkopf
+grafik: wochen
 abschluss: erstgespraech
 ---
 

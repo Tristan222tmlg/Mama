@@ -4,23 +4,52 @@ permalink: pflanzen-und-tiere.html
 title: Pflanzen und Tiere
 description: Welche Pflanze welchen Wildbienen und Schmetterlingen nützt – Moschus-Malve, Natternkopf, Wiesen-Witwenblume, Dost und mehr, jede Verbindung mit Quelle oder eigenem Foto.
 kicker: Mit Quellen
-lead: Die Tiere sucht man nicht aus. Man sucht die Pflanzen aus, die mit besonders vielen Tieren in Beziehung stehen.
+ueberschrift: Die Tiere sucht man nicht aus. Man sucht die *Pflanzen* aus.
+lead: Und zwar die, die mit besonders vielen Tieren in Beziehung stehen. Hier stehen nur Verbindungen mit Beleg, aus Fachquellen oder von meinen eigenen Fotos.
+bild:
+  datei: bilder/dost-hauhechel-blaeuling.jpg
+  alt: Ein Hauhechel-Bläuling mit geschlossenen Flügeln sitzt auf den rosa Blüten des Dosts
+  unterschrift: Hauhechel-Bläuling am Dost
 breit: true
 abschluss: gartenbrief
 ---
-<div class="prosa">
-<p>Hier stehen nur Verbindungen mit Beleg: aus Fachquellen oder von meinen eigenen Fotos. Jede Quelle ist verlinkt. Stand: {{ pflanzen.stand | datum }}.</p>
+<div class="einleitung">
 <p class="quellen-hinweis">Die Quellen: <a href="https://www.wildbienen.info/">Paul Westrich, wildbienen.info</a> für Wildbienen, das <a href="https://lepiforum.org/">Lepiforum</a> für Schmetterlinge und <a href="https://www.floraweb.de/">FloraWeb</a> vom Bundesamt für Naturschutz für die Pflanzen. „Einheimisch“ heißt dort: in Deutschland.</p>
+<p class="quellen-hinweis">Stand: {{ pflanzen.stand | datum }}. Was noch nicht sicher bestimmt ist, ist markiert.</p>
 </div>
+
+<figure class="netz" aria-labelledby="netz-titel">
+<h2 class="grafik-titel" id="netz-titel">Wer mit wem</h2>
+<p class="grafik-unter">Links die Pflanzen und eine Nisthilfe, rechts die Tiere. Jede Linie ist eine belegte Verbindung. Manche Tiere brauchen zwei Pflanzen: eine für den Nektar, eine für ihre Raupen.</p>
+{{ pflanzen | beziehungsnetz | safe }}
+<figcaption>
+<ul class="netz-legende">
+<li><svg viewBox="0 0 40 10" aria-hidden="true" focusable="false"><path class="kante art-bluete" d="M2 5H38"/></svg>Pollen oder Nektar</li>
+<li><svg viewBox="0 0 40 10" aria-hidden="true" focusable="false"><path class="kante art-raupe" d="M2 5H38"/></svg>Futter für die Raupen</li>
+<li><svg viewBox="0 0 40 10" aria-hidden="true" focusable="false"><path class="kante art-nest" d="M2 5H38"/></svg>Nest und Wohnung</li>
+<li><svg viewBox="0 0 40 10" aria-hidden="true" focusable="false"><path class="kante grau" d="M2 5H38"/></svg>Fachquelle</li>
+<li><svg viewBox="0 0 40 10" aria-hidden="true" focusable="false"><path class="kante grau status-eigenes-foto" d="M2 5H38"/></svg>mein Foto</li>
+<li><svg viewBox="0 0 40 10" aria-hidden="true" focusable="false"><path class="kante grau status-bestimmen-lassen" d="M2 5H38"/></svg>Art noch offen</li>
+</ul>
+<p class="sr">Dieselben Verbindungen stehen unten bei jeder Pflanze, mit Quelle.</p>
+</figcaption>
+</figure>
+
+<figure class="kalender" aria-labelledby="kalender-titel">
+<h2 class="grafik-titel" id="kalender-titel">Wann sie blühen</h2>
+<p class="grafik-unter">Von der Kornelkirsche im März bis zur Moschus-Malve, zum Natternkopf und zur Wegwarte im Oktober. Die Balken haben die Farbe der Blüten.</p>
+{{ pflanzen | bluehkalender | safe }}
+<figcaption>Blühmonate laut FloraWeb (Rothmaler), nicht aus eigenen Beobachtungen. Die Minze fehlt, weil ihre Art noch nicht bestimmt ist.</figcaption>
+</figure>
 
 {%- for p in pflanzen.pflanzen %}
 {%- set anker = p.name | slugify %}
 <article class="pflanze" id="{{ anker }}" aria-labelledby="{{ anker }}-titel">
+<div class="pflanze-bild">
 {%- if p.foto %}
-<div class="pflanze-foto">
-{% foto p.foto, p.foto_alt, "(min-width: 48rem) 13rem, 60vw", loop.first %}
-</div>
+<div class="kreis">{% foto p.foto, p.foto_alt, "(min-width: 56rem) 16rem, 64vw" %}</div>
 {%- endif %}
+</div>
 <div class="pflanze-text">
 <h2 id="{{ anker }}-titel">{{ p.name }} <span class="latein" lang="la">{{ p.latein }}</span></h2>
 {%- if p.art_offen %}
@@ -30,7 +59,12 @@ abschluss: gartenbrief
 <p class="pflanze-zitat">„{{ p.zitat }}“</p>
 {%- endif %}
 {%- if p.floraweb %}
-<p class="steckdaten">{{ p.status | capitalize }} · blüht {{ p.bluete | monate }}{% if p.rote_liste and p.rote_liste != "ungefährdet" %} · Rote Liste: {{ p.rote_liste }}{% endif %} · <a href="{{ p.floraweb }}">FloraWeb</a>{% if p.floraweb_name %} (dort: {{ p.floraweb_name }}){% endif %}</p>
+<dl class="etikett">
+<div><dt>Status</dt><dd>{{ p.status | capitalize }}</dd></div>
+<div><dt>Blüte</dt><dd>{{ p.bluete | monate }}{{ p.bluete | monatsband(p.bluetenfarbe) | safe }}</dd></div>
+<div><dt>Rote Liste</dt><dd>{{ p.rote_liste or "–" }}</dd></div>
+<div><dt>Quelle</dt><dd><a href="{{ p.floraweb }}">FloraWeb</a>{% if p.floraweb_name %}, dort: {{ p.floraweb_name }}{% endif %}</dd></div>
+</dl>
 {%- endif %}
 {%- if p.steckbrief %}
 <p>{{ p.steckbrief }}</p>
@@ -41,20 +75,24 @@ abschluss: gartenbrief
 <figcaption>Mein Steckbrief zur Moschus-Malve, mit dem Foto der Steinhummel. Antippen zum Vergrößern.</figcaption>
 </figure>
 {%- endif %}
-<h3>Wer sie nutzt</h3>
+<h3 class="wer-titel">Wer sie nutzt</h3>
 <ul class="beziehungen">
 {%- for b in p.beziehungen %}
 <li>
-<p><strong>{{ b.tier }}</strong>{% if b.latein %} <span class="latein" lang="la">{{ b.latein }}</span>{% endif %}: {{ b.was }}</p>
+<p class="beziehung-kopf"><span class="art art-{{ b.art }}">{% if b.art == "raupe" %}Raupe{% elif b.art == "nest" %}Nest{% else %}Blüte{% endif %}</span><strong>{{ b.tier }}</strong>{% if b.latein %}<span class="latein" lang="la">{{ b.latein }}</span>{% endif %}</p>
+<p>{{ b.was }}</p>
+<p class="beziehung-fuss">
 {%- if b.status == "belegt" %}
-<p class="beleg">Quelle: <a href="{{ b.url }}">{{ b.quelle }}</a>{% if b.quelle_name %} (dort: {{ b.quelle_name }}){% endif %}</p>
+<span class="beleg beleg-quelle">Quelle: <a href="{{ b.url }}">{{ b.quelle }}</a>{% if b.quelle_name %}, dort: {{ b.quelle_name }}{% endif %}</span>
 {%- elif b.status == "eigenes-foto" %}
-<p class="beleg">Beleg: mein Foto</p>
+<span class="beleg beleg-foto">Beleg: mein Foto</span>
 {%- elif b.status == "bestimmen-lassen" %}
-<p class="beleg">Beleg: mein Foto. Die Art ist noch nicht sicher bestimmt.</p>
+<span class="beleg beleg-foto">Beleg: mein Foto</span><span class="beleg beleg-offen">Art noch nicht sicher bestimmt</span>
 {%- endif %}
+</p>
 {%- if b.raupen %}
-<p class="raupen">{{ b.raupen }} <span class="beleg">Quelle: <a href="{{ b.raupen_url }}">{{ b.raupen_quelle }}</a></span></p>
+<p class="raupen"><span class="art art-raupe">Raupe</span> {{ b.raupen }}</p>
+<p class="beziehung-fuss"><span class="beleg beleg-quelle">Quelle: <a href="{{ b.raupen_url }}">{{ b.raupen_quelle }}</a></span></p>
 {%- endif %}
 </li>
 {%- endfor %}
@@ -65,25 +103,30 @@ abschluss: gartenbrief
 
 {%- set n = pflanzen.nisthilfe %}
 <article class="pflanze" id="nisthilfe" aria-labelledby="nisthilfe-titel">
-<div class="pflanze-foto">
-{% foto n.foto, n.foto_alt, "(min-width: 48rem) 13rem, 60vw" %}
+<div class="pflanze-bild">
+<div class="kreis">{% foto n.foto, n.foto_alt, "(min-width: 56rem) 16rem, 64vw" %}</div>
 </div>
 <div class="pflanze-text">
 <p class="kicker">Und eine Wohnung</p>
 <h2 id="nisthilfe-titel">{{ n.titel }}</h2>
+<ul class="beziehungen">
+<li>
+<p class="beziehung-kopf"><span class="art art-nest">Nest</span><strong>{{ n.tier }}</strong><span class="latein" lang="la">{{ n.latein }}</span></p>
 <p>{{ n.text }}</p>
-<p class="beleg">Beleg: mein Foto. Quelle zur Art: <a href="{{ n.url }}">{{ n.quelle }}</a></p>
+<p class="beziehung-fuss"><span class="beleg beleg-foto">Beleg: mein Foto</span><span class="beleg beleg-offen">Art noch nicht sicher bestimmt</span><span class="beleg beleg-quelle">Quelle zur Art: <a href="{{ n.url }}">{{ n.quelle }}</a></span></p>
+</li>
+</ul>
 </div>
 </article>
 
 <section class="weitere" aria-labelledby="weitere-titel">
-<h2 id="weitere-titel">Weitere Pflanzen von meinen Fotos</h2>
-<p>Zu diesen Pflanzen ist hier noch keine Verbindung zu einem Tier belegt. Ich trage sie nach, sobald es eine Quelle gibt.</p>
+<h2 id="weitere-titel">Weitere Pflanzen, noch ohne belegtes Tier</h2>
+<p>Sie stammen von meinen Fotos und aus meinen Gesprächen. Welche Tiere sie nutzen, trage ich nach, sobald es eine Quelle gibt.</p>
 <ul class="weitere-liste">
 {%- for p in pflanzen.weitere %}
 <li>
 {%- if p.foto %}
-<div class="weitere-foto">{% foto p.foto, p.foto_alt, "8rem" %}</div>
+<div class="weitere-foto kreis">{% foto p.foto, p.foto_alt, "8rem" %}</div>
 {%- endif %}
 <p><strong>{{ p.name }}</strong> <span class="latein" lang="la">{{ p.latein }}</span><br>
 <span class="steckdaten">{{ p.status | capitalize }} · blüht {{ p.bluete | monate }}{% if p.rote_liste and p.rote_liste != "ungefährdet" %} · Rote Liste: {{ p.rote_liste }}{% endif %} · <a href="{{ p.floraweb }}">FloraWeb</a></span></p>

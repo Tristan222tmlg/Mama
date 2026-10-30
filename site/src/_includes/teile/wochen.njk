@@ -1,0 +1,13 @@
+<div class="wochen-grafik">
+<dl class="zahlen">
+<div><dt>Wochen</dt><dd>7</dd></div>
+<div><dt>Live-Calls pro Woche</dt><dd>2</dd></div>
+<div><dt>Stunden je Call</dt><dd>1,5</dd></div>
+</dl>
+<ol class="wochen" aria-label="Ablauf über sieben Wochen">
+{%- for w in range(1, 8) %}
+<li><span class="woche-name">Woche {{ w }}</span><span class="calls" aria-hidden="true"><span class="call"></span><span class="call"></span></span><span class="sr">zwei Live-Calls</span></li>
+{%- endfor %}
+</ol>
+<p class="wochen-summe">7 Wochen mal 2 Live-Calls: 14 Live-Calls zu je anderthalb Stunden.</p>
+</div>

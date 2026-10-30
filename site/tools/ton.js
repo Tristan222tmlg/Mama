@@ -15,6 +15,7 @@ function text(html) {
     .replace(/<script[\s\S]*?<\/script>/g, " ")
     .replace(/<style[\s\S]*?<\/style>/g, " ")
     .replace(/<(\w+)[^>]*\sdata-ton-ok[^>]*>[\s\S]*?<\/\1>/g, " ")
+    .replace(/<\/(p|li|h[1-6]|div|dd|dt|figcaption|blockquote|td|th)>/g, "\n")
     .replace(/<[^>]+>/g, " ");
   const decode = (s) => s.replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'");
   return { inhalt: decode(sichtbar + " " + attribute.join(" ")), ausnahmen };
@@ -44,7 +45,7 @@ for (const seite of seiten) {
   }
   for (const a of ausnahmen) erlaubt.push(`${seite}: ${a.trim()}`);
   // Anrede: Die Website duzt. Höfliche Anrede mitten im Satz ist verdächtig.
-  for (const m of inhalt.matchAll(/(?<![.!?:]\s|^)\b(Ihnen|Ihre[mnrs]?)\b/g)) {
+  for (const m of inhalt.matchAll(/(?<![.!?:]\s|^|\n\s*)\b(Ihnen|Ihre[mnrs]?)\b/g)) {
     console.log(`SIE  ${seite}: „${m[0]}“ – die Website duzt`);
   }
 }

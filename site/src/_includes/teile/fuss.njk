@@ -1,10 +1,11 @@
 <footer class="fuss">
 <div class="fuss-innen">
-<div class="fuss-marke">
-<img src="{{ base }}assets/logo/zeichen-einfarbig-hell.svg" alt="" width="58" height="52" loading="lazy">
-<p><strong>{{ site.name }}</strong><br>{{ site.person }}</p>
+<div class="fuss-oben">
+<p class="fuss-logo"><img src="{{ base }}assets/logo/logo-einfarbig-hell.svg" alt="{{ site.name }}" width="272" height="117" loading="lazy"></p>
+<p class="fuss-satz">Damit Menschen Freude daran haben, in ihrem Garten Natur zu erleben und Tieren zu begegnen.</p>
 </div>
-<p class="fuss-satz">Mitglied im <a href="https://naturgarten.org/">Naturgarten e. V.</a></p>
+<div class="fuss-unten">
+<p>{{ site.person }} · Mitglied im <a href="https://naturgarten.org/">Naturgarten e. V.</a></p>
 <nav aria-label="Rechtliches und Kontakt">
 <ul>
 <li><a href="{{ base }}kontakt.html">Kontakt</a></li>
@@ -12,5 +13,6 @@
 <li><a href="{{ base }}datenschutz.html">Datenschutz</a></li>
 </ul>
 </nav>
+</div>
 </div>
 </footer>

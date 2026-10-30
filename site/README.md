@@ -9,6 +9,16 @@ und die Pflanzen-Tier-Tabelle mit Quellen.
 Kleiner als der Prototyp in `v2/`, dafür mit echten Adressen, ohne
 JavaScript, ohne Cookies und ohne fremde Dienste.
 
+**Gestaltung:** ein Feldbuch mit Kreisen. Runde Fotos und handschriftliche
+Notizen wie auf Sabines Moschusmalven-Steckbrief, der offene Ring und die
+Erdkugel aus dem Logo, Belege wie auf einem Herbar-Etikett. Die Grafiken
+zeigen echte Daten aus `src/_data/pflanzen.yml` und den Antworten: das Netz der
+belegten Verbindungen, den Blühkalender, die sieben Programmwochen, die
+Dreiviertelstunde des Online-Abends. Sie entstehen beim Bauen
+(`lib/grafiken.js`, `src/_includes/teile/`), ganz ohne JavaScript im Browser.
+Schriften: Fraunces (weich, mit festen Achsen, damit die Datei klein bleibt),
+Source Sans 3 und Caveat für Notizen, alle unter der SIL Open Font License.
+
 | Seite | Datei | Inhalt |
 | --- | --- | --- |
 | `/` | `src/index.md` | Wofür Sabine steht, das Programm, Gartenbrief und Online-Abend |
@@ -61,8 +71,8 @@ für Programme, ungültige Eingaben, kein seitliches Scrollen bei 320 und 390 px
 Breite, der Sprunglink als erster Tab-Schritt.
 
 **Stand 30. Oktober 2026:** alles bestanden. axe: keine Verstöße auf 12 Seiten.
-Lighthouse mobil (13.5.0, lokal): Leistung 93–99, Barrierefreiheit,
-Best Practices und SEO je 100 auf allen 9 Hauptseiten. Ob die Formular-Mails
+Lighthouse mobil (13.5.0, lokal, ohne Komprimierung): Leistung 93–98,
+Barrierefreiheit, Best Practices und SEO je 100 auf allen 9 Hauptseiten. Ob die Formular-Mails
 in Sabines echtem Postfach ankommen, lässt sich erst auf dem Webspace testen.
 
 **Vorschau ohne Server:** `VORSCHAU=1 npx eleventy` baut eine Fassung, deren

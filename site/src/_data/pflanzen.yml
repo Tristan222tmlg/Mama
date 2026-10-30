@@ -6,8 +6,16 @@
 #   eigenes-foto      Sabines Foto zeigt das Tier an der Pflanze
 #   bestimmen-lassen  eigenes Foto, aber die Tierart ist noch nicht sicher bestimmt
 #
+# art (für das Beziehungsnetz):
+#   bluete  Pollen oder Nektar
+#   raupe   Futter für die Raupen
+#   nest    Wohnung oder Baumaterial
+# kurz: wenige Wörter für die Grafiken
+# raupen_an: die Raupenfutterpflanzen als kurzer Name für das Netz (nur mit Quelle)
+#
 # FloraWeb-Angaben (Status, Blühmonate, Rote Liste) gelten für Deutschland und
 # stammen aus dem Rothmaler über FloraWeb, abgerufen am Datum unter "stand".
+# bluetenfarbe: rosa, purpur, lila, blau, hellblau, weiss, gelb
 
 stand: 2026-10-30
 
@@ -20,6 +28,7 @@ pflanzen:
     floraweb_name: ""
     status: einheimisch
     bluete: [6, 10]
+    bluetenfarbe: rosa
     rote_liste: ungefährdet
     steckbrief: >-
       30 bis 50 cm hoch, Sonne bis Halbschatten, mehrjährig und winterhart,
@@ -40,21 +49,29 @@ pflanzen:
       - tier: Steinhummel
         latein: Bombus lapidarius
         was: sammelt Pollen und Nektar.
+        kurz: Pollen und Nektar
+        art: bluete
         status: eigenes-foto
       - tier: Malven-Dickkopffalter
         latein: Carcharodus alceae
         was: Seine Raupen fressen an Malven, besonders an der Moschus-Malve.
+        kurz: Futter für die Raupen
+        art: raupe
         quelle: Lepiforum
         url: https://lepiforum.org/wiki/page/Carcharodus_alceae
         status: belegt
       - tier: Stahlblaue Mauerbiene
         latein: Osmia caerulescens
         was: baut ihr Nest unter anderem aus Blüten- und Laubblättern der Moschus-Malve.
+        kurz: Baumaterial fürs Nest
+        art: nest
         quelle: Westrich, wildbienen.info
         url: https://www.wildbienen.info/steckbriefe/osmia_caerulescens.php
         status: belegt
       - tier: Wildbienen
         was: Die Moschus-Malve steht in der Liste der Pollenquellen für Wildbienen.
+        kurz: Pollenquelle
+        art: bluete
         quelle: Westrich, wildbienen.info
         url: https://www.wildbienen.info/bluetenbesuch/liste_der_pollenquellen.php
         status: belegt
@@ -66,11 +83,14 @@ pflanzen:
     floraweb: https://www.floraweb.de/php/artenhome.php?name-use-id=2067
     status: einheimisch
     bluete: [5, 10]
+    bluetenfarbe: blau
     rote_liste: ungefährdet
     beziehungen:
       - tier: Glänzende Natterkopf-Mauerbiene
         latein: Osmia adunca
         was: sammelt Pollen nur an Natterkopf-Arten. Bei uns ist das fast immer der Gewöhnliche Natternkopf.
+        kurz: nur Natterkopf-Pollen
+        art: bluete
         quelle: Westrich, wildbienen.info
         url: https://www.wildbienen.info/steckbriefe/osmia_adunca.php
         status: belegt
@@ -82,17 +102,22 @@ pflanzen:
     floraweb: https://www.floraweb.de/php/artenhome.php?suchnr=3188
     status: einheimisch
     bluete: [7, 8]
+    bluetenfarbe: lila
     rote_liste: ungefährdet
     beziehungen:
       - tier: Knautien-Sandbiene
         latein: Andrena hattorfiana
         was: Ihre Hauptpollenquelle ist die Wiesen-Witwenblume. Die Biene steht in Deutschland als gefährdet auf der Roten Liste.
+        kurz: Hauptpollenquelle
+        art: bluete
         quelle: Westrich, wildbienen.info
         url: https://www.wildbienen.info/steckbriefe/andrena_hattorfiana.php
         status: belegt
       - tier: Braun-Dickkopffalter
         latein: Thymelicus
         was: saugt Nektar an der Blüte. Ob es der Braunkolbige oder der Schwarzkolbige ist, wird noch bestimmt.
+        kurz: Nektar
+        art: bluete
         status: bestimmen-lassen
         raupen: Die Raupen des Braunkolbigen Braun-Dickkopffalters fressen an Gräsern, zum Beispiel am Wolligen Honiggras.
         raupen_quelle: Lepiforum
@@ -105,13 +130,17 @@ pflanzen:
     floraweb: https://www.floraweb.de/php/artenhome.php?suchnr=3996
     status: einheimisch
     bluete: [7, 9]
+    bluetenfarbe: purpur
     rote_liste: ungefährdet
     beziehungen:
       - tier: Hauhechel-Bläuling
         latein: Polyommatus icarus
         was: saugt Nektar an den Blüten.
+        kurz: Nektar
+        art: bluete
         status: eigenes-foto
         raupen: Seine Raupen fressen an Hornklee, Luzerne, Dornigem Hauhechel und Rotklee.
+        raupen_an: Hornklee, Luzerne, Hauhechel, Rotklee
         raupen_quelle: Lepiforum
         raupen_url: https://lepiforum.org/wiki/page/Polyommatus_icarus
 
@@ -124,8 +153,11 @@ pflanzen:
       - tier: Kleiner Feuerfalter
         latein: Lycaena phlaeas
         was: saugt Nektar an den Blüten.
+        kurz: Nektar
+        art: bluete
         status: eigenes-foto
         raupen: Seine Raupen fressen unter anderem an Kleinem und Großem Sauerampfer.
+        raupen_an: Kleiner und Großer Sauerampfer
         raupen_quelle: Lepiforum
         raupen_url: https://lepiforum.org/wiki/page/Lycaena_phlaeas
 
@@ -135,10 +167,13 @@ pflanzen:
     floraweb: https://www.floraweb.de/php/artenhome.php?name-use-id=1550
     status: einheimisch
     bluete: [7, 10]
+    bluetenfarbe: hellblau
     rote_liste: ungefährdet
     beziehungen:
       - tier: Wildbienen
         was: Die Wegwarte steht in der Liste der Pollenquellen für Wildbienen. Welche Arten an ihr sammeln, trage ich noch nach.
+        kurz: Pollenquelle
+        art: bluete
         quelle: Westrich, wildbienen.info
         url: https://www.wildbienen.info/bluetenbesuch/liste_der_pollenquellen.php
         status: belegt
@@ -151,12 +186,15 @@ pflanzen:
     floraweb_name: Echte Sternmiere
     status: einheimisch
     bluete: [4, 5]
+    bluetenfarbe: weiss
     rote_liste: ungefährdet
     beziehungen:
       - tier: Rotschopfige Sandbiene
         latein: Andrena haemorrhoa
         quelle_name: Rotfransige Sandbiene
         was: sammelt hier Pollen, außerdem unter anderem an Süß-Kirsche, Sal-Weide und Stiel-Eiche.
+        kurz: Pollen
+        art: bluete
         quelle: Westrich, wildbienen.info
         url: https://www.wildbienen.info/steckbriefe/andrena_haemorrhoa.php
         status: belegt
@@ -168,6 +206,8 @@ nisthilfe:
   foto_alt: Bambusröhrchen einer Nisthilfe, aus einem schaut der Kopf einer Biene mit hellem Gesichtshaar
   tier: Rostrote Mauerbiene
   latein: Osmia bicornis
+  kurz: Nistplatz
+  art: nest
   status: bestimmen-lassen
   text: >-
     Vermutlich ein Männchen der Rostroten Mauerbiene, die Bestimmung steht noch
@@ -186,6 +226,7 @@ weitere:
     floraweb: https://www.floraweb.de/php/artenhome.php?name-use-id=3552
     status: einheimisch
     bluete: [5, 7]
+    bluetenfarbe: rosa
     rote_liste: ungefährdet
   - name: Echte Mispel
     latein: Mespilus germanica
@@ -194,9 +235,11 @@ weitere:
     floraweb: https://www.floraweb.de/php/artenhome.php?name-use-id=3695
     status: einheimisch
     bluete: [5, 6]
+    bluetenfarbe: weiss
     rote_liste: Vorwarnliste
   - name: Kornelkirsche
     latein: Cornus mas
     floraweb: https://www.floraweb.de/php/artenhome.php?suchnr=1649
     status: einheimisch
     bluete: [3, 4]
+    bluetenfarbe: gelb

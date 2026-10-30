@@ -1,0 +1,21 @@
+{%- set m = pflanzen.pflanzen[0] %}
+{%- set ziele = [[22, 13], [78, 13], [22, 87], [78, 87]] %}
+<figure class="stern" aria-labelledby="stern-text">
+<div class="stern-flaeche">
+<svg class="stern-linien" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+{%- for b in m.beziehungen %}{% if loop.index <= 4 %}
+<line class="kante art-{{ b.art }} status-{{ b.status }}" x1="50" y1="50" x2="{{ ziele[loop.index0][0] }}" y2="{{ ziele[loop.index0][1] }}" vector-effect="non-scaling-stroke"/>
+{%- endif %}{% endfor %}
+</svg>
+<div class="stern-mitte">
+<div class="kreis">{% foto m.foto, m.foto_alt, "(min-width: 56rem) 12rem, 34vw" %}</div>
+<span class="stern-pflanze">{{ m.name }}</span>
+</div>
+<ul class="stern-tiere">
+{%- for b in m.beziehungen %}{% if loop.index <= 4 %}
+<li class="pos-{{ loop.index }}"><span class="art art-{{ b.art }}">{% if b.art == "raupe" %}Raupe{% elif b.art == "nest" %}Nest{% else %}Blüte{% endif %}</span><strong>{{ b.tier }}</strong><span class="stern-kurz">{{ b.kurz }}</span></li>
+{%- endif %}{% endfor %}
+</ul>
+</div>
+<figcaption id="stern-text">Die Moschus-Malve und Tiere, die sie nutzen. Durchgezogene Linie: belegt mit einer Fachquelle, gestrichelt: mein eigenes Foto. <a class="pfeil-link" href="{{ base }}pflanzen-und-tiere.html#moschus-malve">Alle Pflanzen mit Quellen</a></figcaption>
+</figure>

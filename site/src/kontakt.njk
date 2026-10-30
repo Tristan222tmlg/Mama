@@ -5,18 +5,21 @@ title: Gartenbrief und Kontakt
 description: Den Gartenbrief von Sabine Schröder-Gravendyck abonnieren oder ihr eine Nachricht schreiben, zum Beispiel für ein Erstgespräch zum Online-Programm.
 kicker: Am liebsten per E-Mail
 lead: Abonnier den Gartenbrief oder schreib mir eine Nachricht. Ich antworte per E-Mail.
+breit: true
 abschluss: keiner
 ---
-<section id="gartenbrief" class="block" aria-labelledby="gartenbrief-titel">
+<div class="kontakt-raster">
+<section id="gartenbrief" class="tafel" aria-labelledby="gartenbrief-titel">
 <h2 id="gartenbrief-titel">Der Gartenbrief</h2>
 <p>Mein Newsletter, den ich gelegentlich per E-Mail schicke. Darin erfährst du von den nächsten Online-Abenden und vom nächsten Start des Programms.</p>
 {%- set fid = "kgb" %}
 {% include "teile/gartenbrief-formular.njk" %}
 </section>
 
-<section id="nachricht" class="block" aria-labelledby="nachricht-titel">
+<section id="nachricht" class="tafel" aria-labelledby="nachricht-titel">
+<p class="notiz kontakt-notiz">Es gibt keine dummen Fragen.</p>
 <h2 id="nachricht-titel">Schreib mir</h2>
-<p>Für eine Frage, ein Erstgespräch zum Online-Programm oder alles andere. Es gibt keine dummen Fragen.</p>
+<p>Für eine Frage, ein Erstgespräch zum Online-Programm oder alles andere.</p>
 <form class="formular" action="{{ base }}formular.php" method="post">
 <input type="hidden" name="formular" value="kontakt">
 <div class="feld">
@@ -49,3 +52,4 @@ abschluss: keiner
 </form>
 <p>Oder direkt per E-Mail: {% if site.email %}<a href="mailto:{{ site.email }}">{{ site.email }}</a>{% else %}[[offen: E-Mail-Adresse]]{% endif %}</p>
 </section>
+</div>

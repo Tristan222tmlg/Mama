@@ -1,13 +1,13 @@
 ---
 layout: basis.njk
 ---
-<div class="seitenkopf{% if bild %} mit-bild{% endif %}">
+<header class="seitenkopf{% if bild %} mit-bild{% endif %}">
 <div class="wrap seitenkopf-raster">
 <div class="seitenkopf-text">
 {%- if kicker %}
 <p class="kicker">{{ kicker }}</p>
 {%- endif %}
-<h1>{{ ueberschrift or title }}</h1>
+<h1>{{ (ueberschrift or title) | betont | safe }}</h1>
 {%- if lead %}
 <p class="lead">{{ lead }}</p>
 {%- endif %}
@@ -20,22 +20,38 @@ layout: basis.njk
 {%- endif %}
 </div>
 {%- if bild %}
-<figure class="seitenkopf-bild{% if bild.klein %} klein{% endif %}">
-{% foto bild.datei, bild.alt, "(min-width: 56rem) 24rem, 72vw", true %}
+<figure class="kreisbild{% if bild.klein %} klein{% endif %}">
+<div class="kreisbild-rahmen">
+{% include "teile/ring.njk" %}
+<div class="kreis">{% foto bild.datei, bild.alt, "(min-width: 56rem) 22rem, 70vw", true %}</div>
+</div>
 {%- if bild.unterschrift %}
-<figcaption>{{ bild.unterschrift }}</figcaption>
+<figcaption class="notiz">{% include "teile/pfeil.njk" %}<span>{{ bild.unterschrift }}</span></figcaption>
 {%- endif %}
 </figure>
 {%- endif %}
 </div>
-</div>
+</header>
+{%- if grafik == "wochen" %}
+<div class="wrap inhalt-wochen">{% include "teile/wochen.njk" %}</div>
+{%- endif %}
 <div class="wrap{% if not breit %} prosa{% endif %} inhalt">
 {{ content | safe }}
 {%- if zitat %}
 <figure class="zitat">
-<blockquote><p>{{ zitat.text }}</p></blockquote>
+<blockquote><p>„{{ zitat.text }}“</p></blockquote>
 <figcaption>{{ zitat.quelle }}</figcaption>
 </figure>
 {%- endif %}
 </div>
+{%- if projekte %}
+<section class="wrap projekte" aria-labelledby="projekte-titel">
+<h2 id="projekte-titel">Aus meinen letzten Projekten</h2>
+<ul class="projekt-liste">
+{%- for p in projekte %}
+<li><span class="projekt-art">{{ p.art }}</span><h3>{{ p.titel }}</h3><p>{{ p.text }}</p></li>
+{%- endfor %}
+</ul>
+</section>
+{%- endif %}
 {% include "teile/abschluss.njk" %}

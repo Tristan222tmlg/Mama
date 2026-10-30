@@ -2,6 +2,7 @@ import path from "node:path";
 import yaml from "js-yaml";
 import Image from "@11ty/eleventy-img";
 import { EleventyRenderPlugin } from "@11ty/eleventy";
+import { beziehungsnetz, bluehkalender, monatsband } from "./lib/grafiken.js";
 
 const MONATE = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
 
@@ -25,10 +26,10 @@ export default function (eleventyConfig) {
 
   // Fotos: verkleinert, als WebP und JPEG, ohne Metadaten. Die Originale in
   // src/bilder/ werden nie direkt ausgeliefert, so gelangt kein Aufnahmeort ins Netz.
-  eleventyConfig.addShortcode("foto", async function (datei, alt, groessen = "100vw", oben = false) {
+  eleventyConfig.addShortcode("foto", async function (datei, alt, groessen = "100vw", oben = false, breiten = [400, 800, 1200]) {
     // Pages CMS schreibt Bilder als "bilder/name.jpg"; hier zählt nur der Dateiname.
     const meta = await Image(path.join("src/bilder", datei.replace(/^\/?bilder\//, "")), {
-      widths: [400, 800, 1200],
+      widths: breiten,
       formats: ["webp", "jpeg"],
       outputDir: "_site/bilder/",
       urlPath: "bilder/",
@@ -45,6 +46,15 @@ export default function (eleventyConfig) {
       ...(oben ? { fetchpriority: "high" } : {}),
     });
   });
+
+  // Grafiken aus den Pflanzendaten (lib/grafiken.js)
+  eleventyConfig.addFilter("monatsband", monatsband);
+  eleventyConfig.addFilter("bluehkalender", bluehkalender);
+  eleventyConfig.addFilter("beziehungsnetz", beziehungsnetz);
+
+  // *Wörter* in Überschriften hervorheben, sonst nur reiner Text
+  eleventyConfig.addFilter("betont", (text = "") =>
+    String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\*([^*]+)\*/g, '<em class="strich">$1</em>'));
 
   // "bilder/moschusmalve-steckbrief.jpg" -> "moschusmalve-steckbrief"
   eleventyConfig.addFilter("dateiname", (pfad) => path.parse(pfad).name);
