@@ -1,5 +1,10 @@
 # Projekt-Brief & Bau-Prompt — Website „Bessere Welt ergärtnern"
 
+> **Veraltet.** Dieser Brief gehört zu Version 1 vom Juli 2026. Inhalte,
+> Angebote und Gestaltung haben sich seitdem geändert. Der aktuelle Stand steht
+> in [`CLAUDE.md`](CLAUDE.md) und [`site/README.md`](site/README.md). Nicht als
+> Bauanleitung verwenden.
+
 > **Zweck dieses Dokuments:** Damit du (Claude) in einer neuen Session die
 > komplette Website neu bzw. **noch umfangreicher** bauen kannst, ohne dass
 > ich alles neu erklären muss. Dieses Dokument enthält alle Inhalte, die

@@ -95,7 +95,9 @@ Barrierefreiheit, Best Practices und SEO je 100 auf allen 9 Hauptseiten. Ob die 
 in Sabines echtem Postfach ankommen, lässt sich erst auf dem Webspace testen.
 
 **Vorschau ohne Server:** `VORSCHAU=1 npx eleventy` baut eine Fassung, deren
-Formulare nichts abschicken.
+Formulare nichts abschicken. `tools/vorschau/einzeldatei.py` packt sie in eine
+einzige HTML-Datei zum Verschicken (öffnet auch in Safari),
+`tools/vorschau/vorschau.py` bereitet sie als Claude-Artifact vor.
 
 ## Formulare
 
