@@ -1,0 +1,45 @@
+# Baut die Website aus site/, prüft sie und lädt sie hoch.
+# Läuft nur auf main (dorthin speichert auch Pages CMS). Hochgeladen wird erst,
+# wenn in den Repository-Einstellungen unter Secrets diese drei Werte stehen:
+#   DEPLOY_ZIEL         z. B. benutzer@server.example:/pfad/zum/webordner/
+#   DEPLOY_SSH_KEY      privater SSH-Schlüssel für diesen Zugang
+#   DEPLOY_KNOWN_HOSTS  Ausgabe von: ssh-keyscan server.example
+name: Website
+
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", ".github/workflows/website.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bauen:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    env:
+      DEPLOY_ZIEL: ${{ secrets.DEPLOY_ZIEL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - run: npm run check
+      - name: Hochladen
+        if: env.DEPLOY_ZIEL != ''
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          rsync -az --delete _site/ "$DEPLOY_ZIEL"

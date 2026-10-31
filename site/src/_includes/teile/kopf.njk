@@ -1,0 +1,17 @@
+<header class="kopf{% if kopf_dunkel %} dunkel-kopf{% endif %}">
+<div class="wrap kopf-innen">
+<a class="marke" href="{{ start }}"{% if page.url == "/" %} aria-current="page"{% endif %}>
+<img src="{{ base }}assets/logo/zeichen.svg" alt="" width="58" height="52">
+<span class="marke-wort">Bessere Welt<br>ergärtnern</span>
+</a>
+<button class="menue-knopf" type="button" popovertarget="menue">Menü</button>
+<nav class="menue" id="menue" popover aria-label="Hauptmenü">
+<ul>
+{%- for punkt in navigation %}
+<li><a href="{{ base }}{{ punkt.ziel }}"{% if page.url == "/" + punkt.ziel %} aria-current="page"{% endif %}>{{ punkt.text }}</a></li>
+{%- endfor %}
+</ul>
+<button class="menue-zu" type="button" popovertarget="menue" popovertargetaction="hide">Schließen</button>
+</nav>
+</div>
+</header>

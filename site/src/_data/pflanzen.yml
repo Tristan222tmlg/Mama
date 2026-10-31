@@ -1,0 +1,245 @@
+# Pflanzen und Tiere: nur Verbindungen mit Beleg.
+#
+# Jede Verbindung braucht entweder eine Fachquelle (url) oder ein eigenes Foto.
+# status:
+#   belegt            Fachquelle verlinkt
+#   eigenes-foto      Sabines Foto zeigt das Tier an der Pflanze
+#   bestimmen-lassen  eigenes Foto, aber die Tierart ist noch nicht sicher bestimmt
+#
+# art (für das Beziehungsnetz):
+#   bluete  Pollen oder Nektar
+#   raupe   Futter für die Raupen
+#   nest    Wohnung oder Baumaterial
+# kurz: wenige Wörter für die Grafiken
+# raupen_an: die Raupenfutterpflanzen als kurzer Name für das Netz (nur mit Quelle)
+#
+# FloraWeb-Angaben (Status, Blühmonate, Rote Liste) gelten für Deutschland und
+# stammen aus dem Rothmaler über FloraWeb, abgerufen am Datum unter "stand".
+# bluetenfarbe: rosa, purpur, lila, blau, hellblau, weiss, gelb
+
+stand: 2026-10-30
+
+pflanzen:
+  - name: Moschus-Malve
+    latein: Malva moschata
+    foto: bilder/moschusmalve.jpg
+    foto_alt: Rosa Blüten der Moschus-Malve
+    floraweb: https://www.floraweb.de/php/artenhome.php?name-use-id=3584
+    floraweb_name: ""
+    status: einheimisch
+    bluete: [6, 10]
+    bluetenfarbe: rosa
+    rote_liste: ungefährdet
+    steckbrief: >-
+      30 bis 50 cm hoch, Sonne bis Halbschatten, mehrjährig und winterhart,
+      auch für den Topf geeignet. Wer möchte, entfernt im Spätsommer verblühte
+      Blüten, um noch mehr neue Blüten anzuregen.
+    steckbrief_bild: bilder/moschusmalve-steckbrief.jpg
+    steckbrief_alt: >-
+      Sabines Steckbrief zur Moschusmalve (Malva moschata): 30 bis 50 cm hoch,
+      Sonne bis Halbschatten, blüht Juni bis Oktober, lange Blütezeit, mehrjährig,
+      winterhart, geeignet für Topfkultur. Pollen- und Nektarpflanze für
+      zahlreiche Insekten, hier eine Steinhummel (Bombus lapidarius) mit
+      Pollenkörnchen im Pelz. Futterpflanze für die Raupen des
+      Malven-Dickkopffalters. Schlaf- und Ruheplatz für Wildbienen; Baumaterial
+      für das Nest der Stahlblauen Mauerbiene (Osmia caerulescens). Wer möchte,
+      entfernt im Spätsommer verblühte Blüten, um noch mehr Wachstum neuer
+      Blüten anzuregen.
+    beziehungen:
+      - tier: Steinhummel
+        latein: Bombus lapidarius
+        was: sammelt Pollen und Nektar.
+        kurz: Pollen und Nektar
+        art: bluete
+        status: eigenes-foto
+      - tier: Malven-Dickkopffalter
+        latein: Carcharodus alceae
+        was: Seine Raupen fressen an Malven, besonders an der Moschus-Malve.
+        kurz: Futter für die Raupen
+        art: raupe
+        quelle: Lepiforum
+        url: https://lepiforum.org/wiki/page/Carcharodus_alceae
+        status: belegt
+      - tier: Stahlblaue Mauerbiene
+        latein: Osmia caerulescens
+        was: baut ihr Nest unter anderem aus Blüten- und Laubblättern der Moschus-Malve.
+        kurz: Baumaterial fürs Nest
+        art: nest
+        quelle: Westrich, wildbienen.info
+        url: https://www.wildbienen.info/steckbriefe/osmia_caerulescens.php
+        status: belegt
+      - tier: Wildbienen
+        was: Die Moschus-Malve steht in der Liste der Pollenquellen für Wildbienen.
+        kurz: Pollenquelle
+        art: bluete
+        quelle: Westrich, wildbienen.info
+        url: https://www.wildbienen.info/bluetenbesuch/liste_der_pollenquellen.php
+        status: belegt
+
+  - name: Gewöhnlicher Natternkopf
+    latein: Echium vulgare
+    foto: bilder/natternkopf.jpg
+    foto_alt: Blau blühender Natternkopf am Rand einer Wiese
+    floraweb: https://www.floraweb.de/php/artenhome.php?name-use-id=2067
+    status: einheimisch
+    bluete: [5, 10]
+    bluetenfarbe: blau
+    rote_liste: ungefährdet
+    beziehungen:
+      - tier: Glänzende Natterkopf-Mauerbiene
+        latein: Osmia adunca
+        was: sammelt Pollen nur an Natterkopf-Arten. Bei uns ist das fast immer der Gewöhnliche Natternkopf.
+        kurz: nur Natterkopf-Pollen
+        art: bluete
+        quelle: Westrich, wildbienen.info
+        url: https://www.wildbienen.info/steckbriefe/osmia_adunca.php
+        status: belegt
+
+  - name: Wiesen-Witwenblume
+    latein: Knautia arvensis
+    foto: bilder/witwenblume-dickkopffalter.jpg
+    foto_alt: Ein orangebrauner Dickkopffalter sitzt auf der lila Blüte einer Wiesen-Witwenblume
+    floraweb: https://www.floraweb.de/php/artenhome.php?suchnr=3188
+    status: einheimisch
+    bluete: [7, 8]
+    bluetenfarbe: lila
+    rote_liste: ungefährdet
+    beziehungen:
+      - tier: Knautien-Sandbiene
+        latein: Andrena hattorfiana
+        was: Ihre Hauptpollenquelle ist die Wiesen-Witwenblume. Die Biene steht in Deutschland als gefährdet auf der Roten Liste.
+        kurz: Hauptpollenquelle
+        art: bluete
+        quelle: Westrich, wildbienen.info
+        url: https://www.wildbienen.info/steckbriefe/andrena_hattorfiana.php
+        status: belegt
+      - tier: Braun-Dickkopffalter
+        latein: Thymelicus
+        was: saugt Nektar an der Blüte. Ob es der Braunkolbige oder der Schwarzkolbige ist, wird noch bestimmt.
+        kurz: Nektar
+        art: bluete
+        status: bestimmen-lassen
+        raupen: Die Raupen des Braunkolbigen Braun-Dickkopffalters fressen an Gräsern, zum Beispiel am Wolligen Honiggras.
+        raupen_quelle: Lepiforum
+        raupen_url: https://lepiforum.org/wiki/page/Thymelicus_sylvestris
+
+  - name: Gewöhnlicher Dost
+    latein: Origanum vulgare
+    foto: bilder/dost-hauhechel-blaeuling.jpg
+    foto_alt: Ein Hauhechel-Bläuling mit geschlossenen Flügeln sitzt auf den rosa Blüten des Dosts
+    floraweb: https://www.floraweb.de/php/artenhome.php?suchnr=3996
+    status: einheimisch
+    bluete: [7, 9]
+    bluetenfarbe: purpur
+    rote_liste: ungefährdet
+    beziehungen:
+      - tier: Hauhechel-Bläuling
+        latein: Polyommatus icarus
+        was: saugt Nektar an den Blüten.
+        kurz: Nektar
+        art: bluete
+        status: eigenes-foto
+        raupen: Seine Raupen fressen an Hornklee, Luzerne, Dornigem Hauhechel und Rotklee.
+        raupen_an: Hornklee, Luzerne, Hauhechel, Rotklee
+        raupen_quelle: Lepiforum
+        raupen_url: https://lepiforum.org/wiki/page/Polyommatus_icarus
+
+  - name: Minze
+    latein: Mentha
+    art_offen: Welche Minze es ist, wird noch bestimmt.
+    foto: bilder/minze-kleiner-feuerfalter.jpg
+    foto_alt: Ein Kleiner Feuerfalter mit orangen, schwarz gepunkteten Flügeln auf den hellen Blüten einer Minze
+    beziehungen:
+      - tier: Kleiner Feuerfalter
+        latein: Lycaena phlaeas
+        was: saugt Nektar an den Blüten.
+        kurz: Nektar
+        art: bluete
+        status: eigenes-foto
+        raupen: Seine Raupen fressen unter anderem an Kleinem und Großem Sauerampfer.
+        raupen_an: Kleiner und Großer Sauerampfer
+        raupen_quelle: Lepiforum
+        raupen_url: https://lepiforum.org/wiki/page/Lycaena_phlaeas
+
+  - name: Gewöhnliche Wegwarte
+    latein: Cichorium intybus
+    zitat: Die Wegwarte empfehle ich häufig.
+    floraweb: https://www.floraweb.de/php/artenhome.php?name-use-id=1550
+    status: einheimisch
+    bluete: [7, 10]
+    bluetenfarbe: hellblau
+    rote_liste: ungefährdet
+    beziehungen:
+      - tier: Wildbienen
+        was: Die Wegwarte steht in der Liste der Pollenquellen für Wildbienen. Welche Arten an ihr sammeln, trage ich noch nach.
+        kurz: Pollenquelle
+        art: bluete
+        quelle: Westrich, wildbienen.info
+        url: https://www.wildbienen.info/bluetenbesuch/liste_der_pollenquellen.php
+        status: belegt
+
+  - name: Große Sternmiere
+    latein: Stellaria holostea
+    foto: bilder/grosse-sternmiere.jpg
+    foto_alt: Weiße, sternförmige Blüten der Großen Sternmiere im Gras unter Bäumen
+    floraweb: https://www.floraweb.de/php/artenhome.php?suchnr=5772
+    floraweb_name: Echte Sternmiere
+    status: einheimisch
+    bluete: [4, 5]
+    bluetenfarbe: weiss
+    rote_liste: ungefährdet
+    beziehungen:
+      - tier: Rotschopfige Sandbiene
+        latein: Andrena haemorrhoa
+        quelle_name: Rotfransige Sandbiene
+        was: sammelt hier Pollen, außerdem unter anderem an Süß-Kirsche, Sal-Weide und Stiel-Eiche.
+        kurz: Pollen
+        art: bluete
+        quelle: Westrich, wildbienen.info
+        url: https://www.wildbienen.info/steckbriefe/andrena_haemorrhoa.php
+        status: belegt
+
+# Eine Wohnung statt Nahrung
+nisthilfe:
+  titel: Nisthilfe aus Bambus
+  foto: bilder/nisthilfe-mauerbiene.jpg
+  foto_alt: Bambusröhrchen einer Nisthilfe, aus einem schaut der Kopf einer Biene mit hellem Gesichtshaar
+  tier: Rostrote Mauerbiene
+  latein: Osmia bicornis
+  kurz: Nistplatz
+  art: nest
+  status: bestimmen-lassen
+  text: >-
+    Vermutlich ein Männchen der Rostroten Mauerbiene, die Bestimmung steht noch
+    aus. Die Art nistet unter anderem in Bambusröhrchen mit 5 bis 7 mm
+    Durchmesser.
+  quelle: Westrich, wildbienen.info
+  url: https://www.wildbienen.info/steckbriefe/osmia_bicornis.php
+
+# Pflanzen von Sabines Fotos und aus ihren Antworten, zu denen noch keine
+# belegte Tierverbindung eingetragen ist
+weitere:
+  - name: Kuckucks-Lichtnelke
+    latein: Lychnis flos-cuculi
+    foto: bilder/kuckucks-lichtnelke.jpg
+    foto_alt: Rosa, fein zerschlitzte Blüten der Kuckucks-Lichtnelke in einer Wiese
+    floraweb: https://www.floraweb.de/php/artenhome.php?name-use-id=3552
+    status: einheimisch
+    bluete: [5, 7]
+    bluetenfarbe: rosa
+    rote_liste: ungefährdet
+  - name: Echte Mispel
+    latein: Mespilus germanica
+    foto: bilder/mispel.jpg
+    foto_alt: Braune Früchte der Echten Mispel zwischen grünen Blättern
+    floraweb: https://www.floraweb.de/php/artenhome.php?name-use-id=3695
+    status: einheimisch
+    bluete: [5, 6]
+    bluetenfarbe: weiss
+    rote_liste: Vorwarnliste
+  - name: Kornelkirsche
+    latein: Cornus mas
+    floraweb: https://www.floraweb.de/php/artenhome.php?suchnr=1649
+    status: einheimisch
+    bluete: [3, 4]
+    bluetenfarbe: gelb

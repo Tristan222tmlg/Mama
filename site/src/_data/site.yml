@@ -1,0 +1,41 @@
+# Einstellungen der Website. Leere Felder erscheinen auf der Seite als
+# markierte Lücke, und "npm run livegang" bricht ab, solange etwas fehlt.
+
+name: Bessere Welt ergärtnern
+person: Dr. Sabine Schröder-Gravendyck
+
+# Vollständiger Name für das Impressum, wie er im Rechtsverkehr verwendet wird
+name_impressum: Dr. A. Sabine Schröder-Gravendyck
+
+# Adresse der Website, ohne Schrägstrich am Ende, z. B. https://www.beispiel.de
+url: ""
+
+# An diese Adresse schickt das Formular, und sie steht auf der Website
+email: ""
+
+# Absender der Formular-Mails: eine Adresse auf der eigenen Domain, z. B. website@beispiel.de
+absender: ""
+
+anschrift:
+  strasse: ""
+  plz: ""
+  ort: ""
+
+# freiwillig; im Impressum reicht eine schnelle elektronische Kontaktmöglichkeit
+telefon: ""
+
+# Umsatzsteuer-ID, falls vorhanden. Gibt es keine, keine_ust_id auf true setzen.
+ust_id: ""
+keine_ust_id: false
+
+# Nur nötig, falls Sabine noch als Tierärztin tätig ist (dann Kammer, Berufsordnung)
+tieraerztekammer: ""
+
+# Wo die Website liegt (für die Datenschutzerklärung), z. B. "Uberspace, Mainz"
+hoster: ""
+
+# Dienst für den Gartenbrief; leer = Anmeldungen kommen als E-Mail bei Sabine an
+newsletter_dienst: ""
+
+# Videodienst für Online-Abend und Live-Calls
+videodienst: ""

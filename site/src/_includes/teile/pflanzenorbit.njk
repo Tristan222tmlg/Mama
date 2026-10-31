@@ -1,0 +1,21 @@
+{#- Eine Pflanze mit ihren Tieren als Trabanten. Jedes Tier führt zu seinem Eintrag;
+    mit grafik.js zeigt der Kreis beim Darüberfahren, was das Tier an der Pflanze tut. Erwartet: po -#}
+{%- set plaetze = po.beziehungen | length | plaetze %}
+{%- set po_anker = po.anker or (po.name | slugify) %}
+<figure class="pflanzenorbit">
+<div class="po-kreis">
+{%- if po.foto %}
+<div class="po-bild">{% foto po.foto, po.foto_alt, "(min-width: 56rem) 20rem, 60vw" %}</div>
+{%- else %}
+<div class="po-bild po-leer farbe-{{ po.bluetenfarbe or 'gruen' }}"><svg class="sym" aria-hidden="true" focusable="false"><use href="#i-flower"/></svg></div>
+{%- endif %}
+<p class="po-info" aria-hidden="true"><strong></strong><span></span></p>
+{% include "teile/ring.njk" %}
+</div>
+<ul class="po-tiere" aria-label="Tiere, die {{ po.name }} nutzen">
+{%- for b in po.beziehungen %}{% if loop.index <= 4 %}
+{%- set platz = plaetze[loop.index0] %}
+<li class="po-tier slot-{{ platz }}{% if platz >= 5 %} seite-links{% endif %}"><a href="{{ base }}pflanzen-und-tiere.html#{{ po_anker }}-{{ b.tier | slugify }}" data-eintrag="{{ po_anker }}-{{ b.tier | slugify }}" data-was="{{ (b.was or b.kurz) | anfang }}"><span class="po-symbol art-{{ b.art }}"><svg class="sym" aria-hidden="true" focusable="false"><use href="#i-{{ b.tier | tiergruppe }}"/></svg></span><span class="po-name">{{ b.tier }}</span></a></li>
+{%- endif %}{% endfor %}
+</ul>
+</figure>

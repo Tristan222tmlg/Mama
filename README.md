@@ -3,6 +3,13 @@
 Statische Website (reines HTML/CSS/JS, kein Build-Schritt nötig) für
 Sabine Schröder-Gravendycks Biodiversitätsberatung.
 
+> **Die neue Website** liegt in [`site/`](site/README.md): kleiner, aus Sabines
+> eigenen Antworten, mit echten Seitenadressen, Kontaktformular und Quellen für
+> jede Pflanzen-Tier-Verbindung. Sie ersetzt die beiden älteren Fassungen.
+>
+> **Version 2** (Prototyp mit Logo, Pflanzen-Finder, Blühkalender und Journal)
+> liegt in [`v2/`](v2/README.md). Dieser Hauptordner enthält Version 1.
+
 ## Lokal ansehen
 
 Einfach `index.html` im Browser öffnen, oder z. B.:
@@ -22,16 +29,28 @@ und dann `http://localhost:8000` aufrufen.
 - `kontakt.html` — Kontakt
 - `impressum.html`, `datenschutz.html` — rechtliche Pflichtseiten (Platzhalter)
 - `assets/css/style.css` — gesamtes Design (Farbpalette: Grüntöne + Blau + Weiß, nach Sabines eigener Beschreibung)
+- `assets/js/main.js` — Menü, Header-Verhalten, sanfte Einblend-Animationen
 - `assets/img/` — Bildmaterial
+- `assets/fonts/` — selbst gehostete Schriften (Fraunces + Inter, Latin-Subset).
+  Werden **lokal** ausgeliefert, keine Verbindung zu Google Fonts — DSGVO-freundlich.
+
+## Design
+
+Editorial-Look: großformatige Fotos, Serifen-Display-Schrift (Fraunces) mit
+klarer Grotesk (Inter), eigene Linien-Icons (SVG, keine Emojis), Farbwelt aus
+mehreren Grüntönen plus warmem Papierton, Blau und Weiß. Reines HTML/CSS/JS.
 
 ## Offene Punkte, bevor die Seite live gehen kann
 
-1. **Echte Fotos.** Die im Chat eingefügten Bilder (Heckenskizze, Wiesenblumen,
-   Akelei, Wildbiene) waren nur eingebettet, nicht als Datei-Uploads — sie
-   liegen dem Projekt bisher nicht als Dateien vor. Bitte als Anhang
-   (Upload) schicken, dann können sie die grau-gestreiften
-   Platzhalter-Kästen ersetzen. Bisher ist nur ein echtes Bild eingebunden:
-   das Moschusmalve-Pflanzenporträt aus der docx-Datei.
+1. **Weitere Porträtfotos von Sabine wären gut.** Ein rundes Profilbild ist
+   auf `ueber-mich.html` bereits eingebunden (`assets/img/sabine-portrait.jpg`),
+   aber nur 200×200px — zu klein für die beiden großen Rechteck-Plätze
+   ("Foto: Sabine im Garten / bei der Arbeit") auf derselben Seite. Für die
+   braucht es noch höher aufgelöste Fotos von ihr. Alle anderen bisher
+   erhaltenen Naturfotos (Akelei, Kuckuckslichtnelke, Große Sternmiere,
+   Hauhechel-Bläuling, Rotschopfige Sandbiene, Grashüpfer, Kirschen sowie
+   das Moschusmalve-Pflanzenporträt) sind bereits eingebunden — verteilt auf
+   Startseite, Angebot und die Foto-Galerie auf `pflanzenwelt.html`.
 2. **Kontaktdaten.** E-Mail-Adresse, Telefonnummer und Einzugsgebiet in
    `kontakt.html` sind Platzhalter.
 3. **Impressum/Datenschutz.** Rechtlich in Deutschland Pflicht — beide

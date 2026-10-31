@@ -1,0 +1,144 @@
+---
+layout: seite.njk
+permalink: pflanzen-und-tiere.html
+title: Pflanzen und Tiere
+description: Welche Pflanze welchen Wildbienen und Schmetterlingen nützt – Moschus-Malve, Natternkopf, Wiesen-Witwenblume, Dost und mehr, jede Verbindung mit Quelle oder eigenem Foto.
+kicker: Jede Verbindung mit Quelle oder eigenem Foto
+ueberschrift: Die Tiere sucht man nicht aus. Man sucht die *Pflanzen* aus.
+lead: Und zwar die, die mit besonders vielen Tieren in Beziehung stehen. Hier stehen nur Verbindungen mit Beleg, aus Fachquellen oder von meinen eigenen Fotos.
+bild:
+  datei: bilder/dost-hauhechel-blaeuling.jpg
+  alt: Ein Hauhechel-Bläuling mit geschlossenen Flügeln sitzt auf den rosa Blüten des Dosts
+  unterschrift: Hauhechel-Bläuling am Dost
+breit: true
+grafik_js: true
+abschluss: gartenbrief
+---
+<div class="wrap quellen">
+<p>Die Quellen: <a href="https://www.wildbienen.info/">Paul Westrich, wildbienen.info</a> für Wildbienen, das <a href="https://lepiforum.org/">Lepiforum</a> für Schmetterlinge und <a href="https://www.floraweb.de/">FloraWeb</a> vom Bundesamt für Naturschutz für die Pflanzen. „Einheimisch“ heißt dort: in Deutschland.</p>
+<p>Stand: {{ pflanzen.stand | datum }}. Was noch nicht sicher bestimmt ist, ist markiert.</p>
+</div>
+
+<section class="netzteil" aria-labelledby="netz-titel">
+<div class="wrap">
+<div class="kopfzeile">
+<h2 id="netz-titel">Wer mit wem</h2>
+<p>Links die Pflanzen und eine Nisthilfe, rechts die Tiere. Jede Linie ist eine belegte Verbindung. Manche Tiere brauchen zwei Pflanzen: eine für den Nektar, eine für ihre Raupen.</p>
+</div>
+{{ pflanzen | kreisnetz | safe }}
+<div class="netz-linear"><p class="netz-tipp" hidden>Tipp auf eine Pflanze oder ein Tier, um ihre Verbindungen zu sehen.</p>{{ pflanzen | beziehungsnetz | safe }}</div>
+<ul class="legende">
+<li><svg viewBox="0 0 40 10" aria-hidden="true" focusable="false"><path class="kante art-bluete" d="M2 5H38"/></svg>Pollen oder Nektar</li>
+<li><svg viewBox="0 0 40 10" aria-hidden="true" focusable="false"><path class="kante art-raupe" d="M2 5H38"/></svg>Futter für die Raupen</li>
+<li><svg viewBox="0 0 40 10" aria-hidden="true" focusable="false"><path class="kante art-nest" d="M2 5H38"/></svg>Nest und Wohnung</li>
+<li><svg viewBox="0 0 40 10" aria-hidden="true" focusable="false"><path class="kante grau" d="M2 5H38"/></svg>Fachquelle</li>
+<li><svg viewBox="0 0 40 10" aria-hidden="true" focusable="false"><path class="kante grau status-eigenes-foto" d="M2 5H38"/></svg>mein Foto</li>
+<li><svg viewBox="0 0 40 10" aria-hidden="true" focusable="false"><path class="kante grau status-bestimmen-lassen" d="M2 5H38"/></svg>Art noch offen</li>
+</ul>
+<p class="sr">Dieselben Verbindungen stehen unten bei jeder Pflanze, mit Quelle.</p>
+</div>
+</section>
+
+<section class="abschnitt sanft" aria-labelledby="rad-titel">
+<div class="wrap">
+{% include "teile/rad.njk" %}
+</div>
+</section>
+
+<div class="wrap">
+{%- for p in pflanzen.pflanzen %}
+{%- set anker = p.name | slugify %}
+<article class="pflanze{% if loop.index0 is odd %} gerade{% endif %}" id="{{ anker }}" aria-labelledby="{{ anker }}-titel">
+<div class="pflanze-orbit">
+{%- set po = p %}
+{% include "teile/pflanzenorbit.njk" %}
+</div>
+<div class="pflanze-text">
+<h2 id="{{ anker }}-titel">{{ p.name }} <span class="latein" lang="la">{{ p.latein }}</span></h2>
+{%- if p.art_offen %}
+<p class="hinweis">{{ p.art_offen }}</p>
+{%- endif %}
+{%- if p.zitat %}
+<p class="pflanze-zitat">„{{ p.zitat }}“</p>
+{%- endif %}
+{%- if p.floraweb %}
+<dl class="daten">
+<div><dt>Status</dt><dd>{{ p.status | capitalize }}</dd></div>
+<div><dt>Blüte</dt><dd>{{ p.bluete | monate }}{{ p.bluete | monatsband(p.bluetenfarbe) | safe }}</dd></div>
+<div><dt>Rote Liste</dt><dd>{{ p.rote_liste or "–" }}</dd></div>
+<div><dt>Quelle</dt><dd><a href="{{ p.floraweb }}">FloraWeb</a>{% if p.floraweb_name %}, dort: {{ p.floraweb_name }}{% endif %}</dd></div>
+</dl>
+{%- endif %}
+{%- if p.steckbrief %}
+<p>{{ p.steckbrief }}</p>
+{%- endif %}
+{%- if p.steckbrief_bild %}
+<figure class="steckbrief">
+<a href="bilder/{{ p.steckbrief_bild | dateiname }}-1200.jpeg">{% foto p.steckbrief_bild, p.steckbrief_alt, "7rem" %}</a>
+<figcaption>Mein Steckbrief zur Moschus-Malve, mit dem Foto der Steinhummel. Antippen zum Vergrößern.</figcaption>
+</figure>
+{%- endif %}
+<h3>Wer sie nutzt</h3>
+<ul class="beziehungen">
+{%- for b in p.beziehungen %}
+<li id="{{ anker }}-{{ b.tier | slugify }}">
+<span class="po-symbol art-{{ b.art }}" aria-hidden="true"><svg class="sym" focusable="false"><use href="#i-{{ b.tier | tiergruppe }}"/></svg></span>
+<div>
+<p class="bz-tier">{{ b.tier }}{% if b.latein %} <span class="latein" lang="la">{{ b.latein }}</span>{% endif %}</p>
+<p>{{ b.was | anfang }}</p>
+{% include "teile/beleg.njk" %}
+{%- if b.raupen %}
+<p class="raupen">{{ b.raupen }}</p>
+<p class="beleg"><span><svg viewBox="0 0 30 10" aria-hidden="true" focusable="false"><path class="linie-quelle" d="M1 5H29"/></svg><span>Quelle: <a href="{{ b.raupen_url }}">{{ b.raupen_quelle }}</a></span></span></p>
+{%- endif %}
+</div>
+</li>
+{%- endfor %}
+</ul>
+</div>
+</article>
+{%- endfor %}
+
+{%- set n = pflanzen.nisthilfe %}
+{%- set po = { name: n.titel, anker: "nisthilfe", foto: n.foto, foto_alt: n.foto_alt, beziehungen: [n] } %}
+<article class="pflanze{% if pflanzen.pflanzen | length is odd %} gerade{% endif %}" id="nisthilfe" aria-labelledby="nisthilfe-titel">
+<div class="pflanze-orbit">
+{% include "teile/pflanzenorbit.njk" %}
+</div>
+<div class="pflanze-text">
+<h2 id="nisthilfe-titel">{{ n.titel }}</h2>
+<p class="unterzeile">Keine Pflanze, sondern eine Wohnung</p>
+<ul class="beziehungen">
+<li id="nisthilfe-{{ n.tier | slugify }}">
+<span class="po-symbol art-{{ n.art }}" aria-hidden="true"><svg class="sym" focusable="false"><use href="#i-{{ n.tier | tiergruppe }}"/></svg></span>
+<div>
+<p class="bz-tier">{{ n.tier }} <span class="latein" lang="la">{{ n.latein }}</span></p>
+<p>{{ n.text }}</p>
+{%- set b = n %}
+{% include "teile/beleg.njk" %}
+</div>
+</li>
+</ul>
+</div>
+</article>
+</div>
+
+<section class="weitere" aria-labelledby="weitere-titel">
+<div class="wrap">
+<div class="kopfzeile">
+<h2 id="weitere-titel">Weitere Pflanzen, noch ohne belegtes Tier</h2>
+<p>Sie stammen von meinen Fotos und aus meinen Gesprächen. Welche Tiere sie nutzen, trage ich nach, sobald es eine Quelle gibt.</p>
+</div>
+<ul class="weitere-liste">
+{%- for p in pflanzen.weitere %}
+<li id="{{ p.name | slugify }}">
+{%- if p.foto %}
+<div class="weitere-foto">{% foto p.foto, p.foto_alt, "8rem" %}</div>
+{%- endif %}
+<p><strong>{{ p.name }}</strong> <span class="latein" lang="la">{{ p.latein }}</span><br>
+<span class="steckdaten">{{ p.status | capitalize }} · blüht {{ p.bluete | monate }}{% if p.rote_liste and p.rote_liste != "ungefährdet" %} · Rote Liste: {{ p.rote_liste }}{% endif %} · <a href="{{ p.floraweb }}">FloraWeb</a></span></p>
+</li>
+{%- endfor %}
+</ul>
+</div>
+</section>

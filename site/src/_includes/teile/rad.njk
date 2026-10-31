@@ -1,0 +1,19 @@
+{#- Blüten-Jahresrad. Ohne JavaScript zeigt es alle Pflanzen; mit grafik.js lässt sich ein Monat wählen,
+    ein Bogen zeigt beim Darüberfahren seine Pflanze, ein Klick führt zu ihr. -#}
+{%- set rad = pflanzen | bluehrad %}
+<div class="radteil">
+<div class="rad-flaeche">
+{{ rad.svg | safe }}
+<p class="rad-mitte" aria-hidden="true"><strong data-rad-titel>Das Jahr</strong><span data-rad-unter>{{ rad.anzahl }} Pflanzen, zwölf Monate</span></p>
+</div>
+<div class="rad-seite">
+<h2 id="rad-titel">{{ rad_titel or "Wann sie blühen" }}</h2>
+<p>Jeder Bogen ist eine Pflanze, von ihrem ersten bis zu ihrem letzten Blühmonat, in der Farbe ihrer Blüte.<span class="rad-tipp" hidden> Tipp auf einen Monat im Rad oder darunter. Fahr über einen Bogen, um die Pflanze zu sehen.</span></p>
+<div class="rad-knoepfe" role="group" aria-label="Monat wählen" hidden>{{ rad.knoepfe | safe }}</div>
+<h3 class="rad-liste-titel" data-rad-liste-titel>Alle Pflanzen</h3>
+<ul class="rad-liste">{{ rad.liste | safe }}</ul>
+<p class="rad-leer" data-rad-leer hidden></p>
+<p class="sr" data-rad-ansage aria-live="polite"></p>
+<p class="rad-quelle">Blühmonate laut FloraWeb (Rothmaler), nicht aus eigenen Beobachtungen.</p>
+</div>
+</div>

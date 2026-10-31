@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ seitentitel or (title + " – " + site.name) }}</title>
+<meta name="description" content="{{ description }}">
+{%- if site.url %}
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:image" content="{{ site.url }}/teilen.jpg">
+{%- endif %}
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description }}">
+{%- if noindex %}
+<meta name="robots" content="noindex">
+{%- endif %}
+<link rel="icon" href="{{ base }}favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{{ base }}favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="{{ base }}apple-touch-icon.png">
+<link rel="preload" href="{{ base }}assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ base }}assets/fonts/source-sans-3.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ base }}assets/css/style.css">
+{%- if page.url == "/" %}
+<script type="application/ld+json">{{ jsonld | dump | safe }}</script>
+{%- endif %}
+</head>
+<body>
+{% include "teile/symbole.njk" %}
+<a class="sprung" href="#inhalt">Zum Inhalt</a>
+{%- if build.vorschau %}
+<p class="vorschau-band">Vorschau: Die Formulare schicken hier nichts ab. Gelb markiert ist, was noch fehlt.</p>
+{%- endif %}
+{% include "teile/kopf.njk" %}
+<main id="inhalt" tabindex="-1">
+{{ content | safe }}
+</main>
+{% include "teile/fuss.njk" %}
+{%- if grafik_js %}
+<script src="{{ base }}assets/js/grafik.js" defer></script>
+{%- endif %}
+{%- if build.vorschau %}
+<script src="{{ base }}assets/vorschau.js"></script>
+{%- endif %}
+</body>
+</html>

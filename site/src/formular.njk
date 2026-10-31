@@ -1,0 +1,141 @@
+---
+permalink: formular.php
+eleventyExcludeFromCollections: true
+---
+<?php
+/*
+ * Nimmt die drei Formulare der Website entgegen (Nachricht, Gartenbrief,
+ * Online-Abend) und schickt sie als E-Mail an Sabine. Auf dem Server wird
+ * nichts gespeichert.
+ *
+ * Diese Datei entsteht beim Bauen aus src/formular.njk; die Adressen kommen
+ * aus src/_data/site.yml. Der Webspace braucht PHP mit der mail()-Funktion,
+ * das haben die meisten deutschen Webhoster.
+ */
+declare(strict_types=1);
+date_default_timezone_set('Europe/Berlin');
+
+const EMPFAENGER = '{{ site.email }}';
+const ABSENDER = '{{ site.absender or site.email }}';
+
+const ZIEL = [
+    'kontakt' => 'danke.html',
+    'gartenbrief' => 'gartenbrief-danke.html',
+    'abend' => 'abend-danke.html',
+];
+const BETREFF = [
+    'kontakt' => 'Nachricht',
+    'gartenbrief' => 'Anmeldung zum Gartenbrief',
+    'abend' => 'Anmeldung zum Online-Abend',
+];
+const ZURUECK = [
+    'kontakt' => 'kontakt.html#nachricht',
+    'gartenbrief' => 'kontakt.html#gartenbrief',
+    'abend' => 'online-abend.html#anmelden',
+];
+
+function feld(string $name, int $max): string
+{
+    $wert = trim(str_replace(["\r\n", "\r"], "\n", (string) ($_POST[$name] ?? '')));
+    return function_exists('mb_substr') ? mb_substr($wert, 0, $max) : substr($wert, 0, $max);
+}
+
+// Für Kopfzeilen der E-Mail: keine Zeilenumbrüche, sonst ließen sich Kopfzeilen einschleusen
+function zeile(string $wert): string
+{
+    return trim((string) preg_replace('/[\r\n]+/', ' ', $wert));
+}
+
+function kodiert(string $text): string
+{
+    return function_exists('mb_encode_mimeheader') ? mb_encode_mimeheader($text, 'UTF-8', 'Q') : $text;
+}
+
+function seite(int $code, string $titel, string $html): void
+{
+    http_response_code($code);
+    header('Content-Type: text/html; charset=utf-8');
+    echo '<!doctype html><html lang="de"><head><meta charset="utf-8">'
+        . '<meta name="viewport" content="width=device-width, initial-scale=1">'
+        . '<meta name="robots" content="noindex"><title>' . htmlspecialchars($titel) . ' – Bessere Welt ergärtnern</title>'
+        . '<link rel="stylesheet" href="assets/css/style.css"></head><body>'
+        . '<main id="inhalt" class="wrap prosa meldung"><h1>' . htmlspecialchars($titel) . '</h1>' . $html . '</main></body></html>';
+    exit;
+}
+
+if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+    header('Location: kontakt.html', true, 303);
+    exit;
+}
+
+$art = feld('formular', 20);
+if (!isset(ZIEL[$art])) {
+    seite(400, 'Das hat nicht geklappt', '<p>Das Formular war unvollständig. <a href="kontakt.html">Zurück zum Kontakt</a></p>');
+}
+
+// Dieses Feld ist für Menschen unsichtbar. Ist es ausgefüllt, war es ein Programm.
+if (feld('website', 200) !== '') {
+    header('Location: ' . ZIEL[$art], true, 303);
+    exit;
+}
+
+$name = feld('name', 120);
+$email = feld('email', 200);
+$anliegen = feld('anliegen', 120);
+$termin = feld('termin', 120);
+$nachricht = feld('nachricht', 5000);
+
+$fehlt = [];
+if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+    $fehlt[] = 'eine gültige E-Mail-Adresse';
+}
+if ($art !== 'gartenbrief' && $name === '') {
+    $fehlt[] = 'deinen Namen';
+}
+if ($art === 'kontakt' && $nachricht === '') {
+    $fehlt[] = 'deine Nachricht';
+}
+if ($fehlt) {
+    seite(400, 'Da fehlt noch etwas', '<p>Bitte gib ' . htmlspecialchars(implode(' und ', $fehlt)) . ' an.</p>'
+        . '<p><a href="' . ZURUECK[$art] . '">Zurück zum Formular</a></p>');
+}
+
+if (EMPFAENGER === '') {
+    seite(503, 'Das Formular ist noch nicht eingerichtet', '<p>Bitte versuch es später noch einmal.</p>');
+}
+
+$text = [
+    BETREFF[$art] . ' über die Website',
+    '',
+    'Name: ' . ($name !== '' ? $name : '–'),
+    'E-Mail: ' . $email,
+];
+if ($anliegen !== '') {
+    $text[] = 'Anliegen: ' . $anliegen;
+}
+if ($termin !== '') {
+    $text[] = 'Termin: ' . $termin;
+}
+if ($nachricht !== '') {
+    array_push($text, '', $nachricht);
+}
+if ($art === 'gartenbrief') {
+    array_push($text, '', 'Bitte zuerst eine kurze Mail zur Bestätigung schicken (Double-Opt-in) und die Adresse erst nach der Antwort in den Verteiler aufnehmen.');
+}
+array_push($text, '', '--', 'Gesendet am ' . date('d.m.Y') . ' um ' . date('H:i') . ' Uhr. Auf dem Server ist nichts gespeichert.');
+
+$kopf = [
+    'From' => kodiert('Website Bessere Welt ergärtnern') . ' <' . ABSENDER . '>',
+    'Reply-To' => zeile($email),
+    'MIME-Version' => '1.0',
+    'Content-Type' => 'text/plain; charset=UTF-8',
+    'Content-Transfer-Encoding' => '8bit',
+];
+$betreff = kodiert('[Website] ' . BETREFF[$art] . ($name !== '' ? ' von ' . zeile($name) : ''));
+
+if (!mail(EMPFAENGER, $betreff, implode("\n", $text), $kopf, '-f' . ABSENDER)) {
+    seite(500, 'Das hat leider nicht geklappt', '<p>Deine Nachricht konnte nicht verschickt werden. Schreib mir bitte direkt an <a href="mailto:'
+        . htmlspecialchars(EMPFAENGER) . '">' . htmlspecialchars(EMPFAENGER) . '</a>.</p>');
+}
+
+header('Location: ' . ZIEL[$art], true, 303);

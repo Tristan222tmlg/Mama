@@ -1,0 +1,58 @@
+---
+layout: seite.njk
+permalink: kontakt.html
+title: Gartenbrief und Kontakt
+description: Den Gartenbrief von Sabine Schröder-Gravendyck abonnieren oder ihr eine Nachricht schreiben, zum Beispiel für ein Erstgespräch zum Online-Programm.
+kicker: Am liebsten per E-Mail
+lead: Abonnier den Gartenbrief oder schreib mir eine Nachricht. Ich antworte per E-Mail.
+bild:
+  datei: bilder/kuckucks-lichtnelke.jpg
+  alt: Rosa, fein zerschlitzte Blüten der Kuckucks-Lichtnelke in einer Wiese
+  unterschrift: Kuckucks-Lichtnelke
+breit: true
+abschluss: keiner
+---
+<div class="kontakt-split">
+<section id="gartenbrief" class="dunkel" aria-labelledby="gartenbrief-titel">
+<h2 id="gartenbrief-titel">Der Gartenbrief</h2>
+<p>Mein Newsletter, den ich gelegentlich per E-Mail schicke. Darin erfährst du von den nächsten Online-Abenden und vom nächsten Start des Programms.</p>
+{%- set fid = "kgb" %}
+{% include "teile/gartenbrief-formular.njk" %}
+</section>
+
+<section id="nachricht" class="nachricht" aria-labelledby="nachricht-titel">
+<h2 id="nachricht-titel">Schreib mir</h2>
+<p>Für eine Frage, ein Erstgespräch zum Online-Programm oder alles andere. Es gibt keine dummen Fragen.</p>
+<form class="formular" action="{{ base }}formular.php" method="post">
+<input type="hidden" name="formular" value="kontakt">
+<div class="feld">
+<label for="k-name">Dein Name</label>
+<input id="k-name" name="name" type="text" autocomplete="name" required>
+</div>
+<div class="feld">
+<label for="k-email">Deine E-Mail-Adresse</label>
+<input id="k-email" name="email" type="email" autocomplete="email" required>
+</div>
+<div class="feld">
+<label for="k-anliegen">Worum geht es?</label>
+<select id="k-anliegen" name="anliegen">
+<option>Eine Frage</option>
+<option>Erstgespräch zum Online-Programm</option>
+<option>Online-Abend</option>
+<option>Etwas anderes</option>
+</select>
+</div>
+<div class="feld">
+<label for="k-nachricht">Deine Nachricht</label>
+<textarea id="k-nachricht" name="nachricht" rows="7" required></textarea>
+</div>
+<div class="honig" aria-hidden="true">
+<label for="k-web">Dieses Feld bitte leer lassen</label>
+<input id="k-web" name="website" type="text" tabindex="-1" autocomplete="off">
+</div>
+<p class="formular-hinweis">Ich nutze deine Angaben nur, um dir zu antworten. Mehr dazu in der <a href="{{ base }}datenschutz.html#nachricht">Datenschutzerklärung</a>.</p>
+<button type="submit">Nachricht abschicken</button>
+</form>
+<p>Oder direkt per E-Mail: {% if site.email %}<a href="mailto:{{ site.email }}">{{ site.email }}</a>{% else %}[[offen: E-Mail-Adresse]]{% endif %}</p>
+</section>
+</div>

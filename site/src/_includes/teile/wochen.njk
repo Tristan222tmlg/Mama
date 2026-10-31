@@ -1,0 +1,13 @@
+<figure class="wochen">
+<svg viewBox="0 0 700 110" aria-hidden="true" focusable="false">
+<line class="woche-linie" x1="50" y1="55" x2="650" y2="55"/>
+{%- for w in range(0, 7) %}
+{%- set x = 50 + w * 100 %}
+<circle class="woche-kreis" cx="{{ x }}" cy="55" r="38"/>
+<circle class="woche-call" cx="{{ x - 19 }}" cy="22.1" r="7"/>
+<circle class="woche-call" cx="{{ x + 19 }}" cy="22.1" r="7"/>
+<text class="woche-nr" x="{{ x }}" y="65" text-anchor="middle">{{ w + 1 }}</text>
+{%- endfor %}
+</svg>
+<figcaption class="wochen-text">Sieben Wochen, jede mit zwei Live-Calls von anderthalb Stunden. Dazwischen arbeitest du an deinem eigenen Gartenplan.</figcaption>
+</figure>
